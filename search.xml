@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+    
+    <entry>
+      <title><![CDATA[发布测试]]></title>
+      <url>http://yoursite.com/2016/05/25/hello-world/</url>
+      <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[UIDynamic物理仿真]]></title>
+      <url>http://yoursite.com/2016/04/26/UIDynamic%E7%89%A9%E7%90%86%E4%BB%BF%E7%9C%9F/</url>
+      <content type="html"><![CDATA[<p><img src="http://upload-images.jianshu.io/upload_images/937405-41a72b13b053b895.gif?imageMogr2/auto-orient/strip" alt="新浪弹出效果"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-29d8df604e357f2d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="仿真器"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-bc483c8f6bcf8208.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建分享视图"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-679f0fd1a6c49577.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="添加仿真行为"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-52f34829be3c6582.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="点击屏幕时，弹出分享视图"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-90e69621dcb102eb.gif?imageMogr2/auto-orient/strip" alt="重力仿真"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-a4528b00606753bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="重力行为"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-03d253c4ffbace88.gif?imageMogr2/auto-orient/strip" alt="碰撞仿真"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-64ea17b8b4844f7c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="碰撞行为"><br><img src="http://upload-images.jianshu.io/upload_images/937405-e63afc11023bf8b3.gif?imageMogr2/auto-orient/strip" alt="吸附仿真"><br><img src="http://upload-images.jianshu.io/upload_images/937405-fb7c2dca2b8af1cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="吸附行为"></p>
+]]></content>
+    </entry>
+    
+  
+  
+</search>
