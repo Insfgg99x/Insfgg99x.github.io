@@ -10,7 +10,7 @@
 <p><pre></pre></p>
 <p>#import <foundation foundation.h=""></foundation></p>
 <p>@interface Model : NSObject</p>
-<p>@property(nonatomic,copy)NSString <em>name;<br>@property(nonatomic,copy)NSString </em>sex;<br>@property(nonatomic,copy)NSString <em>idno;<br>@property(nonatomic,copy)NSString </em>address;<br>@property(nonatomic,copy)NSString *mobile;</p>
+<p>@property(nonatomic,copy)NSString *name;<br>@property(nonatomic,copy)NSString *sex;<br>@property(nonatomic,copy)NSString *idno;<br>@property(nonatomic,copy)NSString *address;<br>@property(nonatomic,copy)NSString *mobile;</p>
 <p>+(instancetype)modelWithValues:(NSArray *)values;</p>
 <p>@end<br><br>现在需要获取他的以key=value的形式打印其所有属性及其值。就可以这样写了：<br><code><br>-(NSString <em>)description{<br>    unsigned int count=0;<br>    Ivar </em>list=class_copyIvarList([self class], &amp;count);<br>    NSMutableArray <em>resultArray=[NSMutableArray array];<br>    for(int i=0;i&lt;count;i++){<br>        Ivar var=list[i];<br>        NSString </em>varName=[NSString stringWithUTF8String:ivar_getName(var)];<br>        //去掉前面的下划线<br>        NSString *tmp=[varName substringFromIndex:1];<br>        SEL method=NSSelectorFromString(tmp);</code></p>
 <pre><code>    #pragma clang diagnostic push
