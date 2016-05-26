@@ -104,7 +104,7 @@
 
 @property(nonatomic,copy)NSString *name;
 @property(nonatomic,copy)NSString *se">
-<meta property="og:updated_time" content="2016-05-26T08:38:31.000Z">
+<meta property="og:updated_time" content="2016-05-26T08:40:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="class_copyIvarList的实用举例">
 <meta name="twitter:description" content="当一个模型有很多属性，给定的需求需要获取所有的属性的时候，如果一个一个写，效率很低，这个时候就可以用class_copyIvarList解决了。例如有这样一个类：
@@ -337,7 +337,7 @@
     unsigned int count=0;
     Ivar *list=class_copyIvarList([self class], &count);
     NSMutableArray *resultArray=[NSMutableArray array];
-    for(int i=0;i<count;i++){ ivar="" var="list[i];" nsstring="" *varname="[NSString" stringwithutf8string:ivar_getname(var)];="" 去掉前面的下划线="" *tmp="[varName" substringfromindex:1];="" sel="" method="NSSelectorFromString(tmp);" #pragma="" clang="" diagnostic="" push="" ignored="" "-warc-performselector-leaks"="" id="" value="[self" performselector:method];="" pop="" if(!value||value="=NULL){" }="" *item="[NSString" stringwithformat:@"%@="%@",tmp,value];" [resultarray="" addobject:item];="" return="" componentsjoinedbystring:@"&"];="" <="" pre=""></count;i++){></pre>
+    for(int i=0;i\<count;i++){ ivar="" var="list[i];" nsstring="" *varname="[NSString" stringwithutf8string:ivar_getname(var)];="" 去掉前面的下划线="" *tmp="[varName" substringfromindex:1];="" sel="" method="NSSelectorFromString(tmp);" #pragma="" clang="" diagnostic="" push="" ignored="" "-warc-performselector-leaks"="" id="" value="[self" performselector:method];="" pop="" if(!value||value="=NULL){" }="" *item="[NSString" stringwithformat:@"%@="%@",tmp,value];" [resultarray="" addobject:item];="" return="" componentsjoinedbystring:@"&"];="" <="" pre=""></count;i++){></pre>
       
     </div>
 

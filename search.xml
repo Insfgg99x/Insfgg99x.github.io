@@ -28,7 +28,7 @@
     unsigned int count=0;
     Ivar *list=class_copyIvarList([self class], &count);
     NSMutableArray *resultArray=[NSMutableArray array];
-    for(int i=0;i<count;i++){ ivar="" var="list[i];" nsstring="" *varname="[NSString" stringwithutf8string:ivar_getname(var)];="" 去掉前面的下划线="" *tmp="[varName" substringfromindex:1];="" sel="" method="NSSelectorFromString(tmp);" #pragma="" clang="" diagnostic="" push="" ignored="" "-warc-performselector-leaks"="" id="" value="[self" performselector:method];="" pop="" if(!value||value="=NULL){" }="" *item="[NSString" stringwithformat:@"%@="%@",tmp,value];" [resultarray="" addobject:item];="" return="" componentsjoinedbystring:@"&"];="" <="" pre=""></count;i++){></pre>]]></content>
+    for(int i=0;i\<count;i++){ ivar="" var="list[i];" nsstring="" *varname="[NSString" stringwithutf8string:ivar_getname(var)];="" 去掉前面的下划线="" *tmp="[varName" substringfromindex:1];="" sel="" method="NSSelectorFromString(tmp);" #pragma="" clang="" diagnostic="" push="" ignored="" "-warc-performselector-leaks"="" id="" value="[self" performselector:method];="" pop="" if(!value||value="=NULL){" }="" *item="[NSString" stringwithformat:@"%@="%@",tmp,value];" [resultarray="" addobject:item];="" return="" componentsjoinedbystring:@"&"];="" <="" pre=""></count;i++){></pre>]]></content>
     </entry>
     
     <entry>
