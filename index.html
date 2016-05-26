@@ -256,119 +256,6 @@
             
               
                 
-                <a class="post-title-link" href="/2016/05/26/Ivar/" itemprop="url">
-                  class_copyIvarList的实用举例
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-26T15:34:52+08:00" content="2016-05-26">
-              2016-05-26
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>当一个模型有很多属性，给定的需求需要获取所有的属性的时候，如果一个一个写，效率很低，这个时候就可以用class_copyIvarList解决了。<br>例如有这样一个类：</p>
-<p><pre></pre></p>
-<p>#import <foundation foundation.h=""></foundation></p>
-<p>@interface Model : NSObject</p>
-<p>@property(nonatomic,copy)NSString *name;<br>@property(nonatomic,copy)NSString *sex;<br>@property(nonatomic,copy)NSString *idno;<br>@property(nonatomic,copy)NSString *address;<br>@property(nonatomic,copy)NSString *mobile;</p>
-<p>+(instancetype)modelWithValues:(NSArray *)values;</p>
-<p>@end<br><br>现在需要获取他的以key=value的形式打印其所有属性及其值。就可以这样写了：<br><code><br>-(NSString <em>)description{<br>    unsigned int count=0;<br>    Ivar </em>list=class_copyIvarList([self class], &amp;count);<br>    NSMutableArray <em>resultArray=[NSMutableArray array];<br>    for(int i=0;i&lt;count;i++){<br>        Ivar var=list[i];<br>        NSString </em>varName=[NSString stringWithUTF8String:ivar_getName(var)];<br>        //去掉前面的下划线<br>        NSString *tmp=[varName substringFromIndex:1];<br>        SEL method=NSSelectorFromString(tmp);</code></p>
-<pre><code>    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored &quot;-Warc-performSelector-leaks&quot;
-    id value=[self performSelector:method];
-    #pragma clang diagnostic pop
-    if(!value||value==NULL){
-        value=@&quot;&quot;;
-    }
-    NSString *item=[NSString stringWithFormat:@&quot;%@=%@&quot;,tmp,value];
-
-    [resultArray addObject:item];
-}
-return [resultArray componentsJoinedByString:@&quot;&amp;&quot;];
-</code></pre><p>}<br></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2016/05/26/runtime/" itemprop="url">
                   runtime运行时方法替换的用法
                 </a>
@@ -503,7 +390,7 @@ return [resultArray componentsJoinedByString:@&quot;&amp;&quot;];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">1</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
