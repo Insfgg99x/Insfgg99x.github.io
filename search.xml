@@ -6,14 +6,14 @@
     <entry>
       <title><![CDATA[runtime运行时方法替换的用法]]></title>
       <url>http://cgpointzero.top/2016/05/26/runtime/</url>
-      <content type="html"><![CDATA[<p>在load方法中，用fc_viewDidLoad替换viewDidLoad：<br>/**</p>
+      <content type="html"><![CDATA[<p><pre><br>在load方法中，用fc_viewDidLoad替换viewDidLoad：<br>/**</pre></p>
 <ul>
 <li>在load中交换viewDidLoad和fc_viewDidLoad<br>*/<br>+(void)load{</li>
 </ul>
 <p>Method m1=class_getInstanceMethod([self class], @selector(viewDidLoad));<br>Method m2=class_getInstanceMethod([self class], @selector(fc_viewDidLoad));</p>
 <p>BOOL notImplemented=class_addMethod([self class], @selector(viewDidLoad), method_getImplementation(m2), method_getTypeEncoding(m2));<br>if(!notImplemented){</p>
 <p>method_exchangeImplementations(m1, m2);<br>}</p>
-<p>}<br>/**</p>
+<p>}<br><br>/**</p>
 <ul>
 <li>[self fc_viewDidLoad] 其实是调用了viewDidLoad的实现<br>*/<br>-(void)fc_viewDidLoad{</li>
 </ul>
