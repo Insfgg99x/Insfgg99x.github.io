@@ -84,37 +84,37 @@
 
 
 
-<meta name="description" content="在load方法中，用fc_viewDidLoad替换viewDidLoad：
+<meta name="description" content="当一个模型有很多属性，给定的需求需要获取所有的属性的时候，如果一个一个写，效率很低，这个时候就可以用class_copyIvarList解决了。例如有这样一个类：
 
-/**
- *  在load中交换viewDidLoad和fc_viewDidLoad
- */
-+(void)load{
-    Method m1=class_getInstanceMethod([self class], @selector(viewDidLoad));
-    Method m2=class_get">
+#import 
+
+@interface Model : NSObject
+
+@property(nonatomic,copy)NSString *name;
+@property(nonatomic,copy)NSString *se">
 <meta property="og:type" content="article">
-<meta property="og:title" content="runtime运行时方法替换的用法">
-<meta property="og:url" content="http://cgpointzero.top/2016/05/26/runtime/index.html">
+<meta property="og:title" content="class_copyIvarList的实用举例">
+<meta property="og:url" content="http://cgpointzero.top/2016/05/26/Ivar/index.html">
 <meta property="og:site_name" content="CGPointZero">
-<meta property="og:description" content="在load方法中，用fc_viewDidLoad替换viewDidLoad：
+<meta property="og:description" content="当一个模型有很多属性，给定的需求需要获取所有的属性的时候，如果一个一个写，效率很低，这个时候就可以用class_copyIvarList解决了。例如有这样一个类：
 
-/**
- *  在load中交换viewDidLoad和fc_viewDidLoad
- */
-+(void)load{
-    Method m1=class_getInstanceMethod([self class], @selector(viewDidLoad));
-    Method m2=class_get">
-<meta property="og:updated_time" content="2016-05-26T07:31:09.000Z">
+#import 
+
+@interface Model : NSObject
+
+@property(nonatomic,copy)NSString *name;
+@property(nonatomic,copy)NSString *se">
+<meta property="og:updated_time" content="2016-05-26T07:41:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="runtime运行时方法替换的用法">
-<meta name="twitter:description" content="在load方法中，用fc_viewDidLoad替换viewDidLoad：
+<meta name="twitter:title" content="class_copyIvarList的实用举例">
+<meta name="twitter:description" content="当一个模型有很多属性，给定的需求需要获取所有的属性的时候，如果一个一个写，效率很低，这个时候就可以用class_copyIvarList解决了。例如有这样一个类：
 
-/**
- *  在load中交换viewDidLoad和fc_viewDidLoad
- */
-+(void)load{
-    Method m1=class_getInstanceMethod([self class], @selector(viewDidLoad));
-    Method m2=class_get">
+#import 
+
+@interface Model : NSObject
+
+@property(nonatomic,copy)NSString *name;
+@property(nonatomic,copy)NSString *se">
 
 
 
@@ -132,7 +132,7 @@
   };
 </script>
 
-  <title> runtime运行时方法替换的用法 | CGPointZero </title>
+  <title> class_copyIvarList的实用举例 | CGPointZero </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -275,7 +275,7 @@
             
             
               
-                runtime运行时方法替换的用法
+                class_copyIvarList的实用举例
               
             
           </h1>
@@ -287,7 +287,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-26T15:18:18+08:00" content="2016-05-26">
+            <time itemprop="dateCreated" datetime="2016-05-26T15:34:52+08:00" content="2016-05-26">
               2016-05-26
             </time>
           </span>
@@ -315,28 +315,30 @@
       
 
       
-        <p>在load方法中，用fc_viewDidLoad替换viewDidLoad：</p>
+        <p>当一个模型有很多属性，给定的需求需要获取所有的属性的时候，如果一个一个写，效率很低，这个时候就可以用class_copyIvarList解决了。<br>例如有这样一个类：</p>
 <pre>
-/**
- *  在load中交换viewDidLoad和fc_viewDidLoad
- */
-+(void)load{
-    Method m1=class_getInstanceMethod([self class], @selector(viewDidLoad));
-    Method m2=class_getInstanceMethod([self class], @selector(fc_viewDidLoad));
-    BOOL notImplemented=class_addMethod([self class], @selector(viewDidLoad), method_getImplementation(m2), method_getTypeEncoding(m2));
-    if(!notImplemented){
-        method_exchangeImplementations(m1, m2);
-    }
-}
-</pre><pre>
-/**
- *  [self fc_viewDidLoad] 其实是调用了viewDidLoad的实现
- */
--(void)fc_viewDidLoad{
-    NSLog(@"%s",__func__);
-    [self fc_viewDidLoad];
-}
-</pre>
+#import <foundation foundation.h="">
+
+@interface Model : NSObject
+
+@property(nonatomic,copy)NSString *name;
+@property(nonatomic,copy)NSString *sex;
+@property(nonatomic,copy)NSString *idno;
+@property(nonatomic,copy)NSString *address;
+@property(nonatomic,copy)NSString *mobile;
+
++(instancetype)modelWithValues:(NSArray *)values;
+
+@end
+</foundation></pre>
+现在需要获取他的以key=value的形式打印其所有属性及其值。就可以这样写了：
+<pre>
+-(NSString *)description{
+
+    unsigned int count=0;
+    Ivar *list=class_copyIvarList([self class], &count);
+    NSMutableArray *resultArray=[NSMutableArray array];
+    for(int i=0;i<count;i++){ ivar="" var="list[i];" nsstring="" *varname="[NSString" stringwithutf8string:ivar_getname(var)];="" 去掉前面的下划线="" *tmp="[varName" substringfromindex:1];="" sel="" method="NSSelectorFromString(tmp);" #pragma="" clang="" diagnostic="" push="" ignored="" "-warc-performselector-leaks"="" id="" value="[self" performselector:method];="" pop="" if(!value||value="=NULL){" }="" *item="[NSString" stringwithformat:@"%@="%@",tmp,value];" [resultarray="" addobject:item];="" return="" componentsjoinedbystring:@"&"];="" <="" pre=""></count;i++){></pre>
       
     </div>
 
@@ -360,13 +362,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/05/26/runtime/" rel="next" title="runtime运行时方法替换的用法">
+                <i class="fa fa-chevron-left"></i> runtime运行时方法替换的用法
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/26/Ivar/" rel="prev" title="class_copyIvarList的实用举例">
-                class_copyIvarList的实用举例 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
