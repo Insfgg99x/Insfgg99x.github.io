@@ -319,7 +319,6 @@
 现在需要获取他的以key=value的形式打印其所有属性及其值。就可以这样写了：
 <pre>
 -(NSString *)description{
-
     unsigned int count=0;
     Ivar *list=class_copyIvarList([self class], &count);
     NSMutableArray *resultArray=[NSMutableArray array];
