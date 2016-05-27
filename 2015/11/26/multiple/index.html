@@ -81,7 +81,7 @@ Model.m
     </p>
   <p class="article-time">
     <time datetime="2015-11-25T16:00:00.000Z" itemprop="datePublished">2015-11-26</time>
-    Updated:<time datetime="2016-05-27T04:46:35.000Z" itemprop="dateModified">2016-05-27</time>
+    Updated:<time datetime="2016-05-27T04:47:59.000Z" itemprop="dateModified">2016-05-27</time>
     
   </p>
 </header>
@@ -122,7 +122,7 @@ CustomCell.h
 @end</uikit></pre>
 CustomCell.m
 <pre>#import "CustomCell.h"
-\#define kWidth ([UIScreen mainScreen].bounds.size.width)
+#define kWidth ([UIScreen mainScreen].bounds.size.width)
 
 @implementation CustomCell
 
@@ -172,9 +172,9 @@ EditViewController.m
 #import "CustomCell.h"
 #import "Model.h"
 
-\#define kWidth ([UIScreen mainScreen].bounds.size.width)
-\#define kHeight ([UIScreen mainScreen].bounds.size.height)
-\#define RGB(r,g,b) ([UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1.0f])
+#define kWidth ([UIScreen mainScreen].bounds.size.width)
+#define kHeight ([UIScreen mainScreen].bounds.size.height)
+#define RGB(r,g,b) ([UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1.0f])
 
 @interface EditViewController ()<uitableviewdatasource,uitableviewdelegate>
 {
@@ -324,7 +324,7 @@ Appdelegate.m
 @interface AppDelegate ()
 @end
 @implementation AppDelegate
-\- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     EditViewController *edit=[EditViewController new];
     UINavigationController *navi=[[UINavigationController alloc]initWithRootViewController:edit];
     navi.navigationBar.hidden=YES;
