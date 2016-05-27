@@ -4,18 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>runtime运行时方法替换的用法 | CGPointZero</title>
+    <title>iOS静态库的制作 | CGPointZero</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="CGPoint Zero">
     
-    <meta name="description" content="在load方法中，用fc_viewDidLoad替换viewDidLoad：
-
-/**
- *  在load中交换viewDidLoad和fc_viewDidLoad
- */
-+(void)load{
-    Method m1=class_getInstanceMethod([self class]">
+    <meta name="description" content="iOS静态库的制作">
     
     
     
@@ -72,15 +66,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/05/26/runtime/" title="runtime运行时方法替换的用法" itemprop="url">runtime运行时方法替换的用法</a>
+      <a href="/2015/11/03/static/" title="iOS静态库的制作" itemprop="url">iOS静态库的制作</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://cgpointzero.top" title="CGPoint Zero">CGPoint Zero</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-05-26T07:18:18.000Z" itemprop="datePublished">2016-05-26</time>
-    Updated:<time datetime="2016-05-26T07:31:09.000Z" itemprop="dateModified">2016-05-26</time>
+    <time datetime="2015-11-02T16:00:00.000Z" itemprop="datePublished">2015-11-03</time>
+    Updated:<time datetime="2016-05-27T04:29:20.000Z" itemprop="dateModified">2016-05-27</time>
     
   </p>
 </header>
@@ -92,28 +86,8 @@
 		
 		</div>
 		
-		<p>在load方法中，用fc_viewDidLoad替换viewDidLoad：</p>
-<pre>
-/**
- *  在load中交换viewDidLoad和fc_viewDidLoad
- */
-+(void)load{
-    Method m1=class_getInstanceMethod([self class], @selector(viewDidLoad));
-    Method m2=class_getInstanceMethod([self class], @selector(fc_viewDidLoad));
-    BOOL notImplemented=class_addMethod([self class], @selector(viewDidLoad), method_getImplementation(m2), method_getTypeEncoding(m2));
-    if(!notImplemented){
-        method_exchangeImplementations(m1, m2);
-    }
-}
-</pre><pre>
-/**
- *  [self fc_viewDidLoad] 其实是调用了viewDidLoad的实现
- */
--(void)fc_viewDidLoad{
-    NSLog(@"%s",__func__);
-    [self fc_viewDidLoad];
-}
-</pre>  
+		<p><a href="http://www.jianshu.com/p/d70a51be5af1" target="_blank" rel="external">iOS静态库的制作</a></p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 
@@ -122,7 +96,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://cgpointzero.top/2016/05/26/runtime/" data-title="runtime运行时方法替换的用法 | CGPointZero" data-tsina="null" class="share clearfix">
+  <div data-url="http://cgpointzero.top/2015/11/03/static/" data-title="iOS静态库的制作 | CGPointZero" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -132,21 +106,13 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/05/26/Ivar/" title="class_copyIvarList的实用举例">
+ <a href="/2016/05/26/runtime/" title="runtime运行时方法替换的用法">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  class_copyIvarList的实用举例</span>
+  runtime运行时方法替换的用法</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/2015/11/03/static/"  title="iOS静态库的制作">
- <strong>NEXT:</strong><br/> 
- <span>iOS静态库的制作
-</span>
-</a>
-</div>
 
 </nav>
 

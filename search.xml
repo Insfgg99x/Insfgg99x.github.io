@@ -56,6 +56,13 @@ return [resultArray componentsJoinedByString:@&quot;&amp;&quot;];
 </pre>]]></content>
     </entry>
     
+    <entry>
+      <title><![CDATA[iOS静态库的制作]]></title>
+      <url>http://cgpointzero.top/2015/11/03/static/</url>
+      <content type="html"><![CDATA[<p><a href="http://www.jianshu.com/p/d70a51be5af1" target="_blank" rel="external">iOS静态库的制作</a></p>
+]]></content>
+    </entry>
+    
   
   
 </search>
