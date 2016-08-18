@@ -4,6 +4,23 @@
   
     
     <entry>
+      <title><![CDATA[JSPatch热补丁实时修复补丁]]></title>
+      <url>http://cgpointzero.top/2016/08/19/JSPatchABC/</url>
+      <content type="html"><![CDATA[<p>在iOS开发中，存在一个问题，出了bug，需要Xcode修复-打包-提交审核-用户更新，才能得到解决，周期很长。JSPatch的出现，解决了这个烦恼.它是一个动态更新框架，不仅可以实时的更新bug，还可以实时的添加新功能。操作简单，只需要引入小小的引擎文件，就可以用JS调用和替换任意OC方法。</p>
+<pre>
+//例如线上的app有一段出现了bug，导致crash
+@implementation LeftViewController
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//---------------crash----------------
+    NSArray *array=@[@"1",@"2",@"3"];
+    for(int i=0;i<4;i++){ nslog(@"%@",array[i]);="" 程序中出现的crash="" }="" ---------------crash---------------="" @end="" 可以通过下发这样一段js代码，覆盖掉原方法，修复这个crash：="" defineclass('leftviewcontroller',="" {="" tableview_didselectrowatindexpath:="" function(tableview,="" indexpath)="" var="" array="["1"," "2",="" "3"];="" for="" (var="" i="0;" <="" array.count();="" i++)="" nslog("%",="" array[i]);="" });="" 点击tableview的崩溃就得到了实时的修复。="" pre="">
+<pre>
+
+</pre></4;i++){></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[class_copyIvarList的实用举例]]></title>
       <url>http://cgpointzero.top/2016/05/26/Ivar/</url>
       <content type="html"><![CDATA[<p>当一个模型有很多属性，给定的需求需要获取所有的属性的时候，如果一个一个写，效率很低，这个时候就可以用class_copyIvarList解决了。<br>例如有这样一个类：</p>

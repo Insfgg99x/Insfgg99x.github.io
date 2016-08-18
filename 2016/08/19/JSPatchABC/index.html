@@ -4,16 +4,14 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>class_copyIvarList的实用举例 | CGPointZero</title>
+    <title>JSPatch热补丁实时修复补丁 | CGPointZero</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="CGPoint Zero">
     
-    <meta name="description" content="当一个模型有很多属性，给定的需求需要获取所有的属性的时候，如果一个一个写，效率很低，这个时候就可以用class_copyIvarList解决了。例如有这样一个类：
+    <meta name="description" content="在iOS开发中，存在一个问题，出了bug，需要Xcode修复-打包-提交审核-用户更新，才能得到解决，周期很长。JSPatch的出现，解决了这个烦恼.它是一个动态更新框架，不仅可以实时的更新bug，还可以实时的添加新功能。操作简单，只需要引入小小的引擎文件，就可以用JS调用和替换任意OC方法。
 
-#import 
-@interface Model : NSObject
-@property(nonatomic,copy)NSStr">
+/">
     
     
     
@@ -70,15 +68,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/05/26/Ivar/" title="class_copyIvarList的实用举例" itemprop="url">class_copyIvarList的实用举例</a>
+      <a href="/2016/08/19/JSPatchABC/" title="JSPatch热补丁实时修复补丁" itemprop="url">JSPatch热补丁实时修复补丁</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://cgpointzero.top" title="CGPoint Zero">CGPoint Zero</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-05-26T07:34:52.000Z" itemprop="datePublished">2016-05-26</time>
-    更新日期:<time datetime="2016-08-18T17:28:00.000Z" itemprop="dateModified">2016-08-19</time>
+    <time datetime="2016-08-18T17:30:18.000Z" itemprop="datePublished">2016-08-19</time>
+    更新日期:<time datetime="2016-08-18T18:02:56.000Z" itemprop="dateModified">2016-08-19</time>
     
   </p>
 </header>
@@ -90,28 +88,18 @@
 		
 		</div>
 		
-		<p>当一个模型有很多属性，给定的需求需要获取所有的属性的时候，如果一个一个写，效率很低，这个时候就可以用class_copyIvarList解决了。<br>例如有这样一个类：</p>
-<p><pre></pre></p>
-<p>#import <foundation foundation.h=""></foundation></p>
-<p>@interface Model : NSObject</p>
-<p>@property(nonatomic,copy)NSString *name;<br>@property(nonatomic,copy)NSString *sex;<br>@property(nonatomic,copy)NSString *idno;<br>@property(nonatomic,copy)NSString *address;<br>@property(nonatomic,copy)NSString *mobile;</p>
-<p>+(instancetype)modelWithValues:(NSArray *)values;</p>
-<p>@end<br><br>现在需要获取他的以key=value的形式打印其所有属性及其值。就可以这样写了：<br><code><br>-(NSString <em>)description{<br>    unsigned int count=0;<br>    Ivar </em>list=class_copyIvarList([self class], &amp;count);<br>    NSMutableArray <em>resultArray=[NSMutableArray array];<br>    for(int i=0;i&lt;count;i++){<br>        Ivar var=list[i];<br>        NSString </em>varName=[NSString stringWithUTF8String:ivar_getName(var)];<br>        //去掉前面的下划线<br>        NSString *tmp=[varName substringFromIndex:1];<br>        SEL method=NSSelectorFromString(tmp);</code></p>
-<pre><code>    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored &quot;-Warc-performSelector-leaks&quot;
-    id value=[self performSelector:method];
-    #pragma clang diagnostic pop
-    if(!value||value==NULL){
-        value=@&quot;&quot;;
-    }
-    NSString *item=[NSString stringWithFormat:@&quot;%@=%@&quot;,tmp,value];
+		<p>在iOS开发中，存在一个问题，出了bug，需要Xcode修复-打包-提交审核-用户更新，才能得到解决，周期很长。JSPatch的出现，解决了这个烦恼.它是一个动态更新框架，不仅可以实时的更新bug，还可以实时的添加新功能。操作简单，只需要引入小小的引擎文件，就可以用JS调用和替换任意OC方法。</p>
+<pre>
+//例如线上的app有一段出现了bug，导致crash
+@implementation LeftViewController
 
-    [resultArray addObject:item];
-}
-free(list);
-return [resultArray componentsJoinedByString:@&quot;&amp;&quot;];
-</code></pre><p>}<br></p>
-  
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//---------------crash----------------
+    NSArray *array=@[@"1",@"2",@"3"];
+    for(int i=0;i<4;i++){ nslog(@"%@",array[i]);="" 程序中出现的crash="" }="" ---------------crash---------------="" @end="" 可以通过下发这样一段js代码，覆盖掉原方法，修复这个crash：="" defineclass('leftviewcontroller',="" {="" tableview_didselectrowatindexpath:="" function(tableview,="" indexpath)="" var="" array="["1"," "2",="" "3"];="" for="" (var="" i="0;" <="" array.count();="" i++)="" nslog("%",="" array[i]);="" });="" 点击tableview的崩溃就得到了实时的修复。="" pre="">
+<pre>
+
+</pre></4;i++){></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 
@@ -120,7 +108,7 @@ return [resultArray componentsJoinedByString:@&quot;&amp;&quot;];
 
 <div class="article-share" id="share">
 
-  <div data-url="http://cgpointzero.top/2016/05/26/Ivar/" data-title="class_copyIvarList的实用举例 | CGPointZero" data-tsina="null" class="share clearfix">
+  <div data-url="http://cgpointzero.top/2016/08/19/JSPatchABC/" data-title="JSPatch热补丁实时修复补丁 | CGPointZero" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -129,19 +117,11 @@ return [resultArray componentsJoinedByString:@&quot;&amp;&quot;];
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/08/19/JSPatchABC/" title="JSPatch热补丁实时修复补丁">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  JSPatch热补丁实时修复补丁</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/05/26/runtime/"  title="runtime运行时方法替换的用法">
+<a href="/2016/05/26/Ivar/"  title="class_copyIvarList的实用举例">
  <strong>NEXT:</strong><br/> 
- <span>runtime运行时方法替换的用法
+ <span>class_copyIvarList的实用举例
 </span>
 </a>
 </div>
