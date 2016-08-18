@@ -19,7 +19,7 @@
         NSLog(&quot;%&quot;, array[i]);
     }
 },
-</code></pre><p>});<br>第七步：去<a href="http://jspatch.com" target="_blank" rel="external">JSPatch平台</a>下发补丁。</p>
+</code></pre><p>});<br>第七步：去<a href="http://jspatch.com" target="_blank" rel="external">JSPatch平台</a>下发补丁。<br>补丁选择刚刚的main.js，私钥选择刚刚生成的私钥private_key.pem文件，提交。<br><img src="/img/jspatch_03.png" alt=""><br>第八步：运行app，再次在LeftViewController的选择cell，之前选择cell导致的crash得到了修复！</p>
 ]]></content>
     </entry>
     
