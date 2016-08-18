@@ -14,7 +14,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 //---------------crash----------------
     NSArray *array=@[@"1",@"2",@"3"];
-    for(int i=0;i<4;i++){ nslog(@"%@",array[i]);="" 程序中出现的crash="" }="" ---------------crash---------------="" @end="" [](\="" img="" jspatch_01.png)="" 可以通过下发这样一段js代码，覆盖掉原方法，修复这个crash：="" defineclass('leftviewcontroller',="" {="" tableview_didselectrowatindexpath:="" function(tableview,="" indexpath)="" var="" array="["1"," "2",="" "3"];="" for="" (var="" i="0;" <="" array.count();="" i++)="" nslog("%",="" array[i]);="" });="" 点击tableview的崩溃就得到了实时的修复。="" pre="">
+    for(int i=0;i<4;i++){ nslog(@"%@",array[i]);="" 程序中出现的crash="" }="" ---------------crash---------------="" @end="" ![](="" img="" jspatch_01.png)="" 可以通过下发这样一段js代码，覆盖掉原方法，修复这个crash：="" defineclass('leftviewcontroller',="" {="" tableview_didselectrowatindexpath:="" function(tableview,="" indexpath)="" var="" array="["1"," "2",="" "3"];="" for="" (var="" i="0;" <="" array.count();="" i++)="" nslog("%",="" array[i]);="" });="" 点击tableview的崩溃就得到了实时的修复。="" pre="">
 <pre>
 
 </pre></4;i++){></pre>]]></content>
