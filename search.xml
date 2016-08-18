@@ -6,10 +6,9 @@
     <entry>
       <title><![CDATA[JSPatch热补丁实时修复bug]]></title>
       <url>http://cgpointzero.top/2016/08/19/JSPatchABC/</url>
-      <content type="html"><![CDATA[<p>在iOS开发中，存在一个问题，出了bug，需要Xcode修复-打包-提交审核-用户更新，才能得到解决，周期很长。JSPatch的出现，解决了这个烦恼.它是一个动态更新框架，不仅可以实时的更新bug，还可以实时的添加新功能。操作简单，只需要引入小小的引擎文件，就可以用JS调用和替换任意OC方法。<br><img src="/img/jspatch_01.png" alt="JSPatch实时修复bug"></p>
-<pre>
-JSPatch是一个开源的框架，[JSPathc](https://github.com/bang590/JSPatch)
-</pre>]]></content>
+      <content type="html"><![CDATA[<p>在iOS开发中，存在一个问题，出了bug，需要Xcode修复-打包-提交审核-用户更新，才能得到解决，周期很长。JSPatch的出现，解决了这个烦恼.它是一个动态更新框架，不仅可以实时的更新bug，还可以实时的添加新功能。操作简单，只需要引入小小的引擎文件，就可以用JS调用和替换任意OC方法。<br><a href="/img/jspatch_01.png">JSPatch实时修复bug</a></p>
+<p>JSPatch是一个开源的框架，<a href="https://github.com/bang590/JSPatch" target="_blank" rel="external">JSPathc</a></p>
+]]></content>
     </entry>
     
     <entry>
