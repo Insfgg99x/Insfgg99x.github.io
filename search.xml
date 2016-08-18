@@ -24,6 +24,7 @@
 
     [resultArray addObject:item];
 }
+free(list);
 return [resultArray componentsJoinedByString:@&quot;&amp;&quot;];
 </code></pre><p>}<br></p>
 ]]></content>
