@@ -40,7 +40,7 @@ J">
 				<h1 class="site-name"><a href="/" title="CGPointZero">CGPointZero</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -53,7 +53,7 @@ J">
 					
 					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="text" id="search" autocomplete="off" name="q" maxlength="20" placeholder="搜索" />
+						<input type="text" id="search" autocomplete="off" name="q" maxlength="20" placeholder="Search" />
 					</form>
 					
 					</li>
@@ -76,7 +76,7 @@ J">
     </p>
   <p class="article-time">
     <time datetime="2016-08-18T17:30:18.000Z" itemprop="datePublished">2016-08-19</time>
-    更新日期:<time datetime="2016-08-18T18:48:52.000Z" itemprop="dateModified">2016-08-19</time>
+    Updated:<time datetime="2016-08-18T18:49:15.000Z" itemprop="dateModified">2016-08-19</time>
     
   </p>
 </header>
@@ -84,7 +84,7 @@ J">
 		
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
+			<strong class="toc-title">Contents</strong>
 		
 		</div>
 		
@@ -93,7 +93,7 @@ J">
 <p><a href="/img/jspatch_01.png">JSPatch实时修复bug</a></p>
 <pre><code>JSPatch是一个开源的框架，[JSPatch](https://github.com/bang590/JSPatch)，我们可以在项目中引入JSPatch，
 </code></pre><p>然后在在自己搭建下发补丁的服务器。<br>    当然，我们也可以直接用<a href="http://jspatch.com" target="_blank" rel="external">JSPatch平台</a>集成的带代码下发功能的SDK，我们只需要写好补丁，<br>直接就可以在这个平台下发了。</p>
-<p>第一步：在<a href="http://jspatch.com" target="_blank" rel="external">JSPatch平台</a>注册一个帐号；<br>第二步：创建一个app；<br>第三步：下载JSPatch SDK，这个跟github上的不一样，github上的是开源的，不带代码下发服务器的。<br>第四步：生成RSA公钥和私钥。<br>       打开终端，cd到Desktop/，输入openssl后按回车，输入以下三行指令，<br><code>genrsa -out rsa_private_key.pem 1024<br>pkcs8 -topk8 -inform PEM -in rsa_private_key.pem -outform PEM –nocrypt<br>rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem</code><br>在桌面时就会得到2个.pem文件，分别时公钥和私钥。<br>第五步：按照文档集成SDK到文档中，这个很简单。<br><img src="/img/jspatch_02.png" alt="初始化JSPatch"><br>其中，appkey是平台上创建app得到的appkey，而pullic key则是上步生成的RSA公钥，注意要手动加换行(\n)。<br>如：@”—–BEGIN PUBLIC KEY—–\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1heHjbL+R6nulhIRptjfGmd3M\nlUEe3SnDa5LFGRfxHwYnqHdjUt9WznopZMwyZkEyX46pDMnA5v0mOhXAH6Mcx013\nIdASxf9AO+Qmek/4uez8jxks9/gqhs71uYo8zihsKPw3YtHgstz8liWgj1+ke74G\n2fiQg8zHbXM/vqZ+pQIDAQAB\n—–END PUBLIC KEY—–”。<br>而私钥，则是在下发补丁的时候需要用到。<br>    下发补丁时，服务端会计算补丁文件(js)文件的MD5值，然后讲这个MD5值用RSA私钥签名，签名后的字符串跟补丁一起下发到客户端。<br>客户端拿到签名后的字符串后，用公钥进行解密，得到一个MD5值，计算得到脚本的MD5值，比较这两个MD5值，若一支，说明补丁没有被篡改。<br>在运行时实现方法替换，替换掉我们的crash代码。</p>
+<p>第一步：在<a href="http://jspatch.com" target="_blank" rel="external">JSPatch平台</a>注册一个帐号；<br>第二步：创建一个app；<br>第三步：下载JSPatch SDK，这个跟github上的不一样，github上的是开源的，不带代码下发服务器的。<br>第四步：生成RSA公钥和私钥。<br>       打开终端，cd到Desktop/，输入openssl后按回车，输入以下三行指令，<br><code>genrsa -out rsa_private_key.pem 1024<br>pkcs8 -topk8 -inform PEM -in rsa_private_key.pem -outform PEM –nocrypt<br>rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem</code><br>在桌面时就会得到2个.pem文件，分别时公钥和私钥。<br>第五步：按照文档集成SDK到文档中，这个很简单。<br><img src="/img/jspatch_02.png" alt="初始化JSPatch"><br>其中，appkey是平台上创建app得到的appkey，而pullic key则是上步生成的RSA公钥，注意要手动加换行(\n)。<br>如：@”—–BEGIN PUBLIC KEY—–\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1heHjbL+R6nulhIRptjfGmd3M\nlU…\n—–END PUBLIC KEY—–”。<br>而私钥，则是在下发补丁的时候需要用到。<br>    下发补丁时，服务端会计算补丁文件(js)文件的MD5值，然后讲这个MD5值用RSA私钥签名，签名后的字符串跟补丁一起下发到客户端。<br>客户端拿到签名后的字符串后，用公钥进行解密，得到一个MD5值，计算得到脚本的MD5值，比较这两个MD5值，若一支，说明补丁没有被篡改。<br>在运行时实现方法替换，替换掉我们的crash代码。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -129,15 +129,15 @@ J">
 </section>
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
+  <strong class="toc-title">Contents</strong>
   
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
@@ -145,7 +145,7 @@ J">
   
 
   <div class="rsspart">
-	<a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" title="rss">RSS 订阅</a>
+	<a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
