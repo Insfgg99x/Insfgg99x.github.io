@@ -9,9 +9,7 @@
     
     <meta name="author" content="CGPoint Zero">
     
-    <meta name="description" content="在iOS开发中，存在一个问题，出了bug，需要Xcode修复-打包-提交审核-用户更新，才能得到解决，周期很长。JSPatch的出现，解决了这个烦恼.它是一个动态更新框架，不仅可以实时的更新bug，还可以实时的添加新功能。操作简单，只需要引入小小的引擎文件，就可以用JS调用和替换任意OC方法。
-
-/">
+    <meta name="description" content="在iOS开发中，存在一个问题，出了bug，需要Xcode修复-打包-提交审核-用户更新，才能得到解决，周期很长。JSPatch的出现，解决了这个烦恼.它是一个动态更新框架，不仅可以实时的更新bug，还可以实时的添加新功能。操作简单，只需要引入小小的引擎文件，就可以用JS调用和替换任意OC方法。">
     
     
     
@@ -76,7 +74,7 @@
     </p>
   <p class="article-time">
     <time datetime="2016-08-18T17:30:18.000Z" itemprop="datePublished">2016-08-19</time>
-    Updated:<time datetime="2016-08-18T18:16:14.000Z" itemprop="dateModified">2016-08-19</time>
+    Updated:<time datetime="2016-08-18T18:16:59.000Z" itemprop="dateModified">2016-08-19</time>
     
   </p>
 </header>
@@ -90,16 +88,8 @@
 		
 		<p>在iOS开发中，存在一个问题，出了bug，需要Xcode修复-打包-提交审核-用户更新，才能得到解决，周期很长。JSPatch的出现，解决了这个烦恼.它是一个动态更新框架，不仅可以实时的更新bug，还可以实时的添加新功能。操作简单，只需要引入小小的引擎文件，就可以用JS调用和替换任意OC方法。<br><img src="/img/jspatch_01.png" alt="JSPatch实时修复bug"></p>
 <pre>
-//例如线上的app有一段出现了bug，导致crash
-@implementation LeftViewController
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//---------------crash----------------
-    NSArray *array=@[@"1",@"2",@"3"];
-    for(int i=0;i<4;i++){ nslog(@"%@",array[i]);="" 程序中出现的crash="" }="" ---------------crash---------------="" @end="" 可以通过下发这样一段js代码，覆盖掉原方法，修复这个crash：="" defineclass('leftviewcontroller',="" {="" tableview_didselectrowatindexpath:="" function(tableview,="" indexpath)="" var="" array="["1"," "2",="" "3"];="" for="" (var="" i="0;" <="" array.count();="" i++)="" nslog("%",="" array[i]);="" });="" 点击tableview的崩溃就得到了实时的修复。="" pre="">
-<pre>
-
-</pre></4;i++){></pre>  
+</pre>  
 	</div>
 		<footer class="article-footer clearfix">
 
