@@ -19,7 +19,7 @@
         NSLog(&quot;%&quot;, array[i]);
     }
 },
-</code></pre><p>});</p>
+</code></pre><p>});<br>第七步：去<a href="http://jspatch.com" target="_blank" rel="external">JSPatch平台</a>下发补丁。</p>
 ]]></content>
     </entry>
     
