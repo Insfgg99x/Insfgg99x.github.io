@@ -40,7 +40,7 @@
 				<h1 class="site-name"><a href="/" title="CGPointZero">CGPointZero</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -76,7 +76,7 @@
     </p>
   <p class="article-time">
     <time datetime="2016-08-18T17:30:18.000Z" itemprop="datePublished">2016-08-19</time>
-    更新日期:<time datetime="2016-08-18T18:14:29.000Z" itemprop="dateModified">2016-08-19</time>
+    更新日期:<time datetime="2016-08-18T18:15:19.000Z" itemprop="dateModified">2016-08-19</time>
     
   </p>
 </header>
@@ -84,11 +84,11 @@
 		
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
+			<strong class="toc-title">文章目錄</strong>
 		
 		</div>
 		
-		<p>在iOS开发中，存在一个问题，出了bug，需要Xcode修复-打包-提交审核-用户更新，才能得到解决，周期很长。JSPatch的出现，解决了这个烦恼.它是一个动态更新框架，不仅可以实时的更新bug，还可以实时的添加新功能。操作简单，只需要引入小小的引擎文件，就可以用JS调用和替换任意OC方法。</p>
+		<p>在iOS开发中，存在一个问题，出了bug，需要Xcode修复-打包-提交审核-用户更新，才能得到解决，周期很长。JSPatch的出现，解决了这个烦恼.它是一个动态更新框架，不仅可以实时的更新bug，还可以实时的添加新功能。操作简单，只需要引入小小的引擎文件，就可以用JS调用和替换任意OC方法。<br><img src="/img/jspatch_01.png" alt=""></p>
 <pre>
 //例如线上的app有一段出现了bug，导致crash
 @implementation LeftViewController
@@ -96,7 +96,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 //---------------crash----------------
     NSArray *array=@[@"1",@"2",@"3"];
-    for(int i=0;i<4;i++){ nslog(@"%@",array[i]);="" 程序中出现的crash="" }="" ---------------crash---------------="" @end="" ![](="" img="" jspatch_01.png)="" 可以通过下发这样一段js代码，覆盖掉原方法，修复这个crash：="" defineclass('leftviewcontroller',="" {="" tableview_didselectrowatindexpath:="" function(tableview,="" indexpath)="" var="" array="["1"," "2",="" "3"];="" for="" (var="" i="0;" <="" array.count();="" i++)="" nslog("%",="" array[i]);="" });="" 点击tableview的崩溃就得到了实时的修复。="" pre="">
+    for(int i=0;i<4;i++){ nslog(@"%@",array[i]);="" 程序中出现的crash="" }="" ---------------crash---------------="" @end="" 可以通过下发这样一段js代码，覆盖掉原方法，修复这个crash：="" defineclass('leftviewcontroller',="" {="" tableview_didselectrowatindexpath:="" function(tableview,="" indexpath)="" var="" array="["1"," "2",="" "3"];="" for="" (var="" i="0;" <="" array.count();="" i++)="" nslog("%",="" array[i]);="" });="" 点击tableview的崩溃就得到了实时的修复。="" pre="">
 <pre>
 
 </pre></4;i++){></pre>  
@@ -134,15 +134,15 @@
 </section>
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
+  <strong class="toc-title">文章目錄</strong>
   
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
 <aside class="clearfix">
 
   
@@ -150,7 +150,7 @@
   
 
   <div class="rsspart">
-	<a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" title="rss">RSS 订阅</a>
+	<a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" title="rss">RSS 訂閱</a>
 </div>
 
 </aside>
