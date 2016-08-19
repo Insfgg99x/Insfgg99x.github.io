@@ -11,7 +11,7 @@
 才能得到解决，周期很长。JSPatch的出现，解决了这个烦恼。
 它是一个动态更新框架，不仅可以实时的修复bug(热修复，也叫hotfix技术)，
 还可以实时的添加新功能。操作简单，只需要引入小小的引擎文件，就可以用JS调用和替换任意OC方法。</pre>
-[](http://upload-images.jianshu.io/upload_images/937405-03af15c3791b008a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](http://upload-images.jianshu.io/upload_images/937405-03af15c3791b008a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
   <pre>  JSPatch是一个开源的框架，[JSPatch](https://github.com/bang590/JSPatch)，我们可以在项目中引入JSPatch，
 然后在在自己搭建下发补丁的服务器。
     当然，我们也可以直接用[JSPatch平台](http://jspatch.com)集成的带代码下发功能的SDK，我们只需要写好补丁，
