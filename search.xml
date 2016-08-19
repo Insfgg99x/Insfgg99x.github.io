@@ -4,53 +4,6 @@
   
     
     <entry>
-      <title><![CDATA[test]]></title>
-      <url>http://cgpointzero.top/2016/08/20/test/</url>
-      <content type="html"><![CDATA[<pre>
-    在iOS开发中，存在一个问题，若程序出了bug，需要先Xcode修复--打包--提交审核--用户更新。
-才能得到解决，周期很长。JSPatch的出现，解决了这个烦恼。
-它是一个动态更新框架，不仅可以实时的修复bug(热修复，也叫hotfix技术)，
-还可以实时的添加新功能。操作简单，只需要引入小小的引擎文件，就可以用JS调用和替换任意OC方法。</pre>
-![](http://upload-images.jianshu.io/upload_images/937405-03af15c3791b008a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-  <pre>  JSPatch是一个开源的框架，[JSPatch](https://github.com/bang590/JSPatch)，我们可以在项目中引入JSPatch，
-然后在在自己搭建下发补丁的服务器。
-    当然，我们也可以直接用[JSPatch平台](http://jspatch.com)集成的带代码下发功能的SDK，我们只需要写好补丁，
-直接就可以在这个平台下发了。</pre>
-
-<p>第一步：在<a href="http://jspatch.com" target="_blank" rel="external">JSPatch平台</a>注册一个帐号；<br>第二步：创建一个app；<br>第三步：下载JSPatch SDK，这个跟github上的不一样，github上的是开源的，不带代码下发服务器的。<br>第四步：生成RSA公钥和私钥。<br>       打开终端，cd到Desktop/，输入openssl后按回车，输入以下三行指令，<br><code>genrsa -out rsa_private_key.pem 1024<br>pkcs8 -topk8 -inform PEM -in rsa_private_key.pem -outform PEM –nocrypt<br>rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem</code><br>在桌面时就会得到2个.pem文件，分别时公钥和私钥。<br>第五步：按照文档集成SDK到文档中，这个很简单。<br><a href="http://upload-images.jianshu.io/upload_images/937405-2ff01b64dbe7d63e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" target="_blank" rel="external">初始化JSPatch</a></p>
-<pre>
-其中，appkey是平台上创建app得到的appkey，而pullic key则是上步生成的RSA公钥，注意要手动加换行(\n)。
-如：@"-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1heHjbL+R6nulhIRptjfGmd3M\nlU...\n-----END PUBLIC KEY-----"。
-而私钥，则是在下发补丁的时候需要用到。
-    下发补丁时，服务端会计算补丁文件(js)文件的MD5值，然后讲这个MD5值用RSA私钥签名，签名后的字符串跟补丁一起下发到客户端。
-客户端拿到签名后的字符串后，用公钥进行解密，得到一个MD5值，计算得到脚本的MD5值，比较这两个MD5值，若一支，说明补丁没有被篡改。
-在运行时实现方法替换，替换掉我们的crash代码。
-第六步：我们用在桌面上新建一个main.js文件，打开命令后，cd到桌面，输入 touch main.js后回车，在桌面就会生成一个main.js文件，用文本编辑器打开。
-写入我们自己的方法替换掉crash部分的代码的所在的方法。
-
-defineClass('LeftViewController', {
-
-    tableView_didSelectRowAtIndexPath: function(tableView, indexPath) {
-
-        var array = ["1", "2", "3"];
-        for (var i = 0; i < array.count(); i++) {
-            NSLog("%", array[i]);
-        }
-    },
-});
-你可以用[JSPatchConverter](https://github.com/bang590/JSPatchConvertor/blob/gh-pages/JSPatchConvertor.zip)直接将写好的OC转成Patch，大部分可以直接转，但私有变量/静态变量/宏这些还不支持，所以转换后需要手动修改。可以借助这个工具，省去原本要先写好OC代码，在翻译成Patch的时间成本。
-
-第七步：去[JSPatch平台](http://jspatch.com)下发补丁。
-补丁选择刚刚的main.js，私钥选择刚刚生成的私钥private_key.pem文件，提交。</pre>
-[JSPatch平台下发补丁代码](http://upload-images.jianshu.io/upload_images/937405-19df86d4b89682cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-<pre>
-第八步：运行app，再次在LeftViewController的选择cell，之前选择cell导致的crash得到了修复！</pre>
-
-<p>至此，我们已经在不用重新提交版本的情况下，完成了bug的实时修复。<br><a href="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" target="_blank" rel="external"></a></p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[JSPatch热补丁实时修复bug]]></title>
       <url>http://cgpointzero.top/2016/08/19/JSPatchABC/</url>
       <content type="html"><![CDATA[<pre><code>在iOS开发中，存在一个问题，若程序出了bug，需要先Xcode修复--打包--提交审核--用户更新。
@@ -67,7 +20,7 @@ defineClass('LeftViewController', {
     }
 },
 </code></pre><p>});<br>第七步：去<a href="http://jspatch.com" target="_blank" rel="external">JSPatch平台</a>下发补丁。<br>补丁选择刚刚的main.js，私钥选择刚刚生成的私钥private_key.pem文件，提交。<br><img src="/img/jspatch_03.png" alt=""><br>第八步：运行app，再次在LeftViewController的选择cell，之前选择cell导致的crash得到了修复！</p>
-<p>至此，我们已经在不用重新提交版本的情况下，完成了bug的实时修复。</p>
+<p>至此，我们已经在不用重新提交版本的情况下，完成了bug的实时修复。<br><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 ]]></content>
     </entry>
     
