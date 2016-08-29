@@ -60,20 +60,38 @@ return [resultArray componentsJoinedByString:@&quot;&amp;&quot;];
  *  在load中交换viewDidLoad和fc_viewDidLoad
  */
 +(void)load{
-    Method m1=class_getInstanceMethod([self class], @selector(viewDidLoad));
-    Method m2=class_getInstanceMethod([self class], @selector(fc_viewDidLoad));
-    BOOL notImplemented=class_addMethod([self class], @selector(viewDidLoad), method_getImplementation(m2), method_getTypeEncoding(m2));
-    if(!notImplemented){
-        method_exchangeImplementations(m1, m2);
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken,^{
+
+        xgf_swizzleSelector([self class], @selector(viewDidLoad), @selector(xgf_viewDidLoad));
+
+        /*Method m1=class_getInstanceMethod([self class], @selector(viewDidLoad));
+                Method m2=class_getInstanceMethod([self class], @selector(fc_viewDidLoad));
+                BOOL notImplemented=class_addMethod([self class], @selector(viewDidLoad), method_getImplementation(m2), method_getTypeEncoding(m2));
+                if(!notImplemented){
+                method_exchangeImplementations(m1, m2);
+                }
+        */
+    });
+}
+static inline void xgf_swizzleSelector(Class class, SEL originalSelector, SEL swizzledSelector) {
+
+    Method originalMethod = class_getInstanceMethod(class, originalSelector);
+    Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
+    if (class_addMethod(class, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))) {
+    class_replaceMethod(class, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
+    } else {
+    method_exchangeImplementations(originalMethod, swizzledMethod);
     }
 }
 </pre><pre>
 /**
- *  [self fc_viewDidLoad] 其实是调用了viewDidLoad的实现
+ *  [self xgf_viewDidLoad] 其实是调用了viewDidLoad的实现
  */
--(void)fc_viewDidLoad{
+-(void)xgf_viewDidLoad{
     NSLog(@"%s",__func__);
-    [self fc_viewDidLoad];
+    [self xgf_viewDidLoad];
 }
 </pre>]]></content>
     </entry>
