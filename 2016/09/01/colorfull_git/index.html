@@ -40,7 +40,7 @@ git config –global alias.lg “log –color –graph –pretty=format:’%Cred
 				<h1 class="site-name"><a href="/" title="CGPointZero">CGPointZero</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -53,7 +53,7 @@ git config –global alias.lg “log –color –graph –pretty=format:’%Cred
 					
 					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="text" id="search" autocomplete="off" name="q" maxlength="20" placeholder="Search" />
+						<input type="text" id="search" autocomplete="off" name="q" maxlength="20" placeholder="搜索" />
 					</form>
 					
 					</li>
@@ -76,7 +76,7 @@ git config –global alias.lg “log –color –graph –pretty=format:’%Cred
     </p>
   <p class="article-time">
     <time datetime="2016-08-31T16:30:18.000Z" itemprop="datePublished">2016-09-01</time>
-    Updated:<time datetime="2016-08-31T17:37:45.000Z" itemprop="dateModified">2016-09-01</time>
+    更新日期:<time datetime="2016-08-31T17:39:56.000Z" itemprop="dateModified">2016-09-01</time>
     
   </p>
 </header>
@@ -84,13 +84,13 @@ git config –global alias.lg “log –color –graph –pretty=format:’%Cred
 		
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
+			<strong class="toc-title">文章目录</strong>
 		
 		</div>
 		
 		<p>#将git log替换成git lg，并且彩色显示，方便查看及回滚到某个版本，效果如下：<br><img src="/img/gitlog.png" alt="彩色的git lg"></p>
 <p>#只要在命令行输入以下命令回车：</p>
-<p><pre><br>git config –global alias.lg “log –color –graph –pretty=format:’%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset’ –abbrev-commit”<br></pre></p>
+<p>git config –global alias.lg “log –color –graph –pretty=format:’%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset’ –abbrev-commit”</p>
 <p>#然后再git lg就可以看到彩色的日志。</p>
 <p>#附上常用git 命令<br><code>1.初始化 git init<br>2.查看状态：git status<br>3.添加文件：git  add .<br>4.提交 git commit -m”备注”<br>5.查看日志：git log<br>6.查看当前分支：git branch<br>7.拉取最新代码：git pull origin 分支名<br>8.推送代码：git push origin 分支名<br>9.删除远程分支：git push origin :分支名<br>10.新建分支，并切换到新建的分支:git checkout -b 新分支名<br>11.将新建的分支推送到服务器：git push origin 新建的分支名<br>12.删除本地分支：git branch -D 分支名<br>13.强制回撤到某次提交的版本：git reset —hard 版本号的前6位(如：abe75e)<br>14.添加tag：git tag -a “标签名” -m”备注”<br>15.将添加的标签推送到远程服务器：git push —tag<br>16.进入到某哥tag:git checkout 标签名<br>17.强制回撤到某哥标签：git reset —hard 标签名<br>18.删除本地tag：git tag -d 标签名<br></code></p>
   
@@ -128,15 +128,15 @@ git config –global alias.lg “log –color –graph –pretty=format:’%Cred
 </section>
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
+  <strong class="toc-title">文章目录</strong>
   
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
 <aside class="clearfix">
 
   
@@ -144,7 +144,7 @@ git config –global alias.lg “log –color –graph –pretty=format:’%Cred
   
 
   <div class="rsspart">
-	<a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" title="rss">RSS</a>
+	<a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" title="rss">RSS 订阅</a>
 </div>
 
 </aside>
