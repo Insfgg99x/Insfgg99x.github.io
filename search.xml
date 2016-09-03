@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title><![CDATA[cocoapods_release_project]]></title>
+      <title><![CDATA[发布开源项目发布到cocoapods上去]]></title>
       <url>http://cgpointzero.top/2016/09/03/cocoapods-release-project/</url>
       <content type="html"><![CDATA[<p>发布开源项目到cocoapods上，可以让别人直接用cocoapods引用你的项目。<br>首先你需要安装cocoapods，如果你在安装出现了问题，请参考我的这篇帖子：<br><a href="http://www.jianshu.com/p/7846ef67153f" target="_blank" rel="external">解决安装cocoapods一直卡在Setting up master repos</a></p>
 <p>######发布项目到cocoapods需要如下2个文件：<br><code>LISENCE</code>和<code>podspec</code>，即开源许可和规格说明文件，如下图:</p>
