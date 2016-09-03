@@ -1,0 +1,330 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>cocoapods_release_project | CGPointZero</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="CGPoint Zero">
+    
+    <meta name="description" content="发布开源项目到cocoapods上，可以让别人直接用cocoapods引用你的项目。首先你需要安装cocoapods，如果你在安装出现了问题，请参考我的这篇帖子：解决安装cocoapods一直卡在Setting up master repos
+######发布项目到cocoapods需要如下2个文件">
+    
+    
+    
+    
+    <link rel="alternate" href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" title="CGPointZero" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/avatar.png" alt="CGPointZero" title="CGPointZero"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="CGPointZero">CGPointZero</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" autocomplete="off" name="q" maxlength="20" placeholder="Search" />
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/09/03/cocoapods-release-project/" title="cocoapods_release_project" itemprop="url">cocoapods_release_project</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://cgpointzero.top" title="CGPoint Zero">CGPoint Zero</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-09-03T12:15:44.000Z" itemprop="datePublished">2016-09-03</time>
+    Updated:<time datetime="2016-09-03T12:16:22.000Z" itemprop="dateModified">2016-09-03</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p>发布开源项目到cocoapods上，可以让别人直接用cocoapods引用你的项目。<br>首先你需要安装cocoapods，如果你在安装出现了问题，请参考我的这篇帖子：<br><a href="http://www.jianshu.com/p/7846ef67153f" target="_blank" rel="external">解决安装cocoapods一直卡在Setting up master repos</a></p>
+<p>######发布项目到cocoapods需要如下2个文件：<br><code>LISENCE</code>和<code>podspec</code>，即开源许可和规格说明文件，如下图:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-d8864eee92b83683.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>###LISENCE<br>一般采用<a href="https://opensource.org/licenses/MIT" target="_blank" rel="external">MIT</a>格式LISENCE如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">The MIT License (MIT)</span><br><span class="line">Copyright (c) &lt;year&gt; &lt;copyright holders&gt;</span><br><span class="line">Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</span><br><span class="line">The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</span><br><span class="line">THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</span><br></pre></td></tr></table></figure>
+<p><br><br>直接去这个网址<a href="https://opensource.org/licenses/MIT" target="_blank" rel="external">MIT</a>拷贝下来直接修改年份作者即可，也可以拿Github上别人的LISENCE，用文本编辑器打开来修改开源许可。</p>
+<p>###podspec<br>项目的规格说明，如下面这个podspec：</p>
+<p><pre>Pod::Spec.new do |s|<br>s.name                  = “FGGDownloader”<br>s.version               = “1.0”<br>s.ios.deployment_target = ‘6.0’<br>s.summary               = “FGGDownloader is used for resume from break point downloading.”<br>s.homepage              = “<a href="https://github.com/Insfgg99x/FGGDownloader" target="_blank" rel="external">https://github.com/Insfgg99x/FGGDownloader</a>“<br>s.license               = “MIT”<br>s.authors               = { “CGPointZero” =&gt; “newbox0512@yahoo.com” }<br>s.source                = { :git =&gt; “<a href="https://github.com/Insfgg99x/FGGDownloader.git" target="_blank" rel="external">https://github.com/Insfgg99x/FGGDownloader.git</a>“, :tag =&gt; “1.0” }<br>s.frameworks            = ‘Foundation’,’UIKit’<br>s.source_files          = ‘FGGDownloader/*.{h,m}’<br>s.requires_arc          = true<br>#s.dependency ‘SDWebImage’<br>#s.dependency ‘pop’<br>end</pre></p>
+<p>######每一项都有自己的含义：</p>
+<p><pre><br>s.name：名称，<b>pod search name</b> 的 name<br>s.version：版本号<br>s.ios.deployment_target:支持的pod最低版本<br>s.summary: 简介<br>s.homepage:项目的地址<br>s.license:开源许可<br>s.author:作者信息，表示格式为 { “[作者名]” =&gt; “[邮箱]” }<br>s.source:项目的git代码仓库的地址，如格式为:{:git =&gt; “[git代码仓库地址]”, tag =&gt; “[版本号]”}<br>s.frameworks:表示需要的框架,如’Foundation’，多个框架之间以英文逗号分隔。<br>s.source_files:别人通过你的pod引用文件的层级目录。如我要引用FGGDownloader文件夹下的.h和.m文件，则可以写成’FGGDownloader/*.{h,m}’<br><img src="http://upload-images.jianshu.io/upload_images/937405-88b741350b73aab2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>s.requires_arc: 是否支持ARC<br>s.dependency：依赖的项目，如有多个，则写多行<br>#表示注释<br></pre></p>
+<p>###如何生成podspec<br>两种方法：<br>1.拷贝别人项目的podspec文件，修改作者，简介，依赖等说明信息。<br>2.用中端cd到项目目录，输入<code>touch xxx.podspec</code>生成podspec文件，其中xxx代表你项目的名字，跟上面的<code>s.name</code>要一致。</p>
+<p>###验证podspec文的有效性：<br>验证podspec的有效性，检查修复语法或者逻辑错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod spec lint xxx.podspec --verbose</span><br></pre></td></tr></table></figure></p>
+<p>xxx代表你的项目名字，要与上面的<code>s.name</code>一致。<br>需要注意的是：这种验证方式，存在警告也会验证不通过。<br>我们用可以忽略警告的验证方式(<code>--allow-warnings</code>)，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod spec lint FGGDownloader.podspec --allow-warnings</span><br></pre></td></tr></table></figure></p>
+<p>验证车成功后会提示<code>xxx.podspec passed validation.</code>，如：<br><img src="http://upload-images.jianshu.io/upload_images/937405-ff176f2aad7a6f60.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>###为你的项目添加版本号<br>开源许可LISENCE和podspec都做好之后，将项目push到你的远程代码仓库。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git  add .</span><br><span class="line">git commit -m&quot;添加开源许可和podspec&quot; </span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure></p>
+<p>发布开源项目到cocoapods上去需要添加版本号，用<code>git tag</code>添加版本号。<br><code>git tag -a 1.0.1 -m&quot;version 1.0.1&quot;</code><br>添加完版本号后，用’git tag’命令查看tag是否添加成功。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure></p>
+<p>将本地添加的tag同步到远程代码仓库:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --tag</span><br></pre></td></tr></table></figure></p>
+<p>如果你对<code>git tag</code>的操作存在问题，请参考我的这篇文章：<a href="http://www.jianshu.com/p/f5461fe1787a" target="_blank" rel="external">彩色的git lg</a></p>
+<p>###万事具备<br>上面的准备工作都做好了，可以向cocoapods提交了。<br>我们可以通过<code>pod trunk命令提交我们的开源项目到cocoapods</code>。<br>但是，前提是，你得注册了trunk账号，用<code>pod trunk me</code>验证你是否注册了:</p>
+<p>######若不是出现类似如下信息的，都是没注册的：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-368f30318753cc1e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>###注册trunk账号<br>使用<code>pod trunk register</code>注册账号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod trunk register xxx.@xxx.xx &quot;作者名&quot; --verbose</span><br></pre></td></tr></table></figure></p>
+<p>上面的<code>xxx.@xxx.xx</code>表示邮箱，如123@yahoo.com.<br>–verbose选项表示输出可见性.</p>
+<p>注册好了之后，用<code>pod trunk me</code>验证注册信息.</p>
+<p>###发布代码到cocoapods<br>该有的都准备好了，发布吧！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod trunk push xxx.podspec --verbose</span><br></pre></td></tr></table></figure></p>
+<p>上面的xxx表示项目名，要和<code>s.name</code>保持一致.<br>需要注意的是，这种提交命令，不允许你的podspec文件存在警告。若存在警告，则不能通过有效性验证，导致发布失败！</p>
+<p>我们可以加上允许警告的选项(–allow-warnings)如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod trunk push FGGDownloader.podspec --allow-warnings</span><br></pre></td></tr></table></figure></p>
+<p>验证是否发布成功：<br><code>pod search xxx</code><br>xxx表示你的项目名，要和上面的<code>s.name</code> 保持一致。若能查找到，表示发布成功。</p>
+<p>你也可以在<a href="https://cocoapods.org" target="_blank" rel="external">cocoapods官网</a>搜索你的项目来验证，但一般官网存在延迟，发布后不能立即搜出来，可能要等到第二天甚至第三天。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-4643d30e062a2acb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="在cocoapods官网搜索验证"><br><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://cgpointzero.top/2016/09/03/cocoapods-release-project/" data-title="cocoapods_release_project | CGPointZero" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/09/03/cocoapod-setup/"  title="解决安装cocoapods一直卡在Setting up master repos">
+ <strong>NEXT:</strong><br/> 
+ <span>解决安装cocoapods一直卡在Setting up master repos
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/1752627837" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/Insfgg99x" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
+		
+		<a href="http://cgpointzero.top" target="_blank" title="CGPoint Zero">CGPoint Zero</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>
