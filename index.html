@@ -306,35 +306,15 @@
       
         
           
-            <p>发布开源项目到cocoapods上，可以让别人直接用cocoapods引用你的项目。<br>首先你需要安装cocoapods，如果你在安装出现了问题，请参考我的这篇帖子：<br><a href="http://www.jianshu.com/p/7846ef67153f" target="_blank" rel="external">解决安装cocoapods一直卡在Setting up master repos</a></p>
-<p>######发布项目到cocoapods需要如下2个文件：<br><code>LICENSE</code>和<code>podspec</code>，即开源许可和规格说明文件，如下图:<br><img src="http://upload-images.jianshu.io/upload_images/937405-d8864eee92b83683.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>###LICENSE<br>一般采用<a href="https://opensource.org/licenses/MIT" target="_blank" rel="external">MIT</a>格式LICENSE如下:<br><br><br><img src="http://upload-images.jianshu.io/upload_images/937405-77ba31f6bdfadc02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>直接去这个网址<a href="https://opensource.org/licenses/MIT" target="_blank" rel="external">MIT</a>拷贝下来直接修改年份作者即可，也可以拿Github上别人的LICENSE，用文本编辑器打开来修改开源许可。</p>
-<p>###podspec<br>项目的规格说明，如下面这个podspec：</p>
-<p><pre>Pod::Spec.new do |s|<br>s.name                  = “FGGDownloader”<br>s.version               = “1.0”<br>s.ios.deployment_target = ‘6.0’<br>s.summary               = “FGGDownloader is used for resume from break point downloading.”<br>s.homepage              = “<a href="https://github.com/Insfgg99x/FGGDownloader" target="_blank" rel="external">https://github.com/Insfgg99x/FGGDownloader</a>“<br>s.license               = “MIT”<br>s.authors               = { “CGPointZero” =&gt; “newbox0512@yahoo.com” }<br>s.source                = { :git =&gt; “<a href="https://github.com/Insfgg99x/FGGDownloader.git" target="_blank" rel="external">https://github.com/Insfgg99x/FGGDownloader.git</a>“, :tag =&gt; “1.0” }<br>s.frameworks            = ‘Foundation’,’UIKit’<br>s.source_files          = ‘FGGDownloader/*.{h,m}’<br>s.requires_arc          = true<br>#s.dependency ‘SDWebImage’<br>#s.dependency ‘pop’<br>end</pre></p>
-<p>######每一项都有自己的含义：</p>
-<p><pre><br>s.name：名称，<b>pod search name</b> 的 name<br>s.version：版本号<br>s.ios.deployment_target:支持的pod最低版本<br>s.summary: 简介<br>s.homepage:项目的地址<br>s.license:开源许可<br>s.author:作者信息，表示格式为 { “[作者名]” =&gt; “[邮箱]” }<br>s.source:项目的git代码仓库的地址，如格式为:{:git =&gt; “[git代码仓库地址]”, tag =&gt; “[版本号]”}<br>s.frameworks:表示需要的框架,如’Foundation’，多个框架之间以英文逗号分隔。<br>s.source_files:别人通过你的pod引用文件的层级目录。<br>如我要引用FGGDownloader文件夹下的.h和.m文件，则可以写成’FGGDownloader/*.{h,m}’<br><img src="http://upload-images.jianshu.io/upload_images/937405-88b741350b73aab2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>s.requires_arc: 是否支持ARC<br>s.dependency：依赖的项目，如有多个，则写多行<br>#表示注释<br></pre></p>
-<p>###如何生成podspec<br>两种方法：<br>1.拷贝别人项目的podspec文件，修改作者，简介，依赖等说明信息。<br>2.用中端cd到项目目录，输入<code>touch xxx.podspec</code>生成podspec文件，其中xxx代表你项目的名字，跟上面的<code>s.name</code>要一致。</p>
-<p>###验证podspec文的有效性：<br>验证podspec的有效性，检查修复语法或者逻辑错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod spec lint xxx.podspec --verbose</span><br></pre></td></tr></table></figure></p>
-<p>xxx代表你的项目名字，要与上面的<code>s.name</code>一致。<br>需要注意的是：这种验证方式，存在警告也会验证不通过。<br>我们用可以忽略警告的验证方式(<code>--allow-warnings</code>)，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod spec lint FGGDownloader.podspec --allow-warnings</span><br></pre></td></tr></table></figure></p>
-<p>验证车成功后会提示<code>xxx.podspec passed validation.</code>，如：<br><img src="http://upload-images.jianshu.io/upload_images/937405-ff176f2aad7a6f60.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>###为你的项目添加版本号<br>开源许可LICENSE和podspec都做好之后，将项目push到你的远程代码仓库。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git  add .</span><br><span class="line">git commit -m&quot;添加开源许可和podspec&quot; </span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure></p>
-<p>发布开源项目到cocoapods上去需要添加版本号，用<code>git tag</code>添加版本号。<br><code>git tag -a 1.0.1 -m&quot;version 1.0.1&quot;</code><br>添加完版本号后，用’git tag’命令查看tag是否添加成功。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure></p>
-<p>将本地添加的tag同步到远程代码仓库:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --tag</span><br></pre></td></tr></table></figure></p>
-<p>如果你对<code>git tag</code>的操作存在问题，请参考我的这篇文章：<a href="http://www.jianshu.com/p/f5461fe1787a" target="_blank" rel="external">彩色的git lg</a></p>
-<p>###万事具备<br>上面的准备工作都做好了，可以向cocoapods提交了。<br>我们可以通过<code>pod trunk命令提交我们的开源项目到cocoapods</code>。<br>但是，前提是，你得注册了trunk账号，用<code>pod trunk me</code>验证你是否注册了:</p>
-<p>######若不是出现类似如下信息的，都是没注册的：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/937405-368f30318753cc1e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>###注册trunk账号<br>使用<code>pod trunk register</code>注册账号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod trunk register xxx.@xxx.xx &quot;作者名&quot; --verbose</span><br></pre></td></tr></table></figure></p>
-<p>上面的<code>xxx.@xxx.xx</code>表示邮箱，如123@yahoo.com.<br>–verbose选项表示输出可见性.</p>
-<p>注册好了之后，用<code>pod trunk me</code>验证注册信息.</p>
-<p>###发布代码到cocoapods<br>该有的都准备好了，发布吧！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod trunk push xxx.podspec --verbose</span><br></pre></td></tr></table></figure></p>
-<p>上面的xxx表示项目名，要和<code>s.name</code>保持一致.<br>需要注意的是，这种提交命令，不允许你的podspec文件存在警告。若存在警告，则不能通过有效性验证，导致发布失败！</p>
-<p>我们可以加上允许警告的选项(–allow-warnings)如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod trunk push FGGDownloader.podspec --allow-warnings</span><br></pre></td></tr></table></figure></p>
-<p>验证是否发布成功：<br><code>pod search xxx</code><br>xxx表示你的项目名，要和上面的<code>s.name</code> 保持一致。若能查找到，表示发布成功。</p>
-<p>你也可以在<a href="https://cocoapods.org" target="_blank" rel="external">cocoapods官网</a>搜索你的项目来验证，但一般官网存在延迟，发布后不能立即搜出来，可能要等到第二天甚至第三天。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/937405-4643d30e062a2acb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="在cocoapods官网搜索验证"><br><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+          发布开源项目到cocoapods上，可以让别人直接用cocoapods引用你的项目。首先你需要安装cocoapods，如果你在安装出现了问题，请参考我的这篇帖子：解决安装cocoapods一直卡在Setting up master repos
+######发布项目到cocoapods需要如下2个文件
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/03/cocoapods-release-project/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -432,20 +412,17 @@
       
         
           
-            <p>#首先卸载之前安装的cocoapods:<br>打开终端，输入：<code>which pod</code>会得到一个地址，如<code>/usr/local/bin/pod</code><br>输入<code>sudo rm -rf /usr/local/bin/pod</code>删除pod，后面的路径就是上面的路径</p>
-<p>接着输入<code>gem list</code>得到如下列表：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/937405-2237beb0846859a5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>##删除cocoapods部分：<br><code>sudo gem uninstall cocoapods -v 1.0.1</code><br><code>sudo gem uninstall cocoapods-core -v 1.0.1</code>后面的v1.0.1标示版本</p>
-<p>##验证是否删除成功：<br><code>pod</code><br>得到<code>-bash pod :command not found</code>表示删除成功</p>
-<p>##移除原来的源<br><code>gem source -l</code><br><code>gem sources  -r https://rubygems.org/</code></p>
-<p>##添加国内源<br><code>gem sources -a https://gems.ruby-china.org/</code><br><code>gem source -l</code></p>
-<p>##安装cocoapods<br><code>sudo gem install cocoapods</code>输入开机密码<br>若安装过程出现如下问题<br><code>ERROR:  While executing gem ... (Errno::EPERM)
-Operation not permitted - /usr/bin/pod</code><br>解决办法是：<br><code>sudo gem install -n /usr/local/bin cocoapods</code>后面的路径是上面pod的路径</p>
-<p>##初始化cocoapods<br>上一步安装完成之后，执行<code>pod setup</code>过几分钟到10分之后就完成初始化了。</p>
-<p>##验证安装完成<br><code>pod search FGGDownloader</code>得到如下结果表示安装成功：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/937405-5b2baa3024cad79a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+          #首先卸载之前安装的cocoapods:打开终端，输入：which pod会得到一个地址，如/usr/local/bin/pod输入sudo rm -rf /usr/local/bin/pod删除pod，后面的路径就是上面的路径
+接着输入gem list得到如下列表：
 
-          
+##删除cocoapods部
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/03/cocoapod-setup/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -543,13 +520,16 @@ Operation not permitted - /usr/bin/pod</code><br>解决办法是：<br><code>sud
       
         
           
-            <p>#将git log替换成git lg，并且彩色显示，方便查看及回滚到某个版本，效果如下：<br><img src="/img/gitlog.png" alt="彩色的git lg"></p>
-<p>#只要在命令行输入以下命令回车：</p>
-<p>git config –global alias.lg “log –color –graph –pretty=format:’%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset’ –abbrev-commit”</p>
-<p>#然后再git lg就可以看到彩色的日志。</p>
-<p>#附上常用git 命令<br><code>1.初始化 git init<br>2.查看状态：git status<br>3.添加文件：git  add .<br>4.提交 git commit -m”备注”<br>5.查看日志：git log<br>6.查看当前分支：git branch<br>7.拉取最新代码：git pull origin 分支名<br>8.推送代码：git push origin 分支名<br>9.删除远程分支：git push origin :分支名<br>10.新建分支，并切换到新建的分支:git checkout -b 新分支名<br>11.将新建的分支推送到服务器：git push origin 新建的分支名<br>12.删除本地分支：git branch -D 分支名<br>13.强制回撤到某次提交的版本：git reset —hard 版本号的前6位(如：abe75e)<br>14.添加tag：git tag -a “标签名” -m”备注”<br>15.将添加的标签推送到远程服务器：git push —tag<br>16.进入到某哥tag:git checkout 标签名<br>17.强制回撤到某哥标签：git reset —hard 标签名<br>18.删除本地tag：git tag -d 标签名<br></code></p>
+          #将git log替换成git lg，并且彩色显示，方便查看及回滚到某个版本，效果如下：
+#只要在命令行输入以下命令回车：
+git config –global alias.lg “log –color –graph –pretty=format:’%Cred%h%Creset -%C(yellow
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/01/colorfull_git/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -647,23 +627,15 @@ Operation not permitted - /usr/bin/pod</code><br>解决办法是：<br><code>sud
       
         
           
-            <pre><code>在iOS开发中，存在一个问题，若程序出了bug，需要先Xcode修复--打包--提交审核--用户更新。
-</code></pre><p>才能得到解决，周期很长。JSPatch的出现，解决了这个烦恼。<br>它是一个动态更新框架，不仅可以实时的修复bug(热修复，也叫hotfix技术)，<br>还可以实时的添加新功能。操作简单，只需要引入小小的引擎文件，就可以用JS调用和替换任意OC方法。</p>
-<p><img src="/img/jspatch_01.png" alt="JSPatch实时修复bug"></p>
-<pre><code>JSPatch是一个开源的框架，[JSPatch](https://github.com/bang590/JSPatch)，我们可以在项目中引入JSPatch，
-</code></pre><p>然后在在自己搭建下发补丁的服务器。<br>    当然，我们也可以直接用<a href="http://jspatch.com" target="_blank" rel="external">JSPatch平台</a>集成的带代码下发功能的SDK，我们只需要写好补丁，<br>直接就可以在这个平台下发了。</p>
-<p>第一步：在<a href="http://jspatch.com" target="_blank" rel="external">JSPatch平台</a>注册一个帐号；<br>第二步：创建一个app；<br>第三步：下载JSPatch SDK，这个跟github上的不一样，github上的是开源的，不带代码下发服务器的。<br>第四步：生成RSA公钥和私钥。<br>       打开终端，cd到Desktop/，输入openssl后按回车，输入以下三行指令，<br><code>genrsa -out rsa_private_key.pem 1024<br>pkcs8 -topk8 -inform PEM -in rsa_private_key.pem -outform PEM –nocrypt<br>rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem</code><br>在桌面时就会得到2个.pem文件，分别时公钥和私钥。<br>第五步：按照文档集成SDK到文档中，这个很简单。<br><img src="/img/jspatch_02.png" alt="初始化JSPatch"><br>其中，appkey是平台上创建app得到的appkey，而pullic key则是上步生成的RSA公钥，注意要手动加换行(\n)。<br>如：@”—–BEGIN PUBLIC KEY—–\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1heHjbL+R6nulhIRptjfGmd3M\nlU…\n—–END PUBLIC KEY—–”。<br>而私钥，则是在下发补丁的时候需要用到。<br>    下发补丁时，服务端会计算补丁文件(js)文件的MD5值，然后讲这个MD5值用RSA私钥签名，签名后的字符串跟补丁一起下发到客户端。<br>客户端拿到签名后的字符串后，用公钥进行解密，得到一个MD5值，计算得到脚本的MD5值，比较这两个MD5值，若一支，说明补丁没有被篡改。<br>在运行时实现方法替换，替换掉我们的crash代码。<br>第六步：我们用在桌面上新建一个main.js文件，打开命令后，cd到桌面，输入 touch main.js后回车，在桌面就会生成一个main.js文件，用文本编辑器打开。<br>写入我们自己的方法替换掉crash部分的代码的所在的方法。<br><code><br>defineClass(‘LeftViewController’, {</code></p>
-<pre><code>tableView_didSelectRowAtIndexPath: function(tableView, indexPath) {
+          在iOS开发中，存在一个问题，若程序出了bug，需要先Xcode修复--打包--提交审核--用户更新。
+才能得到解决，周期很长。JSPatch的出现，解决了这个烦恼。它是一个动态更新框架，不仅可以实时的修复bug(热修复，也叫hotfix技术)，还可以实时的添加新功能。操作简单，只需要引入小小的引擎
+          ...
 
-    var array = [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;];
-    for (var i = 0; i &lt; array.count(); i++) {
-        NSLog(&quot;%&quot;, array[i]);
-    }
-},
-</code></pre><p>});<br><br>你可以用<a href="https://github.com/bang590/JSPatchConvertor/blob/gh-pages/JSPatchConvertor.zip" target="_blank" rel="external">JSPatchConverter</a>直接将写好的OC转成Patch，大部分可以直接转，但私有变量/静态变量/宏这些还不支持，所以转换后需要手动修改。可以借助这个工具，省去原本要先写好OC代码，在翻译成Patch的时间成本。<br>第七步：去<a href="http://jspatch.com" target="_blank" rel="external">JSPatch平台</a>下发补丁。<br>补丁选择刚刚的main.js，私钥选择刚刚生成的私钥private_key.pem文件，提交。<br><img src="/img/jspatch_03.png" alt=""><br>第八步：运行app，再次在LeftViewController的选择cell，之前选择cell导致的crash得到了修复！</p>
-<p>至此，我们已经在不用重新提交版本的情况下，完成了bug的实时修复。<br><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/19/JSPatchABC/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -761,155 +733,18 @@ Operation not permitted - /usr/bin/pod</code><br>解决办法是：<br><code>sud
       
         
           
-            <p>本文讲述用2中方法在UILabel中显示带图片和文字的HTML文本。<br>先预览下显示效果：<br><img src="http://upload-images.jianshu.io/upload_images/937405-164214672d8ab9e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="显示效果"><br>如果你的设备时iOS 9或以上，默认只允许HTTPS，请打开HTTP请求许可，参照:<a href="http://www.jianshu.com/p/800637cce334" target="_blank" rel="external">iOS 9打开HTTP请求许可</a></p>
-<p>第一种方案：</p>
-<pre>
+          本文讲述用2中方法在UILabel中显示带图片和文字的HTML文本。先预览下显示效果：如果你的设备时iOS 9或以上，默认只允许HTTPS，请打开HTTP请求许可，参照:iOS 9打开HTTP请求许可
+第一种方案：
+
 //HTML文本 包含图片、文本
-NSString *htmlString=@"< img src=http://upload-images.jianshu.io/upload_images/937405-50a8ad2d8866fc12.png>&nbsp&nbsp花羊羊领取了你的<font color="\"red\""><a>红包</a></font>"
-UILabel \*label=[UILabel alloc] initWithFrame:CGRectMake(50, 200, 220, 20)];
-[self.view addSubview:label];
-UIFont \*font=[UIFont systemFontOfSize:14];
-label.font=font;
-NSDictionary \\*optoins=@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,
-                            NSFontAttributeName:font};
-NSData \*data=[htmlString dataUsingEncoding:NSUnicodeStringEncoding];
-NSAttributedString \*attributeString=[[NSAttributedString alloc] initWithData:data
-                                                                     options:optoins
-                                                          documentAttributes:nil
-                                                                       error:nil];
-label.attributedText=attributeString;
-</pre>
-方案一点评：
-这种方案只是实现了显示，显示效果好不好是另一回事。事实证明，这种方案的显示效果很不好：
+NSString *htmlString=@"&
+          ...
 
-![方案一显示效果](http://upload-images.jianshu.io/upload_images/937405-d810311964b43dab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-我们现在要对方案一进行优化。
-
-方案一优化思路：1.缩小图片，让图片与字体显示差不多大；
-2.让字体显示垂直方向居中。
-
-优化后的方案一：
-
-<pre>
-//HTML文本 包含图片、文本
-NSString *htmlString=@"< img src=http://upload-images.jianshu.io/upload_images/937405-50a8ad2d8866fc12.png>&nbsp&nbsp花羊羊领取了你的<font color="\"red\""><a>红包</a></font>"
-//我们可以先把src对应的图片解析出来，放到本地
-NSRange httpRange=[htmlString rangeOfString:@"http://"];
-NSRange endRange=[htmlString rangeOfString:@".png"];
-NSString \*picString=[htmlString substringWithRange:NSMakeRange(httpRange.location, endRange.location+endRange.length-httpRange.location)];
-[[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:picString] options:nil progress:nil completed:^(UIImage \\*image, NSData \\*data, NSError \*error, BOOL finished) {
-    //按照字体大小缩小图片，具体实现在下文
-     UIImage \\*scaledImage=[self scaleImage:image font:font];
-     NSData \*imgData=UIImagePNGRepresentation(scaledImage);
-     NSString \\*libPath=[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,     NSUserDomainMask, YES) lastObject];
-    NSString \\*cachePath=[libPath stringByAppendingPathComponent:@"Caches"];
-    NSString \\*scaledImagesPath=[cachePath stringByAppendingPathComponent:@"scaledImages"];
-    if(![[NSFileManager defaultManager] fileExistsAtPath:scaledImagesPath]){
-        [[NSFileManager defaultManager] createDirectoryAtPath:scaledImagesPath withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-NSString\\ *picName=[[picString componentsSeparatedByString:@"/"] lastObject];
-    NSString \\*filePath=[scaledImagesPath stringByAppendingPathComponent:picName];
-    [imgData writeToFile:filePath atomically:YES];
-    NSString \\*path=[NSURL fileURLWithPath:filePath].absoluteString;
-//用本地的图片路径替换远程图片路径
-htmlString=[htmlString stringByReplacingOccurrencesOfString:picString withString:path];
-}];
-UILabel \\*label=[UILabel alloc] initWithFrame:CGRectMake(50, 200, 220, 20)];
-[self.view addSubview:label];
-UIFont \\*font=[UIFont systemFontOfSize:14];
-label.font=font;
-NSDictionary \\*optoins=@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,
-                            NSFontAttributeName:font};
-NSData \\*data=[htmlString dataUsingEncoding:NSUnicodeStringEncoding];
-NSAttributedString \\*attributeString=[[NSAttributedString alloc] initWithData:data
-                                                                     options:optoins
-                                                          documentAttributes:nil
-                                                                       error:nil];
-label.attributedText=attributeString;
-</pre>
-
-<p><img src="http://upload-images.jianshu.io/upload_images/937405-aeaca04c3819680c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="优化后的方案一显示效果"></p>
-<p>优化后的方案一显示效果差强人意。这种方法成功的解决了图片大小的问题，以及文本不居中的问题，但图片没有居中对齐，网上也找不到方法，只有继续探寻。</p>
-<p>方案二：</p>
-<pre>
-//HTML文本 包含图片、文本
-NSString *htmlString=@"< img src=http://upload-images.jianshu.io/upload_images/937405-50a8ad2d8866fc12.png>&nbsp&nbsp花羊羊领取了你的<font color="\"red\""><a>红包</a></font>"
-//我们可以先把src对应的图片解析出来，放到本地
-NSRange httpRange=[htmlString rangeOfString:@"http://"];
-NSRange endRange=[htmlString rangeOfString:@".png"];
-NSString \*picString=[htmlString substringWithRange:NSMakeRange(httpRange.location, endRange.location+endRange.length-httpRange.location)];
-UIImage \*scaledImage;
-[[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:picString] options:nil progress:nil completed:^(UIImage \*image, NSData \*data, NSError \*error, BOOL finished) {
-    //按照字体大小缩小图片，具体实现在下文
-     scaledImage=[self scaleImage:image font:font];
-     NSData \*imgData=UIImagePNGRepresentation(scaledImage);
-     NSString \*libPath=[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,     NSUserDomainMask, YES) lastObject];
-    NSString \*cachePath=[libPath stringByAppendingPathComponent:@"Caches"];
-    NSString \*scaledImagesPath=[cachePath stringByAppendingPathComponent:@"scaledImages"];
-    if(![[NSFileManager defaultManager] fileExistsAtPath:scaledImagesPath]){
-        [[NSFileManager defaultManager] createDirectoryAtPath:scaledImagesPath withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-NSString \\*picName=[[picString componentsSeparatedByString:@"/"] lastObject];
-    NSString \\*filePath=[scaledImagesPath stringByAppendingPathComponent:picName];
-    [imgData writeToFile:filePath atomically:YES];
-//用空字符串替换远程图片路径
-htmlString=[htmlString stringByReplacingOccurrencesOfString:picString withString:@""];
-}];
-
-
-UILabel \*label=[UILabel alloc] initWithFrame:CGRectMake(50, 200, 220, 20)];
-[self.view addSubview:label];
-UIFont \*font=[UIFont systemFontOfSize:14];
-label.font=font;
-//利用NSTextAttachment文UILabel添加图片，并调整位置实现居中对齐
-NSTextAttachment *attach=[[NSTextAttachment alloc] init];
-attach.bounds=CGRectMake(2, -(label.frame.size.height-font.pointSize)/2, 12, 14);
-attach.image=scaledImage;
-NSMutableAttributedString \*componets=[[NSMutableAttributedString alloc] init];
-NSAttributedString \*imagePart=[NSAttributedString attributedStringWithAttachment:attach];
-[componets appendAttributedString:imagePart];
-NSDictionary \*optoins=@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,
-                            NSFontAttributeName:font};
-NSData \*data=[htmlString dataUsingEncoding:NSUnicodeStringEncoding];
-NSAttributedString \*textPart=[[NSAttributedString alloc] initWithData:data
-                                                                     options:optoins
-                                                          documentAttributes:nil
-                                                                       error:nil];
-[componets appendAttributedString:textPart];
-label.attributedText=componets;
-</pre>
-
-<p><img src="http://upload-images.jianshu.io/upload_images/937405-e31040e80be7cc90.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="方案二的显示效果"><br>点评：<br>方案二显示效果略复杂，但是达到了我们需要的正常显示效果。</p>
-<p>最后，附上根据字体大小缩小图片的方法：</p>
-<pre>
--(UIImage \*)scaleImage:(UIImage \*)origin font:(UIFont \*)font{
-
-    CGFloat imgH=origin.size.height;
-    CGFloat imgW=origin.size.width;
-    CGFloat width;
-    CGFloat height;
-    CGFloat fontHeight=font.pointSize;
-    if(imgW>imgH){
-
-        width=fontHeight;
-        height=fontHeight/imgW\*imgH;
-    }
-    else{
-        height=fontHeight;
-        width=fontHeight/imgH\*imgW;
-    }
-    UIGraphicsBeginImageContext(CGSizeMake(width, height));
-    [origin drawInRect:CGRectMake(0, 0, width, height)];
-    UIImage \*scaledImage=UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return scaledImage;
-}
-</pre>
-
-<p><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/17/label-html/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1007,29 +842,18 @@ label.attributedText=componets;
       
         
           
-            <p>当一个模型有很多属性，给定的需求需要获取所有的属性的时候，如果一个一个写，效率很低，这个时候就可以用class_copyIvarList解决了。<br>例如有这样一个类：</p>
-<p><pre></pre></p>
-<p>#import <foundation foundation.h=""></foundation></p>
-<p>@interface Model : NSObject</p>
-<p>@property(nonatomic,copy)NSString *name;<br>@property(nonatomic,copy)NSString *sex;<br>@property(nonatomic,copy)NSString *idno;<br>@property(nonatomic,copy)NSString *address;<br>@property(nonatomic,copy)NSString *mobile;</p>
-<p>+(instancetype)modelWithValues:(NSArray *)values;</p>
-<p>@end<br><br>现在需要获取他的以key=value的形式打印其所有属性及其值。就可以这样写了：<br><code><br>-(NSString <em>)description{<br>    unsigned int count=0;<br>    Ivar </em>list=class_copyIvarList([self class], &amp;count);<br>    NSMutableArray <em>resultArray=[NSMutableArray array];<br>    for(int i=0;i&lt;count;i++){<br>        Ivar var=list[i];<br>        NSString </em>varName=[NSString stringWithUTF8String:ivar_getName(var)];<br>        //去掉前面的下划线<br>        NSString *tmp=[varName substringFromIndex:1];<br>        SEL method=NSSelectorFromString(tmp);</code></p>
-<pre><code>    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored &quot;-Warc-performSelector-leaks&quot;
-    id value=[self performSelector:method];
-    #pragma clang diagnostic pop
-    if(!value||value==NULL){
-        value=@&quot;&quot;;
-    }
-    NSString *item=[NSString stringWithFormat:@&quot;%@=%@&quot;,tmp,value];
+          当一个模型有很多属性，给定的需求需要获取所有的属性的时候，如果一个一个写，效率很低，这个时候就可以用class_copyIvarList解决了。例如有这样一个类：
 
-    [resultArray addObject:item];
-}
-free(list);
-return [resultArray componentsJoinedByString:@&quot;&amp;&quot;];
-</code></pre><p>}<br></p>
+#import 
+@interface Model : NSObject
+@property(nonatomic,copy)NSStr
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/26/Ivar/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1127,52 +951,22 @@ return [resultArray componentsJoinedByString:@&quot;&amp;&quot;];
       
         
           
-            <p>在load方法中，用fc_viewDidLoad替换viewDidLoad：</p>
-<pre>
+          在load方法中，用fc_viewDidLoad替换viewDidLoad：
+
 /**
  *  在load中交换viewDidLoad和fc_viewDidLoad
  */
 +(void)load{
 
     static dispatch_once_t onceToken;
-    dispatch_once(&onceToken,^{
+    dispatc
+          ...
 
-        xgf_swizzleSelector([self class], @selector(viewDidLoad), @selector(xgf_viewDidLoad));
-
-        /*Method m1=class_getInstanceMethod([self class], @selector(viewDidLoad));
-        Method m2=class_getInstanceMethod([self class], @selector(fc_viewDidLoad));
-        BOOL notImplemented=class_addMethod([self class], @selector(viewDidLoad), method_getImplementation(m2), method_getTypeEncoding(m2));
-        if(!notImplemented){
-        method_exchangeImplementations(m1, m2);
-        }
-        */
-    });
-}
-static inline void xgf_swizzleSelector(Class class,SEL originalSelector,SEL swizzledSelector){
-
-    Method originalMethod=class_getInstanceMethod(class, originalSelector);
-    Method swizzledMethod=class_getInstanceMethod(class, swizzledSelector);
-    if(class_addMethod(class, 
-                       originalSelector, 
-                       method_getImplementation(swizzledMethod),
-                       method_getTypeEncoding(swizzledMethod))){
-        class_replaceMethod(class, swizzledSelector,
-                            method_getImplementation(originalMethod), 
-                            method_getTypeEncoding(originalMethod));
-    }else{
-        method_exchangeImplementations(originalMethod, swizzledMethod);
-    }
-}
-</pre><pre>
-/**
- *  [self xgf_viewDidLoad] 其实是调用了viewDidLoad的实现
- */
--(void)xgf_viewDidLoad{
-    NSLog(@"%s",__func__);
-    [self xgf_viewDidLoad];
-}
-</pre>
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/26/runtime/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1270,250 +1064,21 @@ static inline void xgf_swizzleSelector(Class class,SEL originalSelector,SEL swiz
       
         
           
-            <p>Model.h</p>
-<pre>#import <foundation foundation.h="">
+          Model.h
+#import 
 @interface Model : NSObject
 @property(nonatomic,strong)NSString *desc;
 +(instancetype)modelWithDesc:(NSString *)desc;
-@end</foundation></pre>
+@end
 Model.m
-<pre>#import "Model.h"
+#i
+          ...
 
-@implementation Model
-
-+(instancetype)modelWithDesc:(NSString *)desc
-{
-    Model *m=[Model new];
-    m.desc=desc;
-    return m;
-}
-@end</pre>
-CustomCell.h
-<pre>#import <uikit uikit.h="">
-
-@interface CustomCell : UITableViewCell
-
-@property(nonatomic,strong)UILabel *titleLb;
-@property(nonatomic,strong)UIButton *selectBtn;
-
-@end</uikit></pre>
-CustomCell.m
-<pre>#import "CustomCell.h"
-#define kWidth ([UIScreen mainScreen].bounds.size.width)
-
-@implementation CustomCell
-
-- (void)awakeFromNib {
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-}
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    if(self=[super initWithStyle:style reuseIdentifier:reuseIdentifier])
-    {
-        self.backgroundColor=[UIColor blackColor];
-        [self createUI];
-        self.selectionStyle=UITableViewCellSelectionStyleNone;
-    }
-    return self;
-}
--(void)createUI
-{
-    for(UIView *sub in self.contentView.subviews)
-        [sub removeFromSuperview];
-
-    //选择按钮
-    self.selectBtn=[[UIButton alloc]initWithFrame:CGRectMake(-20, 10, 20, 20)];
-    [self.selectBtn setImage:[UIImage imageNamed:@"un_select"] forState:UIControlStateNormal];
-    [self .selectBtn setImage:[UIImage imageNamed:@"select"] forState:UIControlStateSelected];
-    [self.contentView addSubview:self.selectBtn];
-    //默认隐藏
-    self.selectBtn.hidden=YES;
-
-    // 标题Lb
-    self.titleLb=[[UILabel alloc]initWithFrame:CGRectMake(20, 0,kWidth-40, 40)];
-    self.titleLb.textColor=[UIColor whiteColor];
-    [self.contentView addSubview:self.titleLb];
-}
-@end</pre>
-EditViewController.h
-<pre>#import <uikit uikit.h="">
-
-@interface EditViewController : UIViewController
-
-@end</uikit></pre>
-EditViewController.m
-<pre>#import "EditViewController.h"
-#import "CustomCell.h"
-#import "Model.h"
-
-#define kWidth ([UIScreen mainScreen].bounds.size.width)
-#define kHeight ([UIScreen mainScreen].bounds.size.height)
-#define RGB(r,g,b) ([UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1.0f])
-
-@interface EditViewController ()<uitableviewdatasource,uitableviewdelegate>
-{
-    UITableView *_tbView;
-    NSMutableArray *_dataArray;
-    NSMutableArray *_delArray;
-}
-//底部工具栏
-@property(nonatomic,strong)UIView *toolView;
-
-@end
-
-@implementation EditViewController
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self setUp];
-    [self initDataArray];
-    [self createTbView];
-    [self createBottomTools];
-}
-//初始设置
--(void)setUp
-{
-    self.automaticallyAdjustsScrollViewInsets=NO;
-    //导航视图
-    UIView *naviView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, kWidth, 64)];
-    naviView.backgroundColor=RGB(157, 25, 36);
-    [self.view addSubview:naviView];
-    //导航栏标题
-    UILabel *titleLb=[[UILabel alloc]initWithFrame:CGRectMake(0, 20, kWidth, 44)];
-    titleLb.text=@"编辑分组";
-    titleLb.textColor=[UIColor whiteColor];
-    titleLb.textAlignment=NSTextAlignmentCenter;
-    titleLb.font=[UIFont systemFontOfSize:20];
-    [naviView addSubview:titleLb];
-    //编辑按钮
-    UIButton *rightBtn=[[UIButton alloc]initWithFrame:CGRectMake(kWidth-60, 27, 40, 30)];
-    [rightBtn setTitle:@"编辑" forState:UIControlStateNormal];
-    [rightBtn setTitle:@"完成" forState:UIControlStateSelected];
-    [rightBtn addTarget:self action:@selector(editAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:rightBtn];
-}
-//初始化数组
--(void)initDataArray
-{
-    //初始化数据源数组
-    _dataArray=[NSMutableArray array];
-
-    [_dataArray addObject:[Model modelWithDesc:@"我的自选"]];
-    [_dataArray addObject:[Model modelWithDesc:@"我关注的牛股"]];
-    [_dataArray addObject:[Model modelWithDesc:@"环保牛股"]];
-    //初始化删除数组
-    _delArray=[NSMutableArray array];
-}
-//点击编辑按钮执行的方法
--(void)editAction:(UIButton *)sender
-{
-    [_tbView setEditing:!_tbView.isEditing animated:YES];
-    sender.selected=!sender.isSelected;
-
-    if(sender.isSelected)
-    {
-        NSArray *allCells=[_tbView visibleCells];
-        for(CustomCell *cell in allCells)
-        {
-            cell.selectBtn.hidden=NO;
-            cell.selectBtn.selected=NO;
-        }
-        //显示底部toolView
-        [self showToolView];
-    }
-    else
-    {
-        NSArray *allCells=[_tbView visibleCells];
-        for(CustomCell *cell in allCells)
-            cell.selectBtn.hidden=YES;
-
-        //隐藏底部toolView
-        [self hideToolView];
-
-        //执行删除
-        [_dataArray removeObjectsInArray:_delArray];
-        //清空删除数组
-        [_delArray removeAllObjects];
-        //刷新表视图
-        [_tbView reloadData];
-    }
-}
-//表视图
--(void)createTbView
-{
-    _tbView=[[UITableView alloc]initWithFrame:CGRectMake(0, 64, kWidth, kHeight-64)];
-    _tbView.delegate=self;
-    _tbView.dataSource=self;
-    _tbView.backgroundColor=[UIColor blackColor];
-    _tbView.separatorColor=[UIColor whiteColor];
-    _tbView.separatorStyle=UITableViewCellSeparatorStyleSingleLine;
-    [self.view addSubview:_tbView];
-    _tbView.scrollEnabled=NO;
-    _tbView.allowsSelectionDuringEditing=YES;
-    _tbView.tableFooterView=[UIView new];
-}
-//底部工具栏
--(void)createBottomTools
-{
-    _toolView=[[UIView alloc]initWithFrame:CGRectMake(0, kHeight, kWidth, 49)];
-    _toolView.backgroundColor=[UIColor darkGrayColor];
-    [self.view addSubview:_toolView];
-
-    //全选按钮
-    UIButton *selectAllBtn=[[UIButton alloc]initWithFrame:CGRectMake(10, 14.5, 20, 20)];
-    [selectAllBtn setImage:[UIImage imageNamed:@"un_all_select"] forState:UIControlStateNormal];
-    [selectAllBtn setImage:[UIImage imageNamed:@"select"] forState:UIControlStateSelected];
-    [selectAllBtn addTarget:self action:@selector(selectAllRows:) forControlEvents:UIControlEventTouchUpInside];
-    selectAllBtn.tag=100;
-    [_toolView addSubview:selectAllBtn];
-
-    //去选lb
-    UILabel *selectAllLb=[[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(selectAllBtn.frame)+5, 14.5, 40, 20)];
-    selectAllLb.textColor=[UIColor whiteColor];
-    selectAllLb.text=@"全选";
-    selectAllLb.textAlignment=NSTextAlignmentCenter;
-    [_toolView addSubview:selectAllLb];
-
-    //删除数量
-    UILabel *deleteCountLb=[[UILabel alloc]initWithFrame:CGRectMake(kWidth-70, 14.5, 60, 20)];
-    deleteCountLb.text=@"删除(0)";
-    deleteCountLb.textAlignment=NSTextAlignmentCenter;
-    deleteCountLb.textColor=[UIColor whiteColor];
-    deleteCountLb.tag=111;
-    [_toolView addSubview:deleteCountLb];
-
-    //默认隐藏
-    _toolView.hidden=YES;
-}
-//全选
--(void)selectAllRows:(UIButton *)sender
-{
-    sender.selected=!sender.isSelected;
-    if(_delArray.count<_dataarray.count) {="" for(model="" *m="" in="" _dataarray)="" if(![_delarray="" containsobject:m])="" [_delarray="" addobject:m];="" }="" nsarray="" *allcells="[_tbView" visiblecells];="" for(customcell="" *cell="" allcells)="" cell.selectbtn.selected="YES;" else="" removeallobjects];="" [self="" refreshdeletecountlb];="" 显示工具栏="" -(void)showtoolview="" __weak="" typeof(self)="" weakself="self;" uilabel="" *deletecountlb="(UILabel" *)[self.toolview="" viewwithtag:111];="" deletecountlb.text="@"删除(0)";" self.toolview.hidden="NO;" 全选标记置为否="" uibutton="" *selectallbtn="(UIButton" viewwithtag:100];="" selectallbtn.selected="NO;" [uiview="" animatewithduration:0.3="" animations:^{="" cgfloat="" ypos="weakSelf.toolView.frame.origin.y;" weakself.toolview.frame="CGRectMake(0," ypos,="" kwidth,="" 49);="" }];="" 隐藏工具栏="" -(void)hidetoolview="" }completion:^(bool="" finished)="" weakself.toolview.hidden="YES;" 刷新删除数量lb="" -(void)refreshdeletecountlb="" stringwithformat:@"删除(%ld)",_delarray.count];="" #pragma="" mark="" -="" uitableview="" -(nsinteger)tableview:(uitableview="" *)tableview="" numberofrowsinsection:(nsinteger)section="" return="" _dataarray.count;="" -(cgfloat)tableview:(uitableview="" heightforrowatindexpath:(nsindexpath="" *)indexpath="" 40;="" -(uitableviewcell="" *)tableview:(uitableview="" cellforrowatindexpath:(nsindexpath="" static="" nsstring="" *cid="@"cid";" customcell="" *cel="[tableView" dequeuereusablecellwithidentifier:cid];="" if(!cel)="" cel="[[CustomCell" alloc]initwithstyle:uitableviewcellstyledefault="" reuseidentifier:cid];="" model="" *model="_dataArray[indexPath.row];" cel.titlelb.text="model.desc;" cel;="" 编辑样式="" -(uitableviewcelleditingstyle)tableview:(uitableview="" editingstyleforrowatindexpath:(nsindexpath="" uitableviewcelleditingstylenone;="" 移动="" -(void)tableview:(uitableview="" moverowatindexpath:(nsindexpath="" *)sourceindexpath="" toindexpath:(nsindexpath="" *)destinationindexpath="" 交换数据="" [_dataarray="" exchangeobjectatindex:sourceindexpath.row="" withobjectatindex:destinationindexpath.row];="" 选中时执行的逻辑="" didselectrowatindexpath:(nsindexpath="" if(_tbview.isediting)="" 若选择了所有行，则将全选标记置为是="" if(_delarray.count="=_dataArray.count)" 全选标记置为是="" *)[_tbview="" cellforrowatindexpath:indexpath];="" removeobject:m];="" 置为未选中="" 刷新删除数lb="" @end="" <="" pre="">
-Appdelegate.m
-<pre>
-＃import "AppDelegate.h"
-＃import "EditViewController.h"
-@interface AppDelegate ()
-@end
-@implementation AppDelegate
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    EditViewController *edit=[EditViewController new];
-    UINavigationController *navi=[[UINavigationController alloc]initWithRootViewController:edit];
-    navi.navigationBar.hidden=YES;
-    navi.navigationBar.barStyle=UIBarStyleBlack;
-    self.window.rootViewController=navi;
-    return YES;
-}</pre>
-
-<p><img src="http://upload-images.jianshu.io/upload_images/937405-8a6d5aadc54c8000.gif?imageMogr2/auto-orient/strip" alt="效果图"><br>最后附上<a href="https://github.com/Insfgg99x/MultiDeleteAndMove" target="_blank" rel="external">GitHub源码地址</a></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/937405-231806b43dc36e61.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-</_dataarray.count)></uitableviewdatasource,uitableviewdelegate></pre>
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/26/multiple/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1611,9 +1176,15 @@ Appdelegate.m
       
         
           
-            <p><a href="http://www.jianshu.com/p/d70a51be5af1" target="_blank" rel="external">iOS静态库的制作</a></p>
+          iOS静态库的制作
 
           
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/03/static/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
