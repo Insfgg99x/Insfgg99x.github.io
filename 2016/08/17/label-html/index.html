@@ -1,0 +1,458 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>两种方法实现UILabel图文并茂的显示html文本 | CGPointZero</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="CGPoint Zero">
+    
+    <meta name="description" content="本文讲述用2中方法在UILabel中显示带图片和文字的HTML文本。先预览下显示效果：如果你的设备时iOS 9或以上，默认只允许HTTPS，请打开HTTP请求许可，参照:iOS 9打开HTTP请求许可
+第一种方案：
+
+//HTML文本 包含图片、文本
+NSString *htmlString=@&quot;&lt;">
+    
+    
+    
+    
+    <link rel="alternate" href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" title="CGPointZero" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/avatar.png" alt="CGPointZero" title="CGPointZero"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="CGPointZero">CGPointZero</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" autocomplete="off" name="q" maxlength="20" placeholder="Search" />
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/08/17/label-html/" title="两种方法实现UILabel图文并茂的显示html文本" itemprop="url">两种方法实现UILabel图文并茂的显示html文本</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://cgpointzero.top" title="CGPoint Zero">CGPoint Zero</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-08-17T13:57:50.000Z" itemprop="datePublished">2016-08-17</time>
+    Updated:<time datetime="2016-09-03T13:59:50.000Z" itemprop="dateModified">2016-09-03</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+		</div>
+		
+		<p>本文讲述用2中方法在UILabel中显示带图片和文字的HTML文本。<br>先预览下显示效果：<br><img src="http://upload-images.jianshu.io/upload_images/937405-164214672d8ab9e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="显示效果"><br>如果你的设备时iOS 9或以上，默认只允许HTTPS，请打开HTTP请求许可，参照:<a href="http://www.jianshu.com/p/800637cce334" target="_blank" rel="external">iOS 9打开HTTP请求许可</a></p>
+<p>第一种方案：</p>
+<pre>
+//HTML文本 包含图片、文本
+NSString *htmlString=@"< img src=http://upload-images.jianshu.io/upload_images/937405-50a8ad2d8866fc12.png>&nbsp&nbsp花羊羊领取了你的<font color="\"red\""><a>红包</a></font>"
+UILabel \*label=[UILabel alloc] initWithFrame:CGRectMake(50, 200, 220, 20)];
+[self.view addSubview:label];
+UIFont \*font=[UIFont systemFontOfSize:14];
+label.font=font;
+NSDictionary \\*optoins=@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,
+                            NSFontAttributeName:font};
+NSData \*data=[htmlString dataUsingEncoding:NSUnicodeStringEncoding];
+NSAttributedString \*attributeString=[[NSAttributedString alloc] initWithData:data
+                                                                     options:optoins
+                                                          documentAttributes:nil
+                                                                       error:nil];
+label.attributedText=attributeString;
+</pre>
+方案一点评：
+这种方案只是实现了显示，显示效果好不好是另一回事。事实证明，这种方案的显示效果很不好：
+
+![方案一显示效果](http://upload-images.jianshu.io/upload_images/937405-d810311964b43dab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+我们现在要对方案一进行优化。
+
+方案一优化思路：1.缩小图片，让图片与字体显示差不多大；
+2.让字体显示垂直方向居中。
+
+优化后的方案一：
+
+<pre>
+//HTML文本 包含图片、文本
+NSString *htmlString=@"< img src=http://upload-images.jianshu.io/upload_images/937405-50a8ad2d8866fc12.png>&nbsp&nbsp花羊羊领取了你的<font color="\"red\""><a>红包</a></font>"
+//我们可以先把src对应的图片解析出来，放到本地
+NSRange httpRange=[htmlString rangeOfString:@"http://"];
+NSRange endRange=[htmlString rangeOfString:@".png"];
+NSString \*picString=[htmlString substringWithRange:NSMakeRange(httpRange.location, endRange.location+endRange.length-httpRange.location)];
+[[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:picString] options:nil progress:nil completed:^(UIImage \\*image, NSData \\*data, NSError \*error, BOOL finished) {
+    //按照字体大小缩小图片，具体实现在下文
+     UIImage \\*scaledImage=[self scaleImage:image font:font];
+     NSData \*imgData=UIImagePNGRepresentation(scaledImage);
+     NSString \\*libPath=[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,     NSUserDomainMask, YES) lastObject];
+    NSString \\*cachePath=[libPath stringByAppendingPathComponent:@"Caches"];
+    NSString \\*scaledImagesPath=[cachePath stringByAppendingPathComponent:@"scaledImages"];
+    if(![[NSFileManager defaultManager] fileExistsAtPath:scaledImagesPath]){
+        [[NSFileManager defaultManager] createDirectoryAtPath:scaledImagesPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+NSString\\ *picName=[[picString componentsSeparatedByString:@"/"] lastObject];
+    NSString \\*filePath=[scaledImagesPath stringByAppendingPathComponent:picName];
+    [imgData writeToFile:filePath atomically:YES];
+    NSString \\*path=[NSURL fileURLWithPath:filePath].absoluteString;
+//用本地的图片路径替换远程图片路径
+htmlString=[htmlString stringByReplacingOccurrencesOfString:picString withString:path];
+}];
+UILabel \\*label=[UILabel alloc] initWithFrame:CGRectMake(50, 200, 220, 20)];
+[self.view addSubview:label];
+UIFont \\*font=[UIFont systemFontOfSize:14];
+label.font=font;
+NSDictionary \\*optoins=@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,
+                            NSFontAttributeName:font};
+NSData \\*data=[htmlString dataUsingEncoding:NSUnicodeStringEncoding];
+NSAttributedString \\*attributeString=[[NSAttributedString alloc] initWithData:data
+                                                                     options:optoins
+                                                          documentAttributes:nil
+                                                                       error:nil];
+label.attributedText=attributeString;
+</pre>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-aeaca04c3819680c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="优化后的方案一显示效果"></p>
+<p>优化后的方案一显示效果差强人意。这种方法成功的解决了图片大小的问题，以及文本不居中的问题，但图片没有居中对齐，网上也找不到方法，只有继续探寻。</p>
+<p>方案二：</p>
+<pre>
+//HTML文本 包含图片、文本
+NSString *htmlString=@"< img src=http://upload-images.jianshu.io/upload_images/937405-50a8ad2d8866fc12.png>&nbsp&nbsp花羊羊领取了你的<font color="\"red\""><a>红包</a></font>"
+//我们可以先把src对应的图片解析出来，放到本地
+NSRange httpRange=[htmlString rangeOfString:@"http://"];
+NSRange endRange=[htmlString rangeOfString:@".png"];
+NSString \*picString=[htmlString substringWithRange:NSMakeRange(httpRange.location, endRange.location+endRange.length-httpRange.location)];
+UIImage \*scaledImage;
+[[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:picString] options:nil progress:nil completed:^(UIImage \*image, NSData \*data, NSError \*error, BOOL finished) {
+    //按照字体大小缩小图片，具体实现在下文
+     scaledImage=[self scaleImage:image font:font];
+     NSData \*imgData=UIImagePNGRepresentation(scaledImage);
+     NSString \*libPath=[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,     NSUserDomainMask, YES) lastObject];
+    NSString \*cachePath=[libPath stringByAppendingPathComponent:@"Caches"];
+    NSString \*scaledImagesPath=[cachePath stringByAppendingPathComponent:@"scaledImages"];
+    if(![[NSFileManager defaultManager] fileExistsAtPath:scaledImagesPath]){
+        [[NSFileManager defaultManager] createDirectoryAtPath:scaledImagesPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+NSString \\*picName=[[picString componentsSeparatedByString:@"/"] lastObject];
+    NSString \\*filePath=[scaledImagesPath stringByAppendingPathComponent:picName];
+    [imgData writeToFile:filePath atomically:YES];
+//用空字符串替换远程图片路径
+htmlString=[htmlString stringByReplacingOccurrencesOfString:picString withString:@""];
+}];
+
+
+UILabel \*label=[UILabel alloc] initWithFrame:CGRectMake(50, 200, 220, 20)];
+[self.view addSubview:label];
+UIFont \*font=[UIFont systemFontOfSize:14];
+label.font=font;
+//利用NSTextAttachment文UILabel添加图片，并调整位置实现居中对齐
+NSTextAttachment *attach=[[NSTextAttachment alloc] init];
+attach.bounds=CGRectMake(2, -(label.frame.size.height-font.pointSize)/2, 12, 14);
+attach.image=scaledImage;
+NSMutableAttributedString \*componets=[[NSMutableAttributedString alloc] init];
+NSAttributedString \*imagePart=[NSAttributedString attributedStringWithAttachment:attach];
+[componets appendAttributedString:imagePart];
+NSDictionary \*optoins=@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,
+                            NSFontAttributeName:font};
+NSData \*data=[htmlString dataUsingEncoding:NSUnicodeStringEncoding];
+NSAttributedString \*textPart=[[NSAttributedString alloc] initWithData:data
+                                                                     options:optoins
+                                                          documentAttributes:nil
+                                                                       error:nil];
+[componets appendAttributedString:textPart];
+label.attributedText=componets;
+</pre>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-e31040e80be7cc90.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="方案二的显示效果"><br>点评：<br>方案二显示效果略复杂，但是达到了我们需要的正常显示效果。</p>
+<p>最后，附上根据字体大小缩小图片的方法：</p>
+<pre>
+-(UIImage \*)scaleImage:(UIImage \*)origin font:(UIFont \*)font{
+
+    CGFloat imgH=origin.size.height;
+    CGFloat imgW=origin.size.width;
+    CGFloat width;
+    CGFloat height;
+    CGFloat fontHeight=font.pointSize;
+    if(imgW>imgH){
+
+        width=fontHeight;
+        height=fontHeight/imgW\*imgH;
+    }
+    else{
+        height=fontHeight;
+        width=fontHeight/imgH\*imgW;
+    }
+    UIGraphicsBeginImageContext(CGSizeMake(width, height));
+    [origin drawInRect:CGRectMake(0, 0, width, height)];
+    UIImage \*scaledImage=UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return scaledImage;
+}
+</pre>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://cgpointzero.top/2016/08/17/label-html/" data-title="两种方法实现UILabel图文并茂的显示html文本 | CGPointZero" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/08/19/JSPatchABC/" title="JSPatch热补丁实时修复bug">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  JSPatch热补丁实时修复bug</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/05/26/Ivar/"  title="class_copyIvarList的实用举例">
+ <strong>NEXT:</strong><br/> 
+ <span>class_copyIvarList的实用举例
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/1752627837" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/Insfgg99x" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
+		
+		<a href="http://cgpointzero.top" target="_blank" title="CGPoint Zero">CGPoint Zero</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>
