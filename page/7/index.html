@@ -87,7 +87,7 @@
 <meta name="description" content="平凡的世界我们终将平凡而过，拥有不平凡的斗志，才能成就自己的不平凡！">
 <meta property="og:type" content="website">
 <meta property="og:title" content="CGPointZero">
-<meta property="og:url" content="http://cgpointzero.top/archives/page/2/index.html">
+<meta property="og:url" content="http://cgpointzero.top/page/7/index.html">
 <meta property="og:site_name" content="CGPointZero">
 <meta property="og:description" content="平凡的世界我们终将平凡而过，拥有不平凡的斗志，才能成就自己的不平凡！">
 <meta name="twitter:card" content="summary">
@@ -110,7 +110,7 @@
   };
 </script>
 
-  <title> 归档 | CGPointZero </title>
+  <title> CGPointZero </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -131,7 +131,9 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -231,70 +233,158 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
+  <section id="posts" class="posts-expand">
+    
+      
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  
+  
 
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 9 篇日志。 继续努力。
-    </span>
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
 
-      
-      
-      
-
-      
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/26/runtime/" itemprop="url">
+                  runtime运行时方法替换的用法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-26T15:18:18+08:00" content="2016-05-26">
+              2016-05-26
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/26/runtime/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/26/runtime/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
         </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
         
-            <a class="post-title-link" href="/2016/09/03/cocoapod-setup/" itemprop="url">
-              
-                <span itemprop="name">解决安装cocoapods一直卡在Setting up master repos</span>
-              
-            </a>
+          
+            <p>在load方法中，用fc_viewDidLoad替换viewDidLoad：</p>
+<pre>
+/**
+ *  在load中交换viewDidLoad和fc_viewDidLoad
+ */
++(void)load{
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken,^{
+
+        xgf_swizzleSelector([self class], @selector(viewDidLoad), @selector(xgf_viewDidLoad));
+
+        /*Method m1=class_getInstanceMethod([self class], @selector(viewDidLoad));
+        Method m2=class_getInstanceMethod([self class], @selector(fc_viewDidLoad));
+        BOOL notImplemented=class_addMethod([self class], @selector(viewDidLoad), method_getImplementation(m2), method_getTypeEncoding(m2));
+        if(!notImplemented){
+        method_exchangeImplementations(m1, m2);
+        }
+        */
+    });
+}
+static inline void xgf_swizzleSelector(Class class,SEL originalSelector,SEL swizzledSelector){
+
+    Method originalMethod=class_getInstanceMethod(class, originalSelector);
+    Method swizzledMethod=class_getInstanceMethod(class, swizzledSelector);
+    if(class_addMethod(class, 
+                       originalSelector, 
+                       method_getImplementation(swizzledMethod),
+                       method_getTypeEncoding(swizzledMethod))){
+        class_replaceMethod(class, swizzledSelector,
+                            method_getImplementation(originalMethod), 
+                            method_getTypeEncoding(originalMethod));
+    }else{
+        method_exchangeImplementations(originalMethod, swizzledMethod);
+    }
+}
+</pre><pre>
+/**
+ *  [self xgf_viewDidLoad] 其实是调用了viewDidLoad的实现
+ */
+-(void)xgf_viewDidLoad{
+    NSLog(@"%s",__func__);
+    [self xgf_viewDidLoad];
+}
+</pre>
+          
         
-      </h1>
+      
+    </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-03T18:06:09+08:00"
-              content="2016-09-03" >
-          09-03
-        </time>
-      </div>
+    <div>
+      
+    </div>
 
-    </header>
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </article>
 
 
-
     
-
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/9/">9</a><a class="extend next" rel="next" href="/archives/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
-
 
 
 
@@ -484,12 +574,6 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
-
 
   
 

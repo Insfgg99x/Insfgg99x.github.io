@@ -87,7 +87,7 @@
 <meta name="description" content="平凡的世界我们终将平凡而过，拥有不平凡的斗志，才能成就自己的不平凡！">
 <meta property="og:type" content="website">
 <meta property="og:title" content="CGPointZero">
-<meta property="og:url" content="http://cgpointzero.top/archives/page/2/index.html">
+<meta property="og:url" content="http://cgpointzero.top/page/3/index.html">
 <meta property="og:site_name" content="CGPointZero">
 <meta property="og:description" content="平凡的世界我们终将平凡而过，拥有不平凡的斗志，才能成就自己的不平凡！">
 <meta name="twitter:card" content="summary">
@@ -110,7 +110,7 @@
   };
 </script>
 
-  <title> 归档 | CGPointZero </title>
+  <title> CGPointZero </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -131,7 +131,9 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -231,70 +233,119 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
+  <section id="posts" class="posts-expand">
+    
+      
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  
+  
 
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 9 篇日志。 继续努力。
-    </span>
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
 
-      
-      
-      
-
-      
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/01/colorfull_git/" itemprop="url">
+                  彩色的git lg
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-01T00:30:18+08:00" content="2016-09-01">
+              2016-09-01
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/01/colorfull_git/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/01/colorfull_git/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
         </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
         
-            <a class="post-title-link" href="/2016/09/03/cocoapod-setup/" itemprop="url">
-              
-                <span itemprop="name">解决安装cocoapods一直卡在Setting up master repos</span>
-              
-            </a>
+          
+            <p>#将git log替换成git lg，并且彩色显示，方便查看及回滚到某个版本，效果如下：<br><img src="/img/gitlog.png" alt="彩色的git lg"></p>
+<p>#只要在命令行输入以下命令回车：</p>
+<p>git config –global alias.lg “log –color –graph –pretty=format:’%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset’ –abbrev-commit”</p>
+<p>#然后再git lg就可以看到彩色的日志。</p>
+<p>#附上常用git 命令<br><code>1.初始化 git init<br>2.查看状态：git status<br>3.添加文件：git  add .<br>4.提交 git commit -m”备注”<br>5.查看日志：git log<br>6.查看当前分支：git branch<br>7.拉取最新代码：git pull origin 分支名<br>8.推送代码：git push origin 分支名<br>9.删除远程分支：git push origin :分支名<br>10.新建分支，并切换到新建的分支:git checkout -b 新分支名<br>11.将新建的分支推送到服务器：git push origin 新建的分支名<br>12.删除本地分支：git branch -D 分支名<br>13.强制回撤到某次提交的版本：git reset —hard 版本号的前6位(如：abe75e)<br>14.添加tag：git tag -a “标签名” -m”备注”<br>15.将添加的标签推送到远程服务器：git push —tag<br>16.进入到某哥tag:git checkout 标签名<br>17.强制回撤到某哥标签：git reset —hard 标签名<br>18.删除本地tag：git tag -d 标签名<br></code></p>
+
+          
         
-      </h1>
+      
+    </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-03T18:06:09+08:00"
-              content="2016-09-03" >
-          09-03
-        </time>
-      </div>
+    <div>
+      
+    </div>
 
-    </header>
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </article>
 
 
-
     
-
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/9/">9</a><a class="extend next" rel="next" href="/archives/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
-
 
 
 
@@ -484,12 +535,6 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
-
 
   
 
