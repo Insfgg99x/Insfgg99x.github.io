@@ -30,7 +30,7 @@
 <p>###发布代码到cocoapods<br>该有的都准备好了，发布吧！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod trunk push xxx.podspec --verbose</span><br></pre></td></tr></table></figure></p>
 <p>上面的xxx表示项目名，要和<code>s.name</code>保持一致.<br>需要注意的是，这种提交命令，不允许你的podspec文件存在警告。若存在警告，则不能通过有效性验证，导致发布失败！</p>
 <p>我们可以加上允许警告的选项(–allow-warnings)如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod trunk push FGGDownloader.podspec --allow-warnings</span><br></pre></td></tr></table></figure></p>
-<p>验证是否发布成功：<br><code>pod search xxx</code><br>xxx表示你的项目名，要和上面的<code>s.name</code> 保持一致。若能查找到，表示发布成功。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-5bd9fe2135ab2aa4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>验证是否发布成功：<br><code>pod search xxx</code><br>xxx表示你的项目名，要和上面的<code>s.name</code> 保持一致。若能查找到，表示发布成功。</p>
 <p>你也可以在<a href="https://cocoapods.org" target="_blank" rel="external">cocoapods官网</a>搜索你的项目来验证，但一般官网存在延迟，发布后不能立即搜出来，可能要等到第二天甚至第三天。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/937405-4643d30e062a2acb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="在cocoapods官网搜索验证"><br><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 ]]></content>
