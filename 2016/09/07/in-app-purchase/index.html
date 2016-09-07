@@ -1,0 +1,832 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="##摘要：
+
+本文讲述了如何创建App内购买项目？
+如何添加沙盒App内购买测试帐号？
+如何封装一个内购买的管理类？
+如何在完成付款之后，保证有效的提供增值服务？###如何创建内购买项目？创建内购买之前，请确保已完成“协议、税务和银行业务”。打开iTunes Connect，进入app，选择”功能”-“App内购买项目”，点击”＋”创建一个内购买项目
+
+选择所属类型：按照提示填写名称，定价，产品i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2016年最新版iOS App内购买详细指南">
+<meta property="og:url" content="http://cgpointzero.top/2016/09/07/in-app-purchase/index.html">
+<meta property="og:site_name" content="CGPointZero">
+<meta property="og:description" content="##摘要：
+
+本文讲述了如何创建App内购买项目？
+如何添加沙盒App内购买测试帐号？
+如何封装一个内购买的管理类？
+如何在完成付款之后，保证有效的提供增值服务？###如何创建内购买项目？创建内购买之前，请确保已完成“协议、税务和银行业务”。打开iTunes Connect，进入app，选择”功能”-“App内购买项目”，点击”＋”创建一个内购买项目
+
+选择所属类型：按照提示填写名称，定价，产品i">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-99d61a36a4c8d77e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-19fa37f86b8d245e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-2389e241e444ff5e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-e36392c078eb248f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-77bc12bf15c7406c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-e42a3ba654fcb492.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-2157998701de688e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-09-07T13:39:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2016年最新版iOS App内购买详细指南">
+<meta name="twitter:description" content="##摘要：
+
+本文讲述了如何创建App内购买项目？
+如何添加沙盒App内购买测试帐号？
+如何封装一个内购买的管理类？
+如何在完成付款之后，保证有效的提供增值服务？###如何创建内购买项目？创建内购买之前，请确保已完成“协议、税务和银行业务”。打开iTunes Connect，进入app，选择”功能”-“App内购买项目”，点击”＋”创建一个内购买项目
+
+选择所属类型：按照提示填写名称，定价，产品i">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/937405-99d61a36a4c8d77e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 2016年最新版iOS App内购买详细指南 | CGPointZero </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">CGPointZero</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                2016年最新版iOS App内购买详细指南
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-07T21:38:47+08:00" content="2016-09-07">
+              2016-09-07
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/07/in-app-purchase/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/07/in-app-purchase/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>##摘要：</p>
+<ul>
+<li>本文讲述了如何创建App内购买项目？</li>
+<li>如何添加沙盒App内购买测试帐号？</li>
+<li>如何封装一个内购买的管理类？</li>
+<li>如何在完成付款之后，保证有效的提供增值服务？<br>###如何创建内购买项目？<br>创建内购买之前，请确保已完成“协议、税务和银行业务”。打开iTunes Connect，进入app，选择”功能”-“App内购买项目”，点击”＋”创建一个内购买项目</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-99d61a36a4c8d77e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>选择所属类型：<br><img src="http://upload-images.jianshu.io/upload_images/937405-19fa37f86b8d245e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>按照提示填写名称，定价，产品id，以及描述信息，内购商品列表截图。<br><img src="http://upload-images.jianshu.io/upload_images/937405-2389e241e444ff5e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>需要注意产品id的规范，它必须由：<code>&quot;bundle identifier&quot;+编号</code>组成 如<code>xxx01</code>，其中<code>xxx</code>表示<code>bundle identifier</code>。<br>每个内购项目需要提供一个内购买商品列表截图，如：<br><img src="http://upload-images.jianshu.io/upload_images/937405-e36392c078eb248f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>创建完内购项目之后，我们需要一个沙盒测试帐号。</p>
+<p>###如何创建沙盒测试帐号？<br>进入“用户和职能”，选择“沙箱测试技术员”，点击“＋”添加一个测试帐号：<br><img src="http://upload-images.jianshu.io/upload_images/937405-77bc12bf15c7406c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>按照提示，输入信息，创建测试帐号，用于内购买测试。接下来是代码部分。</p>
+<p>###如何封装一个内购买管理类？<br>思路</p>
+<ul>
+<li>这个管理类需要有一个支付的调起接口，至少要一个产品id参数；</li>
+<li>若是非消耗型商品，需要提供一个恢复已购买商品的接口；</li>
+<li>要保证内购付完款之后，要告诉我们自己的服务器，我买了什么东西，而要做到这一点，我们又要考虑：<br>搞一个管理类：<code>@interface FCInAppPurchaseManager : NSObject</code><br>搞个单例类方法：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  单例类</span><br><span class="line"> *</span><br><span class="line"> *  @return 单例对象</span><br><span class="line"> */</span><br><span class="line">+(instancetype)sharedManager;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>搞一个购买商品的接口：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  购买商品</span><br><span class="line"> *</span><br><span class="line"> *  @param identifier iTunes Connect商品ID</span><br><span class="line"> *  @param tradeId    交易id（自己服务器创建订单的交易id）</span><br><span class="line"> *  @param key        交易标识（自己服务器生成的key，防治杜撰交易）</span><br><span class="line"> */</span><br><span class="line">-(void)purchaseProductWithIdentifier:(NSString *)identifier tradeId:(NSString *)tradeId key:(NSString *)key;</span><br></pre></td></tr></table></figure></p>
+<p>在商品列表界面购买商品时，调用上面这个接口，从自己服务器创建交易，获取交易id和key<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath&#123;</span><br><span class="line">    //创建交易</span><br><span class="line">    FCInnserPurchaseProductModel *model=_dataArray[indexPath.row];</span><br><span class="line">    FCFamousUser *currentUser=[[FCAccountSettings getCurrentAccountSetting] getCurrentUser];</span><br><span class="line">    NSString *token=[FCMainSettings getToken];</span><br><span class="line">    NSDictionary *params=@&#123;kAfterLoginToken:token,</span><br><span class="line">                           @&quot;userid&quot;:currentUser.userId,</span><br><span class="line">                           @&quot;no&quot;:@(currentUser.no),</span><br><span class="line">                           @&quot;productid&quot;:model.productId,</span><br><span class="line">                           @&quot;price&quot;:model.price,</span><br><span class="line">                           @&quot;coin&quot;:model.coin,</span><br><span class="line">                           @&quot;quantity&quot;:@1,</span><br><span class="line">                           @&quot;signature&quot;:[[NSUUID UUID] UUIDString],</span><br><span class="line">                           @&quot;channel&quot;:@&quot;ios&quot;,</span><br><span class="line">                           @&quot;device_type&quot;:@&quot;ios&quot;&#125;;</span><br><span class="line">    HUDShowLoading</span><br><span class="line">    [[FCWebServiceController sharedWebServiceController] sendRequestWithParameters:params action:@&quot;trade/create&quot; success:^(id json) &#123;</span><br><span class="line">        </span><br><span class="line">        if(![json isKindOfClass:[NSDictionary class]])&#123;</span><br><span class="line">            HUDError(kServerInnerError)</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        HUDDismiss</span><br><span class="line">        NSString *tradeId=[[json objectForKey:@&quot;trade&quot;] objectForKey:@&quot;_id&quot;];</span><br><span class="line">        NSString *key=[[json objectForKey:@&quot;extras&quot;] objectForKey:@&quot;key&quot;];</span><br><span class="line">        //调起购买管理类的购买</span><br><span class="line">        [[FCInAppPurchaseManager sharedManager] purchaseProductWithIdentifier:model.identifier tradeId:tradeId key:key];</span><br><span class="line">        </span><br><span class="line">    &#125; failure:^(NSError *error) &#123;</span><br><span class="line">        HUDError(error.localizedDescription);</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>###内购买管理类的实现 <code>FCInAppPurchaseManager.m</code><br>首先要导入StoreKit框架：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;StoreKit/StoreKit.h&gt;</span><br></pre></td></tr></table></figure></p>
+<p>单例类方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">static FCInAppPurchaseManager *purchaseManager=nil;</span><br><span class="line">+(instancetype)sharedManager&#123;</span><br><span class="line">    </span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        purchaseManager=[[FCInAppPurchaseManager alloc] init];</span><br><span class="line">    &#125;);</span><br><span class="line">    return purchaseManager;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>搞一个拓展，加上一些私有属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@interface FCInAppPurchaseManager()&lt;SKProductsRequestDelegate,SKPaymentTransactionObserver&gt;</span><br><span class="line">/**</span><br><span class="line"> *  服务器生成的校验码</span><br><span class="line"> */</span><br><span class="line">@property(nonatomic,copy)NSString *key;</span><br><span class="line">/**</span><br><span class="line"> *  iTunes Connect上商品的标识符</span><br><span class="line"> */</span><br><span class="line">@property(nonatomic,copy)NSString *identifier;</span><br><span class="line">/**</span><br><span class="line"> *  服务器的交易编号</span><br><span class="line"> */</span><br><span class="line">@property(nonatomic,copy)NSString *tradeId;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
+<p>初始化方法中，添加监听：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-(instancetype)init&#123;</span><br><span class="line">    </span><br><span class="line">    if(self=[super init])&#123;</span><br><span class="line">        </span><br><span class="line">        [[SKPaymentQueue defaultQueue] addTransactionObserver:self];</span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>实现购买商品的接口：保存交易id、key到本地的目的是，支付完成后，告诉服务器用户买了啥的这个过程是一个不确定的过程，有可能断网了，手机没电了、程序被终结了，程序bug崩溃了等不确定因素，一次要保留这一次的交易id、key，再次启动app时，我们的服务器没有拿着凭证去向苹果服务器验证交易信息苹果会自动调用监听购买结果的方法<code>paymentQueue : updatedTransactions :</code>，在这个方法中，完成上一次应该告诉我们服务器用户买了啥的任务。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  购买商品</span><br><span class="line"> *</span><br><span class="line"> *  @param identifier 产品在iTunes connect中的标识符（HZSX.FriendCircle01 HZSX.FriendCircle02 HZSX.FriendCircle03 分别对应60圈币、180圈币 300圈币）</span><br><span class="line"> *  @param tradeId    交易编号（服务端生成的）</span><br><span class="line"> *  @param key        验证用的key（服务端生成）</span><br><span class="line"> */</span><br><span class="line">-(void)purchaseProductWithIdentifier:(NSString *)identifier tradeId:(NSString *)tradeId key:(NSString *)key&#123;</span><br><span class="line">    </span><br><span class="line">    if(![SKPaymentQueue canMakePayments])&#123;</span><br><span class="line">        </span><br><span class="line">        HUDError(@&quot;您的手机没有打开程序内付费购买&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(![identifier hasPrefix:@&quot;HZSX.FriendCircle&quot;])&#123;</span><br><span class="line">        </span><br><span class="line">        HUDError(@&quot;商品类型错误&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(kFCEmptyCheck(tradeId))&#123;</span><br><span class="line">        HUDError(@&quot;交易编号不能为空&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(kFCEmptyCheck(key))&#123;</span><br><span class="line">        HUDError(@&quot;缺少必要参数&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    _identifier=identifier;</span><br><span class="line">    _tradeId=tradeId;</span><br><span class="line">    _key=key;</span><br><span class="line">    //存到本地</span><br><span class="line">    NSString *token=[FCMainSettings getToken];</span><br><span class="line">    NSString *tradeId_key=[NSString stringWithFormat:@&quot;%@_tradeId&quot;,token];</span><br><span class="line">    NSString *tradeKey_key=[NSString stringWithFormat:@&quot;%@_key&quot;,token];</span><br><span class="line">    [[NSUserDefaults standardUserDefaults] setObject:tradeId forKey:tradeId_key];</span><br><span class="line">    [[NSUserDefaults standardUserDefaults] setObject:key forKey:tradeKey_key];</span><br><span class="line">    [[NSUserDefaults standardUserDefaults] synchronize];</span><br><span class="line">    </span><br><span class="line">    NSSet *set=[NSSet setWithObject:identifier];</span><br><span class="line">    //发起购买商品的请求</span><br><span class="line">    SKProductsRequest *request=[[SKProductsRequest alloc] initWithProductIdentifiers:set];</span><br><span class="line">    request.delegate=self;</span><br><span class="line">    [request start];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>实现StoreKit的代理方法：<br>#pragma mark - SKProductsRequestDelegate<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//收到的产品信息</span><br><span class="line">- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response&#123;</span><br><span class="line">    </span><br><span class="line">    if(response.products.count==0)&#123;</span><br><span class="line">        HUDError(@&quot;商品信息错误&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    SKProduct *product=response.products.lastObject;</span><br><span class="line">    SKPayment *payment=[SKPayment paymentWithProduct:product];</span><br><span class="line">    [[SKPaymentQueue defaultQueue] addPayment:payment];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>#pragma mark - SKRequestDelegate<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-(void)request:(SKRequest *)request didFailWithError:(NSError *)error&#123;</span><br><span class="line">    </span><br><span class="line">    HUDError(error.localizedDescription);</span><br><span class="line">&#125;</span><br><span class="line">-(void)requestDidFinish:(SKRequest *)request&#123;</span><br><span class="line">    </span><br><span class="line">    HUDDismiss;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>监听购买结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark - 监听购买结果(若购买时，退出了app，苹果会在app启动时，自动调用这个方法)</span><br><span class="line">-(void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions&#123;</span><br><span class="line">    </span><br><span class="line">    if(transactions.count==0!transactions)&#123;</span><br><span class="line">        </span><br><span class="line">        HUDError(@&quot;获取不到购买结果&quot;)</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    SKPaymentTransaction *transaction=transactions.lastObject;</span><br><span class="line">    switch (transaction.transactionState)</span><br><span class="line">    &#123;</span><br><span class="line">        case SKPaymentTransactionStatePurchased:&#123;//交易完成</span><br><span class="line">            </span><br><span class="line">            [self recordTransaction:transaction];</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">        case SKPaymentTransactionStateFailed:&#123;//交易失败</span><br><span class="line">        </span><br><span class="line">            [self failedTransaction:transaction];</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">        case SKPaymentTransactionStateRestored://已经购买过该商品</span><br><span class="line">            [self restoreTransactions];</span><br><span class="line">            break;</span><br><span class="line">        case SKPaymentTransactionStatePurchasing: //商品添加进列表</span><br><span class="line">            break;</span><br><span class="line">        default:</span><br><span class="line">            break;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>那么问题来了？</p>
+<p>###为什么不把交易完成后，告诉自己服务器，买了什么，这部分业务抽离出来呢？<br>考虑到从调起支付到支付结果（成功、失败等）需要<code>几秒甚至十几秒</code>，在这段时间内，用户可能离开了当前界面，<br>而苹果购买的结果回调时，用户不在当前界面就告诉不了我们的服务器，用户买了啥啥啥。<br>因此我把购买完成，告诉服务器的这部分逻辑也写进了这个管理类里面。这样，用户无论是否离开当前页面，只要支付成功了，就能调用告诉服务器用户买了啥的逻辑。</p>
+<p>告诉服务器用户买了啥：同时将交易id、交易key、凭证<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark - 请求服务端，记录交易 告诉服务器我买了什么</span><br><span class="line">-(void)recordTransaction:(SKPaymentTransaction *)transaction&#123;</span><br><span class="line">    </span><br><span class="line">    //结束交易</span><br><span class="line">    [[SKPaymentQueue defaultQueue] finishTransaction: transaction];</span><br><span class="line">    </span><br><span class="line">    NSString *token=[FCMainSettings getToken];</span><br><span class="line">    NSString *tradeId_key=[NSString stringWithFormat:@&quot;%@_tradeId&quot;,token];</span><br><span class="line">    NSString *tradeKey_key=[NSString stringWithFormat:@&quot;%@_key&quot;,token];</span><br><span class="line">    if(kFCEmptyCheck(_tradeId))&#123;</span><br><span class="line">        _tradeId=[[NSUserDefaults standardUserDefaults] objectForKey:tradeId_key];</span><br><span class="line">    &#125;</span><br><span class="line">    if(kFCEmptyCheck(_key))&#123;</span><br><span class="line">        _key=[[NSUserDefaults standardUserDefaults] objectForKey:tradeKey_key];</span><br><span class="line">    &#125;</span><br><span class="line">    //获取苹果返回的支付凭证</span><br><span class="line">    NSURL *receiptURL=[[NSBundle mainBundle] appStoreReceiptURL];</span><br><span class="line">    NSData *receiptData=[NSData dataWithContentsOfURL:receiptURL];</span><br><span class="line">    if(!receiptData)&#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    NSString *base64_receipt=[[receiptData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed]</span><br><span class="line">                              stringByReplacingOccurrencesOfString:@&quot; &quot; withString:@&quot;&quot;];</span><br><span class="line">    if(kFCEmptyCheck(base64_receipt))&#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    //sign=MD5(tradeid=tradeid&amp;salt=mrpyp-2016&amp;key=key)</span><br><span class="line">    NSString *components=[[NSString stringWithFormat:@&quot;tradeid=%@&amp;salt=mrpyp-2016&amp;key=%@&quot;,_tradeId,_key]</span><br><span class="line">                          stringByReplacingOccurrencesOfString:@&quot; &quot; withString:@&quot;&quot;];</span><br><span class="line">    //NSString *rsa_components=[[RSA encryptString:components publicKey:kInAppPurchaseRSAPublicKey]</span><br><span class="line">    //                          stringByReplacingOccurrencesOfString:@&quot; &quot; withString:@&quot;&quot;];</span><br><span class="line">    NSString *md5_componets=[components MD5Hash];</span><br><span class="line">    if(kFCEmptyCheck(token)kFCEmptyCheck(_tradeId)kFCEmptyCheck(md5_componets))&#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    NSDictionary *params=@&#123;kAfterLoginToken:token,</span><br><span class="line">                           @&quot;sign&quot;:md5_componets,</span><br><span class="line">                           @&quot;tradeid&quot;:_tradeId,</span><br><span class="line">                           @&quot;receipt&quot;:base64_receipt,</span><br><span class="line">                           @&quot;key&quot;:_key&#125;;</span><br><span class="line">    [self tellServerBuySuccessWithdTradeInfo:params];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>告诉服务器，我们买了什么：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  告诉服务器购买成功了</span><br><span class="line"> *</span><br><span class="line"> *  @param tradeInfo       交易信息</span><br><span class="line"> *  @param destinationPath 存放交易信息的文件路径</span><br><span class="line"> */</span><br><span class="line">-(void)tellServerBuySuccessWithdTradeInfo:(NSDictionary *)tradeInfo/* destionationPath:(NSString *)destinationPath*/&#123;</span><br><span class="line">    </span><br><span class="line">    [[FCWebServiceController sharedWebServiceController] sendRequestWithParameters:tradeInfo action:@&quot;pay/ios_receipt_verify&quot; success:^(id json) &#123;</span><br><span class="line">        </span><br><span class="line">        if(![json isKindOfClass:[NSDictionary class]])&#123;</span><br><span class="line">            HUDError(kServerInnerError)</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        BOOL result=[[json objectForKey:@&quot;result&quot;] boolValue];</span><br><span class="line">        if(!result)&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        NSLog(@&quot;验证成功&quot;);</span><br><span class="line">        //显示购买成功的视图</span><br><span class="line">        //[self showBuySuccessViewWithCoin:60];</span><br><span class="line">        </span><br><span class="line">    &#125; failure:^(NSError *error) &#123;</span><br><span class="line">        NSLog(@&quot;%@&quot;,error.localizedDescription);</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>###恢复已购买的商品<br>若你购买的商品类型是<code>非消耗型</code>的，在用户切换帐号，换手机等情景下，恢复已购买的内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//恢复购买的装备</span><br><span class="line">-(void)restoreTransactions&#123;</span><br><span class="line"></span><br><span class="line">    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>并实现恢复购买的代理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//恢复购买的装备成功</span><br><span class="line">-(void)paymentQueueRestoreCompletedTransactionsFinished: (SKPaymentTransaction *)transaction&#123;</span><br><span class="line">    </span><br><span class="line">    if(!transaction)</span><br><span class="line">        return;</span><br><span class="line">    [self paymentQueue:[SKPaymentQueue defaultQueue] updatedTransactions:@[transaction]];</span><br><span class="line">&#125;</span><br><span class="line">//恢复购买的装备失败</span><br><span class="line">-(void)paymentQueue:(SKPaymentQueue *) paymentQueue restoreCompletedTransactionsFailedWithError:(NSError *)error&#123;</span><br><span class="line">    </span><br><span class="line">    HUDError(error.localizedDescription);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后在<code>dealloc</code>方法中注销监听:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-(void)dealloc&#123;</span><br><span class="line">    </span><br><span class="line">    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];//解除监听</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>###测试内购买<br>内购买的代码已经写好了，内购项目也新建了，沙盒测试帐号也有了，现在可以动手测试内购买了。</p>
+<ul>
+<li>手机打开App Store，选择第一个tab<code>精品推荐</code>，滚动到最底部，点击自己的Apple ID，在弹出的框中，选择<code>注销</code>。</li>
+<li>打开我们自己的app，进入内购买<code>商品列表页面</code>，点一个商品，发起购买。</li>
+<li>在登陆的弹框中选择<code>使用现有的Apple ID</code>，在登陆iTunes connect的弹框中，输入前面注册的<code>沙盒测试帐号</code></li>
+<li>在购买信息的弹框中选择<code>购买</code><br><img src="http://upload-images.jianshu.io/upload_images/937405-e42a3ba654fcb492.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></li>
+<li>购买完成，前往<code>我的帐户</code>，查看充值记录，验证服务器是否纪录此次交易。<br>###提交审核<br>若你的app时第一次加入内购买，则，app内购项目也要一并提交<br><img src="http://upload-images.jianshu.io/upload_images/937405-2157998701de688e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>至此，内购买集成结束，欢迎关注我的个人博客：<a href="http://cgpointzero.top">CGPointZero</a><br><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/06/downloader/" rel="next" title="用NSURLConnection封装一个断点续传后台下载的轻量级下载工具">
+                <i class="fa fa-chevron-left"></i> 用NSURLConnection封装一个断点续传后台下载的轻量级下载工具
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/07/in-app-purchase/"
+     data-title="2016年最新版iOS App内购买详细指南"
+     data-content=""
+     data-url="http://cgpointzero.top/2016/09/07/in-app-purchase/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/07/in-app-purchase/"
+           data-title="2016年最新版iOS App内购买详细指南" data-url="http://cgpointzero.top/2016/09/07/in-app-purchase/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="CGPoint Zero" />
+          <p class="site-author-name" itemprop="name">CGPoint Zero</p>
+          <p class="site-description motion-element" itemprop="description">平凡的世界我们终将平凡而过，拥有不平凡的斗志，才能成就自己的不平凡！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1752627837/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Insfgg99x" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CGPoint Zero</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"cgpointzero"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
