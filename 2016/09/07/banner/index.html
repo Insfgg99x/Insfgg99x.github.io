@@ -1,0 +1,802 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="##摘要本文详细的讲述了如何封装一个只用一个方法就实现自动循环轮播的广告视图，依赖于SDWebImage。
+###效果图
+FGGAutomaticScrollView简介：
+ 初始化方法，两种：
+1.从网络加载图片：123[[FGGAutoScrollView alloc] initWithFrame:(CGRect)frame                               imag">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS开发之只用一个方法实现图片的轮播">
+<meta property="og:url" content="http://cgpointzero.top/2016/09/07/banner/index.html">
+<meta property="og:site_name" content="CGPointZero">
+<meta property="og:description" content="##摘要本文详细的讲述了如何封装一个只用一个方法就实现自动循环轮播的广告视图，依赖于SDWebImage。
+###效果图
+FGGAutomaticScrollView简介：
+ 初始化方法，两种：
+1.从网络加载图片：123[[FGGAutoScrollView alloc] initWithFrame:(CGRect)frame                               imag">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-a37caa1ed0f1cefd.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-09-07T13:51:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS开发之只用一个方法实现图片的轮播">
+<meta name="twitter:description" content="##摘要本文详细的讲述了如何封装一个只用一个方法就实现自动循环轮播的广告视图，依赖于SDWebImage。
+###效果图
+FGGAutomaticScrollView简介：
+ 初始化方法，两种：
+1.从网络加载图片：123[[FGGAutoScrollView alloc] initWithFrame:(CGRect)frame                               imag">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/937405-a37caa1ed0f1cefd.gif?imageMogr2/auto-orient/strip">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> iOS开发之只用一个方法实现图片的轮播 | CGPointZero </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">CGPointZero</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS开发之只用一个方法实现图片的轮播
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-07T21:51:10+08:00" content="2016-09-07">
+              2016-09-07
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/07/banner/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/07/banner/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>##摘要<br>本文详细的讲述了如何封装一个只用一个方法就实现自动循环轮播的广告视图，依赖于SDWebImage。</p>
+<p>###效果图<br><img src="http://upload-images.jianshu.io/upload_images/937405-a37caa1ed0f1cefd.gif?imageMogr2/auto-orient/strip" alt=""></p>
+<h3 id="FGGAutomaticScrollView简介："><a href="#FGGAutomaticScrollView简介：" class="headerlink" title="FGGAutomaticScrollView简介："></a>FGGAutomaticScrollView简介：</h3><hr>
+<p> 初始化方法，两种：</p>
+<p>1.从网络加载图片：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[[FGGAutoScrollView alloc] initWithFrame:(CGRect)frame</span><br><span class="line">                               imageURLs:(NSArray *)URLArray</span><br><span class="line">                   imageDidSelectedBlock:(FGGImageClickBlock) didSelectedImageAtIndex];</span><br></pre></td></tr></table></figure></p>
+<p>2.从本地加载图片：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[[FGGAutoScrollView alloc] initWithFrame:(CGRect)frame</span><br><span class="line">                         localImageNames:(NSArray *)imageNames </span><br><span class="line">                   imageDidSelectedBlock:(FGGImageClickBlock) didSelectedImageAtIndex;</span><br></pre></td></tr></table></figure></p>
+<p> 提示：</p>
+<h2 id="若不需要为图片添加点击事件，初始化时，点击图片的回调block置为nil就可以了。"><a href="#若不需要为图片添加点击事件，初始化时，点击图片的回调block置为nil就可以了。" class="headerlink" title=" 若不需要为图片添加点击事件，初始化时，点击图片的回调block置为nil就可以了。"></a> 若不需要为图片添加点击事件，初始化时，点击图片的回调block置为nil就可以了。</h2><p>###使用示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@&quot;http://i.okaybuy.cn/images/multipic/new/201506/fe/fe6b322427edad3dd6c7916116a9a15b.jpg,</span><br><span class="line">&quot;@&quot;http://i.okaybuy.cn/images/multipic/new/201505/88/888d8cf6a769c401af2ced0140fa90f3.jpg&quot;,</span><br><span class="line">@&quot;http://i.okaybuy.cn/images/multipic/new/201506/53/532a6028830f9d7e39b5bce9e5e60e52.jpg&quot;];</span><br><span class="line"></span><br><span class="line">_bannerView=[[FGGAutoScrollView alloc]initWithFrame:CGRectMake(20, 100, self.view.frame.size.width-40, 200) placeHolderImage:nil imageURLs:array imageDidSelectedBlock:^(NSInteger selectedIndex) &#123;</span><br><span class="line">        switch (selectedIndex) &#123;</span><br><span class="line">            case 0:</span><br><span class="line">                NSLog(@&quot;你选择了第%ld张图片&quot;,selectedIndex);</span><br><span class="line">                break;</span><br><span class="line">            case 1:</span><br><span class="line">                NSLog(@&quot;你选择了第%ld张图片&quot;,selectedIndex);</span><br><span class="line">                break;</span><br><span class="line">            case 2:</span><br><span class="line">                NSLog(@&quot;你选择了第%ld张图片&quot;,selectedIndex);</span><br><span class="line">                break;</span><br><span class="line">            default:</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;];</span><br><span class="line">[self.view addSubview:_bannerView];</span><br></pre></td></tr></table></figure></p>
+<p>若你想添加自动滚动的回调事件（可不设置）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_bannerView.imageDidScrolledBlock=^(NSInteger index)&#123;</span><br><span class="line">        NSLog(@&quot;滚动到了第%ld张&quot;,index);</span><br><span class="line">    &#125;;</span><br><span class="line"> [self.view addSubview:_bannerView];</span><br></pre></td></tr></table></figure></p>
+<p>若你的图片是从链接是从网上获取的，你可以在获取图片的数组<code>imgsArray</code>后，调用set方法即可替换数据源，并且会自动reload视图：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_bannerView.imageURLArray=imgsArray;</span><br></pre></td></tr></table></figure></p>
+<p>##实现细节<br>搞一个自定义的视图<code>`FGGAutoScrollView</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@interface FGGAutoScrollView : UIView&lt;UIScrollViewDelegate&gt;</span><br></pre></td></tr></table></figure></p>
+<p>设置如下属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**点击照片的回调*/</span><br><span class="line">@property(nonatomic,copy,readonly)FGGImageClickBlock    didSelectedImageAtIndex;</span><br><span class="line"></span><br><span class="line">@property(nonatomic,copy) FGGImageScrolledBlock         imageDidScrolledBlock;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *    图片的urlString链接数组</span><br><span class="line"> *    </span><br><span class="line"> *    可以通过调用其set方法，来重载数据源和视图</span><br><span class="line"> */</span><br><span class="line">@property(nonatomic,strong)NSArray                      *imageURLArray;</span><br></pre></td></tr></table></figure></p>
+<p>滚动时间间隔：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  滚动时间间隔 可以自己修改</span><br><span class="line"> */</span><br><span class="line">static double kFGGScrollInterval = 3.0f;</span><br></pre></td></tr></table></figure></p>
+<p>加载网络图片：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  加载网络图片滚动</span><br><span class="line"> *</span><br><span class="line"> *  @param frame    frame</span><br><span class="line"> *  @param URLArray 包含图片URL字符串的数组</span><br><span class="line"> *  @param didSelectedImageAtIndex 点击图片时回调的block</span><br><span class="line"> *</span><br><span class="line"> *  @return FGGAutoScrollView对象</span><br><span class="line"> */</span><br><span class="line">-(instancetype)initWithFrame:(CGRect)frame placeHolderImage:(UIImage *)placeHolderImage imageURLs:(NSArray *)URLArray imageDidSelectedBlock:(FGGImageClickBlock) didSelectedImageAtIndex;</span><br></pre></td></tr></table></figure></p>
+<p>加载本地图片：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  加载本地图片滚动</span><br><span class="line"> *</span><br><span class="line"> *  @param frame      frame</span><br><span class="line"> *  @param imageNames 本地图片名字数组</span><br><span class="line"> *  @param didSelectedImageAtIndex 点击图片时回调的block</span><br><span class="line"> *</span><br><span class="line"> *  @return FGGAutoScrollView对象</span><br><span class="line"> */</span><br><span class="line">-(instancetype)initWithFrame:(CGRect)frame placeHolderImage:(UIImage *)placeHolderImage localImageNames:(NSArray *)imageNames imageDidSelectedBlock:(FGGImageClickBlock) didSelectedImageAtIndex;</span><br></pre></td></tr></table></figure></p>
+<p>##实现 FGGAutoScrollView.m</p>
+<p>在拓展中添加一个属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@interface FGGAutoScrollView()</span><br><span class="line">/**</span><br><span class="line"> *  滚动视图对象（只读）</span><br><span class="line"> */</span><br><span class="line">@property(nonatomic,strong,readonly)UIScrollView        *scroll;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure></p>
+<p>添加计数器，默认图片等成员变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@implementation FGGAutoScrollView&#123;</span><br><span class="line">    </span><br><span class="line">    //定时器</span><br><span class="line">    NSTimer *_timer;</span><br><span class="line">    //页码控制器</span><br><span class="line">    UIPageControl *_pageControl;</span><br><span class="line">    /**默认图片*/</span><br><span class="line">    UIImage *_placeHolderImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>加载网络图片：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//加载网络图片的方法</span><br><span class="line">-(instancetype)initWithFrame:(CGRect)frame placeHolderImage:(UIImage *)placeHolderImage imageURLs:(NSArray *)URLArray imageDidSelectedBlock:(FGGImageClickBlock)didSelectedImageAtIndex&#123;</span><br><span class="line">    </span><br><span class="line">    if(self=[super initWithFrame:frame])&#123;</span><br><span class="line">        </span><br><span class="line">        _placeHolderImage=placeHolderImage;</span><br><span class="line">        _imageURLArray=URLArray;</span><br><span class="line">        _didSelectedImageAtIndex=didSelectedImageAtIndex;</span><br><span class="line">        [self createScrollView];</span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>加载本地图片:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">//加载本地的图片的方法</span><br><span class="line">-(instancetype)initWithFrame:(CGRect)frame placeHolderImage:(UIImage *)placeHolderImage localImageNames:(NSArray *)imageNames imageDidSelectedBlock:(FGGImageClickBlock)didSelectedImageAtIndex&#123;</span><br><span class="line">    </span><br><span class="line">    if(self=[super initWithFrame:frame])&#123;</span><br><span class="line">        </span><br><span class="line">        if(imageNames.count&gt;0)&#123;</span><br><span class="line">            </span><br><span class="line">            _placeHolderImage=placeHolderImage;</span><br><span class="line">            NSMutableArray *fullPathArray=[NSMutableArray array];</span><br><span class="line">            for(int i=0;i&lt;imageNames.count;i++)&#123;</span><br><span class="line">                </span><br><span class="line">                NSString *path;</span><br><span class="line">                NSString *name=imageNames[i];</span><br><span class="line">                if([name hasSuffix:@&quot;jpg&quot;][name hasSuffix:@&quot;png&quot;])</span><br><span class="line">                    path=[[NSBundle mainBundle] pathForResource:name ofType:nil];</span><br><span class="line">                else</span><br><span class="line">                    path=[[NSBundle mainBundle] pathForResource:name ofType:@&quot;png&quot;];</span><br><span class="line">                NSString *fullPath=[NSString stringWithFormat:@&quot;file://%@&quot;,[path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];</span><br><span class="line">                [fullPathArray addObject:fullPath];</span><br><span class="line">            &#125;</span><br><span class="line">            _imageURLArray=fullPathArray;</span><br><span class="line">            _didSelectedImageAtIndex=didSelectedImageAtIndex;</span><br><span class="line">            [self createScrollView];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>创建滚动视图，添加点击手势：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">//构建循环滚动视图</span><br><span class="line">-(void)createScrollView&#123;</span><br><span class="line">    </span><br><span class="line">    if(_scroll)&#123;</span><br><span class="line">        </span><br><span class="line">        for(UIView *sub in _scroll.subviews)</span><br><span class="line">            [sub removeFromSuperview];</span><br><span class="line">        [_scroll removeFromSuperview];</span><br><span class="line">        _scroll=nil;</span><br><span class="line">    &#125;</span><br><span class="line">    _scroll=[[UIScrollView alloc]initWithFrame:self.bounds];</span><br><span class="line">    [self addSubview:_scroll];</span><br><span class="line">    _scroll.delegate=self;</span><br><span class="line">    _scroll.contentSize=CGSizeMake((_imageURLArray.count+1)*self.bounds.size.width, self.bounds.size.height);</span><br><span class="line">    </span><br><span class="line">    _scroll.pagingEnabled=YES;</span><br><span class="line">    _scroll.showsHorizontalScrollIndicator=NO;</span><br><span class="line">    if(_timer)&#123;</span><br><span class="line">        </span><br><span class="line">        [_timer invalidate];</span><br><span class="line">        _timer=nil;</span><br><span class="line">    &#125;</span><br><span class="line">    _timer=[NSTimer scheduledTimerWithTimeInterval:kFGGScrollInterval</span><br><span class="line">                                            target:self</span><br><span class="line">                                          selector:@selector(automaticScroll)</span><br><span class="line">                                          userInfo:nil</span><br><span class="line">                                           repeats:YES];</span><br><span class="line">    for(int i=0;i&lt;=_imageURLArray.count;i++)&#123;</span><br><span class="line">        </span><br><span class="line">        CGFloat xpos=i*self.bounds.size.width;</span><br><span class="line">        UIImageView *imv=[[UIImageView alloc]initWithFrame:CGRectMake(xpos, 0, self.bounds.size.width, self.bounds.size.height)];</span><br><span class="line">        //设置灰色底</span><br><span class="line">        imv.image=_placeHolderImage;</span><br><span class="line">        imv.userInteractionEnabled=YES;</span><br><span class="line">        </span><br><span class="line">        //添加点击图片的手势</span><br><span class="line">        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapImage)];</span><br><span class="line">        [imv addGestureRecognizer:tap];</span><br><span class="line">        [_scroll addSubview:imv];</span><br><span class="line">        NSString *urlString;</span><br><span class="line">        if(i&lt;_imageURLArray.count)</span><br><span class="line">            urlString=_imageURLArray[i];</span><br><span class="line">        else</span><br><span class="line">            urlString=_imageURLArray[0];</span><br><span class="line">        NSURL *url=[NSURL URLWithString:urlString];</span><br><span class="line">        [imv sd_setImageWithURL:url placeholderImage:_placeHolderImage];</span><br><span class="line">    &#125;</span><br><span class="line">    if(_pageControl)</span><br><span class="line">        _pageControl=nil;</span><br><span class="line">    _pageControl=[[UIPageControl alloc]init];</span><br><span class="line">    _pageControl.center=CGPointMake(self.bounds.size.width/2, self.bounds.size.height-10);</span><br><span class="line">    _pageControl.numberOfPages=_imageURLArray.count;</span><br><span class="line">    _pageControl.currentPage=0;</span><br><span class="line">    _pageControl.pageIndicatorTintColor=[UIColor whiteColor];</span><br><span class="line">    _pageControl.currentPageIndicatorTintColor=[UIColor orangeColor];</span><br><span class="line">    [self addSubview:_pageControl];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>自动滚动的方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  自动循环滚动</span><br><span class="line"> */</span><br><span class="line">-(void)automaticScroll&#123;</span><br><span class="line">    </span><br><span class="line">    if(_imageURLArray.count&gt;0)&#123;</span><br><span class="line">        </span><br><span class="line">        NSInteger index=_scroll.contentOffset.x/self.bounds.size.width;</span><br><span class="line">        index++;</span><br><span class="line">        if(index==_imageURLArray.count)</span><br><span class="line">            index=0;</span><br><span class="line">        if(self.imageDidScrolledBlock)</span><br><span class="line">            self.imageDidScrolledBlock(index);</span><br><span class="line">        _pageControl.currentPage=index;</span><br><span class="line">        __weak typeof(self) weakSelf=self;</span><br><span class="line">        //添加滚动动画</span><br><span class="line">        [UIView animateWithDuration:0.2 animations:^&#123;</span><br><span class="line">           weakSelf.scroll.contentOffset=CGPointMake(index*self.bounds.size.width, 0);</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>点击图片的回调：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//点击图片时回调代码块</span><br><span class="line">-(void)tapImage&#123;</span><br><span class="line">    </span><br><span class="line">    if(self.didSelectedImageAtIndex)&#123;</span><br><span class="line">        </span><br><span class="line">        self.didSelectedImageAtIndex(_pageControl.currentPage);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>重写数据源的set方法，以重载视图：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/**图片数组的setter方法*/</span><br><span class="line">-(void)setImageURLArray:(NSArray *)imageURLArray&#123;</span><br><span class="line">    </span><br><span class="line">    if(![imageURLArray isKindOfClass:[NSArray class]])</span><br><span class="line">        return;</span><br><span class="line">    _imageURLArray=imageURLArray;</span><br><span class="line">    if(_imageURLArray.count==0)</span><br><span class="line">        return;</span><br><span class="line">    [self createScrollView];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>滚动的代理方法，若设置了滚动的回调，则在这个方法里回调<code>imageDidScrolledBlock</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark - UIScrollView</span><br><span class="line">-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView&#123;</span><br><span class="line">    </span><br><span class="line">    NSInteger index=_scroll.contentOffset.x/self.bounds.size.width;</span><br><span class="line">    if(index==_imageURLArray.count)</span><br><span class="line">        index=0;</span><br><span class="line">    if(self.imageDidScrolledBlock)</span><br><span class="line">        self.imageDidScrolledBlock(index);</span><br><span class="line">    _pageControl.currentPage=index;</span><br><span class="line">    _scroll.contentOffset=CGPointMake(self.bounds.size.width*index, 0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后在delloc中销毁计时器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//销毁</span><br><span class="line">-(void)dealloc&#123;</span><br><span class="line">    </span><br><span class="line">    if(_timer)&#123;</span><br><span class="line">        </span><br><span class="line">        [_timer invalidate];</span><br><span class="line">        _timer=nil;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后附上我的GitHub代码地址：<a href="https://github.com/Insfgg99x/FGGAutomaticScrollView" target="_blank" rel="external">FGGAutomaticScrollView</a>，欢迎pull request和star ~<br>以及我的个人博客：<a href="http://cgpointzero.top">CGPointZero</a>欢迎访问～<br><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/07/in-app-purchase/" rel="next" title="2016年最新版iOS App内购买详细指南">
+                <i class="fa fa-chevron-left"></i> 2016年最新版iOS App内购买详细指南
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/07/banner/"
+     data-title="iOS开发之只用一个方法实现图片的轮播"
+     data-content=""
+     data-url="http://cgpointzero.top/2016/09/07/banner/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/07/banner/"
+           data-title="iOS开发之只用一个方法实现图片的轮播" data-url="http://cgpointzero.top/2016/09/07/banner/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="CGPoint Zero" />
+          <p class="site-author-name" itemprop="name">CGPoint Zero</p>
+          <p class="site-description motion-element" itemprop="description">平凡的世界我们终将平凡而过，拥有不平凡的斗志，才能成就自己的不平凡！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1752627837/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Insfgg99x" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#FGGAutomaticScrollView简介："><span class="nav-number">1.</span> <span class="nav-text">FGGAutomaticScrollView简介：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#若不需要为图片添加点击事件，初始化时，点击图片的回调block置为nil就可以了。"><span class="nav-number"></span> <span class="nav-text"> 若不需要为图片添加点击事件，初始化时，点击图片的回调block置为nil就可以了。</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CGPoint Zero</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"cgpointzero"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
