@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title><![CDATA[Swift 3.0 A function to automaticly convert between Simplified and Traditional Chiniese]]></title>
+      <title><![CDATA[Swift 3.0 Automaticly convert Simplified and Traditional Chiniese]]></title>
       <url>http://cgpointzero.top/2016/09/12/Swfit/swfit-converter/</url>
       <content type="html"><![CDATA[<p>#FGCoverter<br>……………………………………………………..</p>
 <p>##Introduction<br>A Category of String used for mutual converting between simplified Chinese and Traditional Chinese.The Swift Edition of <a href="https://github.com/Insfgg99x/FGReverser" target="_blank" rel="external">FGReverser</a></p>
