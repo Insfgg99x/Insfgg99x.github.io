@@ -1,0 +1,859 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="###Abstract
+
+How to automatic scrollNew features in Swift 3.0How to Async load image with memery and disk cache policy like SDWebImage.
+
+###Introduction……………………………………………………………………………………….A class with a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CGPointZero">
+<meta property="og:url" content="http://cgpointzero.top/2016/09/10/Swfit/swift-auto-scroll/index.html">
+<meta property="og:site_name" content="CGPointZero">
+<meta property="og:description" content="###Abstract
+
+How to automatic scrollNew features in Swift 3.0How to Async load image with memery and disk cache policy like SDWebImage.
+
+###Introduction……………………………………………………………………………………….A class with a">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-24ff5553ed3b31ae.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-09-11T14:28:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CGPointZero">
+<meta name="twitter:description" content="###Abstract
+
+How to automatic scrollNew features in Swift 3.0How to Async load image with memery and disk cache policy like SDWebImage.
+
+###Introduction……………………………………………………………………………………….A class with a">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/937405-24ff5553ed3b31ae.gif?imageMogr2/auto-orient/strip">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title>  | CGPointZero </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">CGPointZero</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-10T12:16:16+08:00" content="2016-09-10">
+              2016-09-10
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/10/Swfit/swift-auto-scroll/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/10/Swfit/swift-auto-scroll/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>###Abstract</p>
+<blockquote>
+<p>How to automatic scroll<br>New features in Swift 3.0<br>How to Async load image with memery and disk cache policy like <code>SDWebImage</code>.</p>
+</blockquote>
+<p>###Introduction<br>……………………………………………………………………………………….<br>A class with ad. pics auotmatic scrolling build in swift with image cache policy used.<br><img src="http://upload-images.jianshu.io/upload_images/937405-24ff5553ed3b31ae.gif?imageMogr2/auto-orient/strip" alt=""></p>
+<p>###Installtion<br>Manual:</p>
+<p>Download This Project and drag the <code>FGSwiftAutoScrollView</code> folder into your peroject, do not forget to ensure “copy item if need” being selected.</p>
+<p>###Usage</p>
+<ul>
+<li><p>Load Web Images：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    //MARK:-</span><br><span class="line">    //MARK:automatic scrollView with web images</span><br><span class="line">    convenience init(frame:CGRect, placeHolder placeHolderImage:UIImage?,remoteImageUrls imgs:Array&lt;String&gt;?, selectImageAction imageDidSelectedAction:@escaping FGImageClickBlock)&#123;</span><br><span class="line">        </span><br><span class="line">        self.init(frame: frame)</span><br><span class="line">        self.createLoacalCacheFolder()</span><br><span class="line">        self.placeHolderImage=placeHolderImage</span><br><span class="line">        self.didSelectedImageAction=imageDidSelectedAction</span><br><span class="line">        self.imageUrlArray=imgs</span><br><span class="line">        DispatchQueue.main.async &#123;</span><br><span class="line">            self.createScrollView()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Load Local Images：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">    //MARK:automatic scrollView with local images</span><br><span class="line">    convenience init(frame:CGRect,placeHolder placeHolderImage:UIImage?,localImageNames imgs:Array&lt;String&gt;?, selectImageAction imageDidSelectedAction:@escaping FGImageClickBlock)&#123;</span><br><span class="line">        </span><br><span class="line">        self.init(frame: frame)</span><br><span class="line">        self.placeHolderImage=placeHolderImage</span><br><span class="line">        var fileUrlsArray:Array&lt;String&gt;=[]</span><br><span class="line">        for name in imgs!&#123;</span><br><span class="line">            </span><br><span class="line">            var path:String?</span><br><span class="line">            if name.hasSuffix(&quot;jpg&quot;)||name.hasSuffix(&quot;png&quot;)&#123;</span><br><span class="line">                path=Bundle.main.path(forResource: name, ofType: nil)</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                path=Bundle.main.path(forResource: name, ofType: &quot;png&quot;)</span><br><span class="line">            &#125;</span><br><span class="line">            if path==nil&#123;</span><br><span class="line">                path=&quot;&quot;</span><br><span class="line">            &#125;</span><br><span class="line">            path=path?.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)</span><br><span class="line">            let fullPath=String.init(format: &quot;file://%@&quot;, path!)</span><br><span class="line">            fileUrlsArray.append(fullPath)</span><br><span class="line">        &#125;</span><br><span class="line">        self.didSelectedImageAction=imageDidSelectedAction</span><br><span class="line">        self.imageUrlArray=fileUrlsArray</span><br><span class="line">        self.createScrollView()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>you can simply use the srcoll call back block if need (not necessary)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">self.banner?.imageDidScrolledBlock=&#123; (currentIndex) in</span><br><span class="line"></span><br><span class="line">    print(&quot;滚到到了第&quot;+String(currentIndex)+&quot;页了&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###Explain：<br>If you don’t need add image tap action, property didSelectedImageAction  block can be nil.</p>
+<p>###How to implementation</p>
+<blockquote>
+<p>Create a class:<code>FGSwiftAutoScrollView.swift</code> and confirm to the UIScrollViewDelegate</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class FGSwiftAutoScrollView: UIView,UIScrollViewDelegate&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Add some properties</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">//auto scroll interval</span><br><span class="line">    let fg_scrollInterval=3.0</span><br><span class="line">    //disk cache path</span><br><span class="line">    let fg_cachePath=NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).last!+&quot;/FGGAutomaticScrollViewCache&quot;</span><br><span class="line">    //memery cache</span><br><span class="line">    let fg_imageCache=NSCache&lt;AnyObject,AnyObject&gt;()</span><br><span class="line">    //maximun disk chache cycle</span><br><span class="line">    let fg_maxCacheCycle=TimeInterval(7*24*3600)</span><br><span class="line">    // tap image call action call back</span><br><span class="line">    private var didSelectedImageAction:FGImageClickBlock?</span><br><span class="line">    //image did scrolled call back</span><br><span class="line">    public var  imageDidScrolledBlock:FGImageScrolledBlock?</span><br><span class="line">    //data source</span><br><span class="line">    public var  imageUrlArray:Array&lt;String&gt;?&#123;</span><br><span class="line">        //redifine setter</span><br><span class="line">        didSet&#123;</span><br><span class="line">            //refresh UI on main queue</span><br><span class="line">            DispatchQueue.main.async &#123;</span><br><span class="line">                </span><br><span class="line">                self.createScrollView()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //main scrollView</span><br><span class="line">    private var scroll:UIScrollView?</span><br><span class="line">    //to ensure automatic scroll</span><br><span class="line">    private var timer:Timer!</span><br><span class="line">    //page control to show current page index</span><br><span class="line">    private var pageControl:UIPageControl!</span><br><span class="line">    //placeHolder image</span><br><span class="line">    var placeHolderImage:UIImage?</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Override initWithFrame:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">override init(frame:CGRect)&#123;</span><br><span class="line">        super.init(frame:frame)</span><br><span class="line">        self.createLoacalCacheFolder()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Create an area for disk image cache</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//MARK:- create cache area</span><br><span class="line">    //MARK:create a cache area to cache web images</span><br><span class="line">    private func createLoacalCacheFolder()&#123;</span><br><span class="line">        </span><br><span class="line">        if !FileManager.default.fileExists(atPath: fg_cachePath)&#123;</span><br><span class="line">            do&#123;</span><br><span class="line">                try FileManager.default.createDirectory(atPath: fg_cachePath, withIntermediateDirectories: true, attributes: nil)</span><br><span class="line">                </span><br><span class="line">            &#125;catch&#123;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Give two convenience functions</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//MARK:-Load Web Image</span><br><span class="line">    //MARK:automatic scrollView with web images</span><br><span class="line">    convenience init(frame:CGRect, placeHolder placeHolderImage:UIImage?,remoteImageUrls imgs:Array&lt;String&gt;?, selectImageAction imageDidSelectedAction:@escaping FGImageClickBlock)&#123;</span><br><span class="line">        </span><br><span class="line">        self.init(frame: frame)</span><br><span class="line">        self.placeHolderImage=placeHolderImage</span><br><span class="line">        self.didSelectedImageAction=imageDidSelectedAction</span><br><span class="line">        self.imageUrlArray=imgs</span><br><span class="line">        DispatchQueue.main.async &#123;</span><br><span class="line">            self.createScrollView()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">//MARK:Load Local Image</span><br><span class="line">    //MARK:automatic scrollView with local images</span><br><span class="line">    convenience init(frame:CGRect,placeHolder placeHolderImage:UIImage?,localImageNames imgs:Array&lt;String&gt;?, selectImageAction imageDidSelectedAction:@escaping FGImageClickBlock)&#123;</span><br><span class="line">        </span><br><span class="line">        self.init(frame: frame)</span><br><span class="line">        self.placeHolderImage=placeHolderImage</span><br><span class="line">        var fileUrlsArray:Array&lt;String&gt;=[]</span><br><span class="line">        for name in imgs!&#123;</span><br><span class="line">            </span><br><span class="line">            var path:String?</span><br><span class="line">            if name.hasSuffix(&quot;jpg&quot;)||name.hasSuffix(&quot;png&quot;)&#123;</span><br><span class="line">                path=Bundle.main.path(forResource: name, ofType: nil)</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                path=Bundle.main.path(forResource: name, ofType: &quot;png&quot;)</span><br><span class="line">            &#125;</span><br><span class="line">            if path==nil&#123;</span><br><span class="line">                path=&quot;&quot;</span><br><span class="line">            &#125;</span><br><span class="line">            path=path?.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)</span><br><span class="line">            let fullPath=String.init(format: &quot;file://%@&quot;, path!)</span><br><span class="line">            fileUrlsArray.append(fullPath)</span><br><span class="line">        &#125;</span><br><span class="line">        self.didSelectedImageAction=imageDidSelectedAction</span><br><span class="line">        self.imageUrlArray=fileUrlsArray</span><br><span class="line">        self.createScrollView()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Create main scroll view</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">//MARK:-</span><br><span class="line">    //MARK:create scroll view</span><br><span class="line">    private func createScrollView()&#123;</span><br><span class="line">        </span><br><span class="line">        if self.scroll != nil&#123;</span><br><span class="line">            </span><br><span class="line">            for sub in self.subviews &#123;</span><br><span class="line">                </span><br><span class="line">                sub.removeFromSuperview()</span><br><span class="line">            &#125;</span><br><span class="line">            self.scroll?.removeFromSuperview()</span><br><span class="line">            self.scroll=nil</span><br><span class="line">        &#125;</span><br><span class="line">        self.scroll=UIScrollView.init(frame: self.bounds)</span><br><span class="line">        self.addSubview(self.scroll!)</span><br><span class="line">        self.scroll?.delegate=self</span><br><span class="line">        var count:Int?;</span><br><span class="line">        if self.imageUrlArray==nil&#123;</span><br><span class="line">            count=0</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            count=self.imageUrlArray?.count</span><br><span class="line">        &#125;</span><br><span class="line">        let width:CGFloat=CGFloat((count!+1))*self.bounds.size.width;</span><br><span class="line">        let height:CGFloat=self.bounds.size.height;</span><br><span class="line">        self.scroll?.contentSize=CGSize.init(width: width, height: height)</span><br><span class="line">        </span><br><span class="line">        self.scroll?.isPagingEnabled=true</span><br><span class="line">        self.scroll?.showsHorizontalScrollIndicator=false</span><br><span class="line">        </span><br><span class="line">        if self.timer != nil&#123;</span><br><span class="line">            </span><br><span class="line">            self.timer.invalidate()</span><br><span class="line">            self.timer=nil</span><br><span class="line">        &#125;</span><br><span class="line">        //detach the timer</span><br><span class="line">        self.timer=Timer.scheduledTimer(withTimeInterval: fg_scrollInterval, repeats: true, block: &#123; (t) in</span><br><span class="line">            </span><br><span class="line">            if self.imageUrlArray?.count==0&#123;</span><br><span class="line">                return</span><br><span class="line">            &#125;</span><br><span class="line">            var index=Int((self.scroll?.contentOffset.x)!/self.bounds.size.width);</span><br><span class="line">            index+=1</span><br><span class="line">            if index==self.imageUrlArray?.count&#123;</span><br><span class="line">                index=0</span><br><span class="line">            &#125;</span><br><span class="line">            if self.imageDidScrolledBlock != nil&#123;</span><br><span class="line">                </span><br><span class="line">                self.imageDidScrolledBlock?(UInt(index))</span><br><span class="line">            &#125;</span><br><span class="line">            self.pageControl.currentPage=index</span><br><span class="line">            UIView.animate(withDuration: 0.2, animations: &#123;</span><br><span class="line">                self.scroll?.contentOffset=CGPoint.init(x: self.bounds.size.width*CGFloat(index), y: 0)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">        if count!&gt;0&#123;</span><br><span class="line">            for i in 0...count!&#123;</span><br><span class="line">                </span><br><span class="line">                let xpos=CGFloat(i)*self.bounds.size.width</span><br><span class="line">                let frm=CGRect.init(x: xpos, y: 0, width: self.bounds.size.width, height: self.bounds.size.height)</span><br><span class="line">                let imv=UIImageView.init(frame: frm)</span><br><span class="line">                imv.image=self.placeHolderImage</span><br><span class="line">                imv.isUserInteractionEnabled=true</span><br><span class="line">                let tap:UITapGestureRecognizer=UITapGestureRecognizer.init(target: self, action:#selector(FGSwiftAutoScrollView.tapImage))</span><br><span class="line">                imv.addGestureRecognizer(tap)</span><br><span class="line">                self.scroll?.addSubview(imv)</span><br><span class="line">                var urlString:String?</span><br><span class="line">                if i&lt;count!&#123;</span><br><span class="line">                    </span><br><span class="line">                    urlString=self.imageUrlArray?[i]</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    urlString=imageUrlArray?.first</span><br><span class="line">                &#125;</span><br><span class="line">                self.fg_setImageWithUrlString(imageView: imv,</span><br><span class="line">                                              urlString: urlString,</span><br><span class="line">                                              placeHolder:self.placeHolderImage)</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if self.pageControl != nil&#123;</span><br><span class="line">            self.pageControl.removeFromSuperview()</span><br><span class="line">            self.pageControl=nil</span><br><span class="line">        &#125;</span><br><span class="line">        let pageControlFrame=CGRect.init(x: 0, y: 0, width: 200, height: 17)</span><br><span class="line">        self.pageControl=UIPageControl.init(frame: pageControlFrame)</span><br><span class="line">        self.pageControl.center=CGPoint.init(x: self.bounds.size.width/2, y: self.bounds.size.height-10)</span><br><span class="line">        self.pageControl.numberOfPages=count!</span><br><span class="line">        self.pageControl.pageIndicatorTintColor=UIColor.init(red: 225.0/255.0, green: 225.0/255.0, blue: 225.0/255.0, alpha: 1.0)</span><br><span class="line">        self.pageControl.currentPageIndicatorTintColor=UIColor.orange</span><br><span class="line">        self.addSubview(self.pageControl)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Impletatin of sroll view delegate</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//MARK:-</span><br><span class="line">    //MARK:UIScrollView Delegate</span><br><span class="line">    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) &#123;</span><br><span class="line">        </span><br><span class="line">        var index=Int((self.scroll?.contentOffset.x)!/self.bounds.size.width);</span><br><span class="line">        if index==self.imageUrlArray?.count&#123;</span><br><span class="line">            index=0;</span><br><span class="line">        &#125;</span><br><span class="line">        if self.imageDidScrolledBlock != nil&#123;</span><br><span class="line">            </span><br><span class="line">            self.imageDidScrolledBlock?(UInt(index))</span><br><span class="line">        &#125;</span><br><span class="line">        self.pageControl.currentPage=index</span><br><span class="line">        self.scroll?.contentOffset=CGPoint.init(x: self.bounds.size.width*CGFloat(index), y: 0)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Implementation of tap image action</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//MARK:-</span><br><span class="line">    //MARK: Tag Image Action</span><br><span class="line">    func tapImage()&#123;</span><br><span class="line">        </span><br><span class="line">        if self.didSelectedImageAction != nil&#123;</span><br><span class="line">            </span><br><span class="line">            self.didSelectedImageAction?(UInt(self.pageControl.currentPage));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Destroy the timer in deinit</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">deinit&#123;</span><br><span class="line">        if self.timer != nil&#123;</span><br><span class="line">            self.timer .invalidate()</span><br><span class="line">            self.timer=nil</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Write an extension to async download image like <code>SDWebImage</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">extension FGSwiftAutoScrollView&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Async image loading like <code>SDWebImage</code> with cache in memery an disk</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">    func fg_setImageWithUrlString(imageView:UIImageView?,urlString:String?,placeHolder:UIImage?)&#123;</span><br><span class="line">        </span><br><span class="line">        if imageView==nil&#123;</span><br><span class="line">            return</span><br><span class="line">        &#125;</span><br><span class="line">        imageView?.image=placeHolder</span><br><span class="line">        if urlString==nil&#123;</span><br><span class="line">            return</span><br><span class="line">        &#125;</span><br><span class="line">        var cachePath=fg_cachePath+&quot;/&quot;+String(describing: urlString?.hash)</span><br><span class="line">        if (urlString?.hasPrefix(&quot;file://&quot;))!&#123;//local path</span><br><span class="line">            cachePath=urlString!</span><br><span class="line">        &#125;</span><br><span class="line">        //check the memery chache exist or not(both local and web images)</span><br><span class="line">        var data=fg_imageCache.object(forKey: cachePath as AnyObject)</span><br><span class="line">        if (data != nil) &#123;//exist in memery cache</span><br><span class="line">            </span><br><span class="line">            DispatchQueue.main.async&#123;</span><br><span class="line">                imageView?.image=UIImage(data: data as! Data)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else&#123;//not in memery cache,check if exist in disk or not</span><br><span class="line">            //local images</span><br><span class="line">            if (urlString?.hasPrefix(&quot;file://&quot;))!&#123;</span><br><span class="line">                </span><br><span class="line">                let url:NSURL=NSURL.init(string: urlString!)!</span><br><span class="line">                do&#123;</span><br><span class="line">                    try data=Data.init(contentsOf: url as URL) as AnyObject?</span><br><span class="line">                &#125;catch&#123;</span><br><span class="line">                    </span><br><span class="line">                &#125;</span><br><span class="line">                //if local image exist</span><br><span class="line">                if data != nil&#123;</span><br><span class="line">                    </span><br><span class="line">                    fg_imageCache.setObject(data as AnyObject, forKey: cachePath as AnyObject)</span><br><span class="line">                    DispatchQueue.main.async&#123;</span><br><span class="line">                        imageView?.image=UIImage(data: data as! Data)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                else&#123;//local image is not exist,just ingnore</span><br><span class="line">                    //ingnore</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">                //web images</span><br><span class="line">            else&#123;</span><br><span class="line">                //check if exist in disk</span><br><span class="line">                let exist=FileManager.default.fileExists(atPath: cachePath)</span><br><span class="line">                if exist &#123;//exist in disk</span><br><span class="line">                    //check if expired</span><br><span class="line">                    var attributes:Dictionary&lt;FileAttributeKey,Any&gt;?</span><br><span class="line">                    do&#123;</span><br><span class="line">                        try attributes=FileManager.default.attributesOfItem(atPath: cachePath)</span><br><span class="line">                    &#125;catch&#123;</span><br><span class="line">                        </span><br><span class="line">                    &#125;</span><br><span class="line">                    let createDate:Date?=attributes?[FileAttributeKey.creationDate] as! Date?</span><br><span class="line">                    let interval:TimeInterval?=Date.init().timeIntervalSince(createDate!)</span><br><span class="line">                    let expired=(interval! &gt; fg_maxCacheCycle)</span><br><span class="line">                    if expired&#123;//expired</span><br><span class="line">                        //download image</span><br><span class="line">                        self.donwloadDataAndRefreshImageView(imageView: imageView, urlString: urlString, cachePath: cachePath)</span><br><span class="line">                    &#125;</span><br><span class="line">                    else&#123;//not expired</span><br><span class="line">                        //load from disk</span><br><span class="line">                        let url:NSURL=NSURL.init(string: urlString!)!</span><br><span class="line">                        do&#123;</span><br><span class="line">                            try data=Data.init(contentsOf: url as URL) as AnyObject?</span><br><span class="line">                        &#125;catch&#123;</span><br><span class="line">                            </span><br><span class="line">                        &#125;</span><br><span class="line">                        if data != nil&#123;//if has data</span><br><span class="line">                            //cached in memery</span><br><span class="line">                            fg_imageCache.setObject(data as AnyObject, forKey: cachePath as AnyObject)</span><br><span class="line">                            DispatchQueue.main.async&#123;</span><br><span class="line">                                imageView?.image=UIImage(data: data as! Data)</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                        else&#123;//has not data</span><br><span class="line">                            //remove item from disk</span><br><span class="line">                            let url:NSURL=NSURL.init(string: urlString!)!</span><br><span class="line">                            do&#123;</span><br><span class="line">                                try data=Data.init(contentsOf: url as URL) as AnyObject?</span><br><span class="line">                            &#125;catch&#123;</span><br><span class="line">                                </span><br><span class="line">                            &#125;</span><br><span class="line">                            //donwload agin</span><br><span class="line">                            self.donwloadDataAndRefreshImageView(imageView: imageView, urlString: urlString, cachePath: cachePath)</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                    //not exist in disk</span><br><span class="line">                else&#123;</span><br><span class="line">                    //download image</span><br><span class="line">                    self.donwloadDataAndRefreshImageView(imageView: imageView, urlString: urlString, cachePath: cachePath)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Donwload Image Task</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">//async download image</span><br><span class="line">    private func donwloadDataAndRefreshImageView(imageView:UIImageView?,urlString:String?,cachePath:String!)&#123;</span><br><span class="line">        </span><br><span class="line">        do&#123;</span><br><span class="line">            try FileManager.default.removeItem(atPath: cachePath)</span><br><span class="line">        &#125;catch&#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        //download data</span><br><span class="line">        let url=URL.init(string: urlString!)</span><br><span class="line">        let session=URLSession.shared.dataTask(with: url!, completionHandler: &#123; (resultData, res, err) in</span><br><span class="line">            let fileUrl=URL.init(fileURLWithPath: cachePath)</span><br><span class="line">            do&#123;</span><br><span class="line">                try resultData?.write(to: fileUrl, options:.atomic)</span><br><span class="line">            &#125;catch&#123;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            self.fg_imageCache.setObject(resultData as AnyObject, forKey: cachePath as AnyObject)</span><br><span class="line">            if resultData != nil&#123;</span><br><span class="line">                DispatchQueue.main.async&#123;</span><br><span class="line">                    imageView?.image=UIImage(data: resultData!)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                //ingnore</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        session.resume()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>End. Attached the address of my source code on GitHub</p>
+</blockquote>
+<p><a href="https://github.com/Insfgg99x/FGSwiftAutoScrollView" target="_blank" rel="external">FGSwiftAutoScrollView</a> Hope your star, fork or pull request.</p>
+<p>###Support Me</p>
+<ul>
+<li>Blog:     <a href="http://cgpointzero.top">CGPointZeero</a></li>
+<li>GitHub:   <a href="https://github.com/Insfgg99x" target="_blank" rel="external">Insfgg99x</a></li>
+<li>Mooc:     <a href="http://www.imooc.com/u/3909164/articles" target="_blank" rel="external">CGPointZero</a></li>
+<li>Jianshu:  <a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" rel="external">CGPointZero</a></li>
+<li>Email:    <a href="mailto:newbox0512@yahoo.com" target="_blank" rel="external">newbox0512@yahoo.com</a></li>
+</ul>
+<p>……………………………………………………………………………………</p>
+<p>Copyright (c) 2016 CGPointZero. All rights reserved.<br><br><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/07/banner/" rel="next" title="iOS开发之只用一个方法实现图片的轮播">
+                <i class="fa fa-chevron-left"></i> iOS开发之只用一个方法实现图片的轮播
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/10/Swfit/swift-auto-scroll/"
+     data-title=""
+     data-content=""
+     data-url="http://cgpointzero.top/2016/09/10/Swfit/swift-auto-scroll/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/10/Swfit/swift-auto-scroll/"
+           data-title="" data-url="http://cgpointzero.top/2016/09/10/Swfit/swift-auto-scroll/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="CGPoint Zero" />
+          <p class="site-author-name" itemprop="name">CGPoint Zero</p>
+          <p class="site-description motion-element" itemprop="description">平凡的世界我们终将平凡而过，拥有不平凡的斗志，才能成就自己的不平凡！</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1752627837/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Insfgg99x" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CGPoint Zero</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"cgpointzero"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
