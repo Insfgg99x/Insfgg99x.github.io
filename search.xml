@@ -15,6 +15,10 @@
 <blockquote>
 <p>The result is <code>恭喜發財</code></p>
 </blockquote>
+<p>or<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> .................................</span><br><span class="line"> let string=&quot;恭喜發財&quot;</span><br><span class="line"> let result=string.reverseString()</span><br><span class="line"> print(result)</span><br><span class="line"> .................................</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>The result is <code>恭喜发财</code></p>
+</blockquote>
 <p>##About Me</p>
 <ul>
 <li>Blog:     <a href="http://cgpointzero.top">CGPointZeero</a></li>
@@ -24,6 +28,10 @@
 <li>Email:    <a href="mailto:newbox0512@yahoo.com" target="_blank" rel="external">newbox0512@yahoo.com</a></li>
 </ul>
 <p>……………………………………………………..</p>
+<blockquote>
+<p>End. </p>
+</blockquote>
+<p>Attached the address of my source code on GitHub <a href="https://github.com/Insfgg99x/FGGConverter" target="_blank" rel="external">FGGConverter</a> Hope your star, fork or pull request.</p>
 <p>@CGPoitZero</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 ]]></content>
