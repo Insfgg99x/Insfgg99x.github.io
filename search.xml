@@ -4,6 +4,32 @@
   
     
     <entry>
+      <title><![CDATA[Swift 3.0 A function to automaticly convert between Simplified and Traditional Chiniese]]></title>
+      <url>http://cgpointzero.top/2016/09/12/Swfit/swfit-converter/</url>
+      <content type="html"><![CDATA[<p>#FGCoverter<br>……………………………………………………..</p>
+<p>##Introduction<br>A Category of String used for mutual converting between simplified Chinese and Traditional Chinese.The Swift Edition of <a href="https://github.com/Insfgg99x/FGReverser" target="_blank" rel="external">FGReverser</a></p>
+<p>##Installtion<br>Manual:<br>Download This Project and drag the FGReverser folder into your peroject, do not forget to ensure “copy item if need” being selected.</p>
+<p>##Usage</p>
+<p>Simplfied Chinese to Traditional Chinese, or Traditional Chinese to Simplfied Chinese, Use:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pulic func reverseString()-&gt;String</span><br></pre></td></tr></table></figure></p>
+<p>##Example<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> .................................</span><br><span class="line"> let string=&quot;恭喜发财&quot;</span><br><span class="line"> let result=string.reverseString()</span><br><span class="line"> print(result)</span><br><span class="line"> .................................</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>The result is <code>恭喜發財</code></p>
+</blockquote>
+<p>##About Me</p>
+<ul>
+<li>Blog:     <a href="http://cgpointzero.top">CGPointZeero</a></li>
+<li>GitHub:   <a href="https://github.com/Insfgg99x" target="_blank" rel="external">Insfgg99x</a></li>
+<li>Mooc:     <a href="http://www.imooc.com/u/3909164/articles" target="_blank" rel="external">CGPointZero</a></li>
+<li>Jianshu:  <a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" rel="external">CGPointZero</a></li>
+<li>Email:    <a href="mailto:newbox0512@yahoo.com" target="_blank" rel="external">newbox0512@yahoo.com</a></li>
+</ul>
+<p>……………………………………………………..</p>
+<p>@CGPoitZero</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[iOS开发之一个方法实现任意内容繁简互转(非本地化)]]></title>
       <url>http://cgpointzero.top/2016/09/11/FGRevser/</url>
       <content type="html"><![CDATA[<p>##摘要<br>本文将介绍我自己封装的一个任意内容繁简换转的实现思路。</p>
