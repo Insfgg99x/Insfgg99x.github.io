@@ -4,6 +4,34 @@
   
     
     <entry>
+      <title><![CDATA[酷炫的文本输入框FGGTextField]]></title>
+      <url>http://cgpointzero.top/2016/09/20/fggtextfield/</url>
+      <content type="html"><![CDATA[<h2 id="FGGTextField"><a href="#FGGTextField" class="headerlink" title="#FGGTextField"></a>#FGGTextField</h2><p>##Introduction<br>一个超级酷炫的文本输入框，继承自UITextField，依赖于AJWValidator.用于实现文本输入的实时监测。<br><img src="/img/fggtextfield.gif" alt=""></p>
+<p>##Installtion<br>Manual:</p>
+<p>Download This Project and drag the FGGTextField folder into your peroject, do not forget to ensure “copy item if need” being selected.</p>
+<p>Cocoapods:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod &apos;FGGTextField&apos;, &apos;~&gt; 1.0.0&apos;</span><br></pre></td></tr></table></figure></p>
+<p>##Usage<br>Just import the header file:<code>import &quot;FGGTextField.h&quot;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">FGGTextField *tf=[[FGGTextField alloc]initWithFrame:CGRectMake(10, 100, kWidth-20, 40)];</span><br><span class="line">tf.placeholder=@&quot;请输入邮箱&quot;;</span><br><span class="line">tf.errorText=@&quot;邮箱格式不对&quot;;</span><br><span class="line">tf.validatorText=@&quot;邮箱&quot;;</span><br><span class="line">[self.view addSubview:tf];</span><br><span class="line">tf.borderStyle=UITextBorderStyleRoundedRect;</span><br><span class="line">tf.keyboardType=UIKeyboardTypeEmailAddress;</span><br><span class="line"></span><br><span class="line">AJWValidator *validator=[AJWValidator validatorWithType:AJWValidatorTypeString];</span><br><span class="line">[validator addValidationToEnsureValidEmailWithInvalidMessage:tf.errorText];</span><br><span class="line"> [tf  ajw_attachValidator:validator];</span><br><span class="line">__weak typeof(validator) weak_validator=validator;</span><br><span class="line">validator.validatorStateChangedHandler=^(AJWValidatorState state)&#123;</span><br><span class="line">            </span><br><span class="line">        switch (state) &#123;</span><br><span class="line">            case AJWValidatorValidationStateValid:</span><br><span class="line">                tf.highlightState=FGGTextFieldHighlightStateValidator;</span><br><span class="line">                leftView.text=@&quot;😁&quot;;</span><br><span class="line">                break;</span><br><span class="line">             case AJWValidatorValidationStateInvalid:</span><br><span class="line">                 tf.highlightState=FGGTextFieldHighlightStateWrong;</span><br><span class="line">                 leftView.text=@&quot;😟&quot;;</span><br><span class="line">                 break;</span><br><span class="line">             default:</span><br><span class="line">                 break;</span><br><span class="line">         &#125;</span><br><span class="line">         if(weak_validator.isValid)&#123;</span><br><span class="line">                </span><br><span class="line">             NSLog(@&quot;格式正确✅&quot;);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;;</span><br></pre></td></tr></table></figure>
+<p>##Example</p>
+<blockquote>
+<p>1.在项目中导入：FGGTextField.h<br><br>2.创建FGGTextField的对象<br><br>FGGTextField *tf=[[FGGTextField alloc]initWithFrame:CGRectMake(50, 100, 200, 40)];<br><br>3.设置属性<br><br>tf.placeholder=@”请输入邮箱”;<br><br>tf.errorText=@”邮箱格式不正确”;<br><br>tf.validatorText=@”邮箱”;<br><br><br><br>tf.borderStyle=UITextBorderStyleRoundedRect;<br><br>tf.keyboardType=UIKeyboardTypeEmailAddress;<br><br>4.添加到父视图<br>如果有问题，可以给我发邮件：newbox0512@yahoo.com<br></p>
+</blockquote>
+<p>##About Me</p>
+<ul>
+<li>Blog:     <a href="http://cgpointzero.top">CGPointZeero</a></li>
+<li>GitHub:   <a href="https://github.com/Insfgg99x" target="_blank" rel="external">Insfgg99x</a></li>
+<li>Mooc:     <a href="http://www.imooc.com/u/3909164/articles" target="_blank" rel="external">CGPointZero</a></li>
+<li>Jianshu:  <a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" rel="external">CGPointZero</a></li>
+<li>Email:    <a href="mailto:newbox0512@yahoo.com" target="_blank" rel="external">newbox0512@yahoo.com</a></li>
+</ul>
+<p>I attached my code on github,touch to download:-&gt;<a href="https://github.com/Insfgg99x/FGGTextField" target="_blank" rel="external">FGGTextField</a></p>
+<hr>
+<p>@CGPoitZero</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Swift 3.0一个方法一行代码实现UITableView头部视图缩放]]></title>
       <url>http://cgpointzero.top/2016/09/18/Swfit/fgtableheaderview/</url>
       <content type="html"><![CDATA[<h3 id="FGTableHeaderView"><a href="#FGTableHeaderView" class="headerlink" title="FGTableHeaderView"></a>FGTableHeaderView<br></h3><blockquote>
