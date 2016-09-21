@@ -84,26 +84,26 @@
 
 
 
-<meta name="description" content="##摘要本文将介绍我自己封装的一个任意内容繁简换转的实现思路。
-##FGReverser……………………………………………………..
-##IntroductionA Category of NSString used for mutual converting between simplified Chinese and Traditional Chinese.
-##InstalltionManu">
+<meta name="description" content="#FGWebImage……………………………………………………..
+##IntroductionAn Categoryension build in Swift 3.0 for UIImageView and A light-weight framework of  async loading image like SDWebImage.
+##InstalltionManual:
+Download">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS开发之一个方法实现任意内容繁简互转(非本地化)">
-<meta property="og:url" content="http://cgpointzero.top/2016/09/11/FGRevser/index.html">
+<meta property="og:title" content="FGWebImage:A Swift async load image framework for iOS">
+<meta property="og:url" content="http://cgpointzero.top/2016/09/21/Swfit/fgwebimage/index.html">
 <meta property="og:site_name" content="CGPointZero">
-<meta property="og:description" content="##摘要本文将介绍我自己封装的一个任意内容繁简换转的实现思路。
-##FGReverser……………………………………………………..
-##IntroductionA Category of NSString used for mutual converting between simplified Chinese and Traditional Chinese.
-##InstalltionManu">
+<meta property="og:description" content="#FGWebImage……………………………………………………..
+##IntroductionAn Categoryension build in Swift 3.0 for UIImageView and A light-weight framework of  async loading image like SDWebImage.
+##InstalltionManual:
+Download">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-09-11T14:49:15.000Z">
+<meta property="og:updated_time" content="2016-09-21T14:24:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS开发之一个方法实现任意内容繁简互转(非本地化)">
-<meta name="twitter:description" content="##摘要本文将介绍我自己封装的一个任意内容繁简换转的实现思路。
-##FGReverser……………………………………………………..
-##IntroductionA Category of NSString used for mutual converting between simplified Chinese and Traditional Chinese.
-##InstalltionManu">
+<meta name="twitter:title" content="FGWebImage:A Swift async load image framework for iOS">
+<meta name="twitter:description" content="#FGWebImage……………………………………………………..
+##IntroductionAn Categoryension build in Swift 3.0 for UIImageView and A light-weight framework of  async loading image like SDWebImage.
+##InstalltionManual:
+Download">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -122,7 +122,7 @@
   };
 </script>
 
-  <title> iOS开发之一个方法实现任意内容繁简互转(非本地化) | CGPointZero </title>
+  <title> FGWebImage:A Swift async load image framework for iOS | CGPointZero </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -264,7 +264,7 @@
             
             
               
-                iOS开发之一个方法实现任意内容繁简互转(非本地化)
+                FGWebImage:A Swift async load image framework for iOS
               
             
           </h1>
@@ -276,8 +276,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-11T22:48:32+08:00" content="2016-09-11">
-              2016-09-11
+            <time itemprop="dateCreated" datetime="2016-09-21T22:24:10+08:00" content="2016-09-21">
+              2016-09-21
             </time>
           </span>
 
@@ -287,8 +287,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/09/11/FGRevser/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/11/FGRevser/" itemprop="commentsCount"></span>
+                <a href="/2016/09/21/Swfit/fgwebimage/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/21/Swfit/fgwebimage/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -311,37 +311,19 @@
       
 
       
-        <p>##摘要<br>本文将介绍我自己封装的一个任意内容繁简换转的实现思路。</p>
-<p>##FGReverser<br>……………………………………………………..</p>
-<p>##Introduction<br>A Category of NSString used for mutual converting between simplified Chinese and Traditional Chinese.</p>
+        <p>#<a href="https://github.com/Insfgg99x/FGWebImage" target="_blank" rel="external">FGWebImage</a><br>……………………………………………………..</p>
+<p>##Introduction<br>An Categoryension build in Swift 3.0 for UIImageView and A light-weight framework of  async loading image like SDWebImage.</p>
 <p>##Installtion<br>Manual:</p>
-<p>Download This Project and drag the FGReverser folder into your peroject, do not forget to ensure “copy item if need” being selected.</p>
-<p>Cocoapods:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod &apos;FGReverser&apos;, &apos;~&gt; 1.0.0&apos;</span><br></pre></td></tr></table></figure></p>
-<p>##Usage<br>Just import the header file:<code>import &quot;NSString+FGReverser.h&quot;</code></p>
-<p>Simplfied Chinese to Traditional Chinese, or Traditional Chinese to Simplfied Chinese, Use:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-(NSString *)reverseString;</span><br></pre></td></tr></table></figure></p>
-<p>##Example<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSString *sourceString=@&quot;恭喜发财&quot;;</span><br><span class="line">NSString *reslutString=[sourceString reverseString];</span><br><span class="line">NSLog(@&quot;%@&quot;,reslutString);</span><br></pre></td></tr></table></figure></p>
-<p>The result is <code>恭喜發財</code></p>
+<p>Download This Project and drag the <code>FGWebImage</code> folder into your peroject, do not forget to ensure “copy item if need” being selected.</p>
+<p>##Usage</p>
+<p>Aync load image example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let frm=CGRect.init(x: 20, y: 80, width: self.view.bounds.size.width-40, height:400)</span><br><span class="line">let imv=UIImageView.init(frame: frm)</span><br><span class="line">self.view?.addSubview(imv)</span><br><span class="line">let urlString=&quot;http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot;</span><br><span class="line">imv.fg_setImageWithUrl(urlString: urlString, placeHolder: nil)</span><br></pre></td></tr></table></figure>
 <p>##About Me</p>
-<ul>
-<li>Blog:     <a href="http://cgpointzero.top">CGPointZeero</a></li>
-<li>GitHub:   <a href="https://github.com/Insfgg99x" target="_blank" rel="external">Insfgg99x</a></li>
-<li>Mooc:     <a href="http://www.imooc.com/u/3909164/articles" target="_blank" rel="external">CGPointZero</a></li>
-<li>Jianshu:  <a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" rel="external">CGPointZero</a></li>
-<li>Email:    <a href="mailto:newbox0512@yahoo.com" target="_blank" rel="external">newbox0512@yahoo.com</a></li>
-</ul>
-<p>……………………………………………………..</p>
-<p>@CGPoitZero</p>
-<p>##实现思路<br>上面内容是该项目的简介，该拓展仅用了一个方法就实现了任意内容繁简体互转的功能。</p>
-<p>1.收集简体和繁体编码的字符集<br>2.整理出来繁体和简体不一样的文字<br>3.分别将简体和繁体不一样的字中所有的简体字和繁体字加载到两个不同的数组中，并且确保这两个数组中的简体和繁体一一对应(相同的index)<br>4.搞一个可变字典，遍历简体字数组，以简体字为键，以繁体字为值，以key-value的形式放入字典中，并且以繁体字作为键，以简体字作为值，再存一遍，即<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for(long i=0i&lt;simplifiedArray.count; i++)&#123;</span><br><span class="line">NSString *key=[simplifiedArray objectAtIndex:i];</span><br><span class="line">NSString *value=[traditionalArray objectAtIndex:i];</span><br><span class="line">[dict setValue:value forKey:key];</span><br><span class="line">[dict setValue:key forKey:value];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>5.将上一步的字典写入一个文件，最好是写入Mac上你知道的一个路径，作为资源文件，比如我存到了桌面上，叫<code>reverse</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[dict writeToFile:filePath atomically:YES];</span><br></pre></td></tr></table></figure></p>
-<p>##进入正题<br>上面的都是准备工作，代码中不需要用到，只是为了准备资源文件。</p>
-<p>###思路<br>为了方便使用，我直接搞了个NSString的分类，当然也可以搞成一个单列类。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">*  Mutual converting</span><br><span class="line">*</span><br><span class="line">*/</span><br><span class="line">@interface NSString (FGReverser)</span><br></pre></td></tr></table></figure></p>
-<p>加载上一步的资源文件到一个字典中，为下面的转化做准备。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSString *mapPath=[[NSBundle mainBundle] pathForResource:@&quot;reverse&quot; ofType:nil];</span><br><span class="line">NSDictionary *map=[NSDictionary dictionaryWithContentsOfFile:mapPath];</span><br></pre></td></tr></table></figure></p>
-<p>搞一个繁简互转的接口，在这个接口中，去遍历给定的字符串，取出每个字符对应的反转字符<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">*  Mutual converting between Simplfied Chinese and traditional Chinese.</span><br><span class="line">*</span><br><span class="line">*  return the converted string</span><br><span class="line">*/</span><br><span class="line">-(NSString *)reverseString;</span><br></pre></td></tr></table></figure></p>
-<p>##互转逻辑<br>很简单，把要转化的字符串，逐个取出来(unichar型的，用格式说明符号<code>%C</code>转成NSString)。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unichar c=[resultString characterAtIndex:i];</span><br><span class="line">NSString *key=[NSString stringWithFormat:@&quot;%C&quot;,c];</span><br></pre></td></tr></table></figure></p>
-<p>然后到上面加载好的map中检查是否存在反转值。若存在反转值，则用反转值字符替换旧值字符，最后将处理好的字符串返回，就实现了繁简互转。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">*  Mutual converting between Simplfied Chinese and traditional Chinese.</span><br><span class="line">*</span><br><span class="line">*  return the converted string</span><br><span class="line">*/</span><br><span class="line">-(NSString *)reverseString&#123;</span><br><span class="line"></span><br><span class="line">NSString *mapPath=[[NSBundle mainBundle] pathForResource:@&quot;reverse&quot; ofType:nil];</span><br><span class="line">NSDictionary *map=[NSDictionary dictionaryWithContentsOfFile:mapPath];</span><br><span class="line">NSMutableString *resultString=[NSMutableString stringWithString:[self copy]];</span><br><span class="line"></span><br><span class="line">for (NSInteger i=0; i&lt;resultString.length; i++)&#123;</span><br><span class="line"></span><br><span class="line">unichar c=[resultString characterAtIndex:i];</span><br><span class="line">NSString *key=[NSString stringWithFormat:@&quot;%C&quot;,c];</span><br><span class="line">NSString *value=[map objectForKey:key];</span><br><span class="line">if(value)&#123;</span><br><span class="line"></span><br><span class="line">[resultString deleteCharactersInRange:NSMakeRange(i, 1)];</span><br><span class="line">[resultString insertString:value atIndex:i];</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">return resultString;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>至此已实现全部功能。<br>最后附上我在<code>Github</code>上的代码地址：<a href="https://github.com/Insfgg99x/FGReverser" target="_blank" rel="external">FGReverser</a>，欢迎pull request和star~，希望多支持。<br>同时，你也可以从<code>Cocoapods</code>下载到：<a href="https://cocoapods.org/pods/FGReverser" target="_blank" rel="external">FGGReverser</a>，使用也很简单，直接：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod &apos;FGReverser&apos;, &apos;~&gt;1.0.0&apos;</span><br></pre></td></tr></table></figure></p>
-<p>我的博客地址：<a href="http://cgpointzero.top">CGPointZero</a>，欢迎访问收藏，一起探讨。<br><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<blockquote>
+<p>Blog:     <a href="http://cgpointzero.top">CGPointZeero</a><br>GitHub:   <a href="https://github.com/Insfgg99x" target="_blank" rel="external">Insfgg99x</a><br>Mooc:     <a href="http://www.imooc.com/u/3909164/articles" target="_blank" rel="external">CGPointZero</a><br>Jianshu:  <a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" rel="external">CGPointZero</a><br>Email:    <a href="mailto:newbox0512@yahoo.com" target="_blank" rel="external">newbox0512@yahoo.com</a></p>
+</blockquote>
+<p>I attached my code on github,touch to download:-&gt;<a href="https://github.com/Insfgg99x/FGWebImage" target="_blank" rel="external">FGWebImage</a><br>……………………………………………………..<br>@CGPoitZero</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 
       
     </div>
@@ -366,17 +348,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/11/Swfit/swift-auto-scroll/" rel="next" title="Swift 3.0 One function to implementation auto scroll ad. view">
-                <i class="fa fa-chevron-left"></i> Swift 3.0 One function to implementation auto scroll ad. view
+              <a href="/2016/09/12/fgnetwork/" rel="next" title="FGNetwork:A light networking kit for iOS base on NSURLSession">
+                <i class="fa fa-chevron-left"></i> FGNetwork:A light networking kit for iOS base on NSURLSession
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/12/Swfit/swfit-converter/" rel="prev" title="Swift 3.0 Automaticly convert Simplified and Traditional Chiniese">
-                Swift 3.0 Automaticly convert Simplified and Traditional Chiniese <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -391,10 +369,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/09/11/FGRevser/"
-     data-title="iOS开发之一个方法实现任意内容繁简互转(非本地化)"
+        <div class="ds-share flat" data-thread-key="2016/09/21/Swfit/fgwebimage/"
+     data-title="FGWebImage:A Swift async load image framework for iOS"
      data-content=""
-     data-url="http://cgpointzero.top/2016/09/11/FGRevser/">
+     data-url="http://cgpointzero.top/2016/09/21/Swfit/fgwebimage/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -421,8 +399,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/11/FGRevser/"
-           data-title="iOS开发之一个方法实现任意内容繁简互转(非本地化)" data-url="http://cgpointzero.top/2016/09/11/FGRevser/">
+      <div class="ds-thread" data-thread-key="2016/09/21/Swfit/fgwebimage/"
+           data-title="FGWebImage:A Swift async load image framework for iOS" data-url="http://cgpointzero.top/2016/09/21/Swfit/fgwebimage/">
       </div>
     
   </div>
