@@ -5,7 +5,7 @@
     
     <entry>
       <title><![CDATA[FGWebImage:A Swift async load image framework for iOS]]></title>
-      <url>http://cgpointzero.top/2016/09/21/Swfit/fgwebimage/</url>
+      <url>http://cgpointzero.top/2016/09/13/Swfit/fgwebimage/</url>
       <content type="html"><![CDATA[<p>#<a href="https://github.com/Insfgg99x/FGWebImage" target="_blank" rel="external">FGWebImage</a><br>……………………………………………………..</p>
 <p>##Introduction<br>An Categoryension build in Swift 3.0 for UIImageView and A light-weight framework of  async loading image like SDWebImage.</p>
 <p>##Installtion<br>Manual:</p>
