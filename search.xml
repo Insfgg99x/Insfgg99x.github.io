@@ -4,6 +4,48 @@
   
     
     <entry>
+      <title><![CDATA[FGNetwork:A light networking kit for iOS base on NSURLSession]]></title>
+      <url>http://cgpointzero.top/2016/09/12/fgnetwork/</url>
+      <content type="html"><![CDATA[<p>###<a href="https://github.com/Insfgg99x/FGNetwork" target="_blank" rel="external">FGNetwork</a><br>……………………………………………………..</p>
+<p>##Introduction<br> A light networking kit for iOS with GET ,POST,file upload and multi files uploading supported,base on <code>NSURLSession</code>.</p>
+<p>##Installtion<br>Manual:</p>
+<p>Download This Project and drag the FGNetwork folder into your peroject, do not forget to ensure “copy item if need” being selected.</p>
+<p>##Usage<br>Just import the header file:<code>import &quot;FGNetwork.h&quot;</code></p>
+<blockquote>
+<p>Singleton</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  Singleton</span><br><span class="line"> */</span><br><span class="line">+(instancetype)shared;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>GET:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  get请求</span><br><span class="line"> *  urlString   链接</span><br><span class="line"> *  success     成功的回调</span><br><span class="line"> *  failure     失败的回调</span><br><span class="line"> */</span><br><span class="line">-(void)get:(NSString *)urlString success:(void (^) (NSData *data, NSURLResponse *response)) success failure:(void (^) (NSError *error))failure;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>POST:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  post请求</span><br><span class="line"> *  urlString   主地址</span><br><span class="line"> *  paramaters  参数字典</span><br><span class="line"> *  success     成功的回调</span><br><span class="line"> *  failure     失败的回调</span><br><span class="line"> */</span><br><span class="line">-(void)post:(NSString *)urlString paramaters:(NSString *)paramaters success:(void (^) (NSData *data, NSURLResponse *response)) success failure:(void (^) (NSError *error))failure;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>And file upload supported:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  文件上传</span><br><span class="line"> *  urlString   服务器地址</span><br><span class="line"> *  fileData    文件二进制数据</span><br><span class="line"> *  mimeType    MIME Type</span><br><span class="line"> *  paramaters  参数字典</span><br><span class="line"> *  success     成功的回调</span><br><span class="line"> *  failure     失败的回调</span><br><span class="line"> */</span><br><span class="line">-(void)uploadFileToHost:(NSString *)urlString fileData:(NSData *)fileData name:(NSString *)name fileName:(NSString *)fileName mimeType:(NSString *)mimeType paramaters:(NSString *)paramaters success:(void (^) (NSData *data, NSURLResponse *response)) success failure:(void (^) (NSError *error))failure;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Multi files upload supported:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/**上传多张照片（2张）file应该对应多个变量名儒file0，file1*/</span><br><span class="line">-(void)uploadMultiFileToHost:(NSString *)urlString imgs:(NSArray *)imgs name:(NSString *)name mimeType:(NSString *)mimeType paramaters:(NSString *)paramaters success:(void (^)(NSData *data, NSURLResponse *response))success failure:(void (^)(NSError *error))failure;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>And  a optional function:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> *  取消所有数据请求</span><br><span class="line"> */</span><br><span class="line">-(void)cancelAllDataTask;</span><br></pre></td></tr></table></figure>
+<p>##Example<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-(void)downloadData&#123;</span><br><span class="line">    </span><br><span class="line">    [[FGNetwork shared] get:@&quot;http://www.baidu.com&quot; success:^(NSData *data, NSURLResponse *response) &#123;</span><br><span class="line">        </span><br><span class="line">        NSString *str=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];</span><br><span class="line">        NSLog(@&quot;%@&quot;,str);</span><br><span class="line">        </span><br><span class="line">    &#125; failure:^(NSError *error) &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>##About Me</p>
+<blockquote>
+<p>Blog:     <a href="http://cgpointzero.top">CGPointZeero</a><br>GitHub:   <a href="https://github.com/Insfgg99x" target="_blank" rel="external">Insfgg99x</a><br>Mooc:     <a href="http://www.imooc.com/u/3909164/articles" target="_blank" rel="external">CGPointZero</a><br>Jianshu:  <a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" rel="external">CGPointZero</a><br>Email:    <a href="mailto:newbox0512@yahoo.com" target="_blank" rel="external">newbox0512@yahoo.com</a></p>
+</blockquote>
+<p>I attached my code on github,touch to download -&gt;<a href="https://github.com/Insfgg99x/FGNetwork" target="_blank" rel="external">FGNetwork</a><br>……………………………………………………..</p>
+<p>@CGPoitZero<br><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Swift 3.0 Automaticly convert Simplified and Traditional Chiniese]]></title>
       <url>http://cgpointzero.top/2016/09/12/Swfit/swfit-converter/</url>
       <content type="html"><![CDATA[<p>#FGCoverter<br>……………………………………………………..</p>
