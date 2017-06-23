@@ -84,9 +84,8 @@
 
 
 
-<meta name="description" content="##FCPopMenu
+<meta name="description" content="##FCPopMenu 简易、友好的下拉菜单
 An easy,friendly and customizable way to make a popover menu.
-容易、友好且可定制的下拉菜单
 
 ###Installation
 
@@ -97,14 +96,13 @@ Use pod repo update if not exist.
 
 Manual
 
-Download FC">
+Download FCPopM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FGPopMenu">
 <meta property="og:url" content="http://cgpointzero.top/2017/03/14/FGPopMenu/index.html">
 <meta property="og:site_name" content="CGPointZero">
-<meta property="og:description" content="##FCPopMenu
+<meta property="og:description" content="##FCPopMenu 简易、友好的下拉菜单
 An easy,friendly and customizable way to make a popover menu.
-容易、友好且可定制的下拉菜单
 
 ###Installation
 
@@ -115,15 +113,14 @@ Use pod repo update if not exist.
 
 Manual
 
-Download FC">
+Download FCPopM">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-b419a2c9014d511e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-06-23T17:23:25.000Z">
+<meta property="og:updated_time" content="2017-06-23T17:26:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FGPopMenu">
-<meta name="twitter:description" content="##FCPopMenu
+<meta name="twitter:description" content="##FCPopMenu 简易、友好的下拉菜单
 An easy,friendly and customizable way to make a popover menu.
-容易、友好且可定制的下拉菜单
 
 ###Installation
 
@@ -134,7 +131,7 @@ Use pod repo update if not exist.
 
 Manual
 
-Download FC">
+Download FCPopM">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/937405-b419a2c9014d511e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -342,9 +339,8 @@ Download FC">
       
 
       
-        <p>##FCPopMenu</p>
+        <p>##FCPopMenu 简易、友好的下拉菜单</p>
 <p>An easy,friendly and customizable way to make a popover menu.</p>
-<p>容易、友好且可定制的下拉菜单</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/937405-b419a2c9014d511e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>###Installation</p>
 <blockquote>
@@ -364,7 +360,7 @@ Download FC">
 <blockquote>
 <p>FCPopMenu</p>
 </blockquote>
-<p>Create a popover menu like this<br>像这样创建一个下拉菜单</p>
+<p>Create a popover menu like this</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">_list=[FCPopMenu menuWithFrame:CGRectMake(kFCPopMenuWidth-143, 64, 138, 140) trangleHeight:10 tranglePosition:CGPointMake(112, 0) items:items];</span><br><span class="line">_list.mainColor=[UIColor colorWithRed:73/255.f green:73/255.f blue:73/255.f alpha:1.f];</span><br><span class="line">_list.rowHeight=43.5;</span><br><span class="line">_list.sperateColor=[UIColor colorWithRed:217/255.f green:217/255.f blue:217/255.f alpha:1.f];</span><br><span class="line">_list.seperateInsets=UIEdgeInsetsMake(0, 14, 0, 14);</span><br></pre></td></tr></table></figure>
 <p>You may need a overlay view<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-(UIControl *)back&#123;</span><br><span class="line"></span><br><span class="line">    if(!_back)&#123;</span><br><span class="line"></span><br><span class="line">        _back=[[UIControl alloc] initWithFrame:self.view.bounds];</span><br><span class="line">        _back.backgroundColor=[UIColor clearColor];</span><br><span class="line">        [_back addTarget:self action:@selector(hideList:) forControlEvents:UIControlEventTouchUpInside];</span><br><span class="line">    &#125;</span><br><span class="line">    return _back;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>Troggle show/close menu</p>
