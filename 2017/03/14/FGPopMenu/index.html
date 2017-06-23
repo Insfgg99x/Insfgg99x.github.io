@@ -84,26 +84,49 @@
 
 
 
-<meta name="description" content="###背景在iOS开发中，存在bug修复周期长的问题。若程序出了bug，往往需要走一下步骤：修改代码–打包–提交审核(–审核被拒–修改代码–再次提交审核)–用户更新。需要很长一个周期才能解决问题。而JSPatch的出现，有效的解决了这一尴尬的局面。
-###热修复一种即时修复bug的技术，也叫hotfix。
-###什么是JSPatch？JSPatch是一个一个动态更新的开源的框架，可以实时的修复bu">
+<meta name="description" content="##FCPopMenu
+An easy,friendly and customizable way to make a popover menu.
+容易、友好且可定制的下拉菜单
+
+###Installation 安装
+
+Cocoapods
+
+pod “FCPopMenu”, “~&amp;gt;1.0”
+Use pod repo update if not exist.
+如果pod找不到FCPopMenu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JSPatch热补丁实时修复bug">
-<meta property="og:url" content="http://cgpointzero.top/2016/08/19/JSPatchABC/index.html">
+<meta property="og:title" content="FGPopMenu">
+<meta property="og:url" content="http://cgpointzero.top/2017/03/14/FGPopMenu/index.html">
 <meta property="og:site_name" content="CGPointZero">
-<meta property="og:description" content="###背景在iOS开发中，存在bug修复周期长的问题。若程序出了bug，往往需要走一下步骤：修改代码–打包–提交审核(–审核被拒–修改代码–再次提交审核)–用户更新。需要很长一个周期才能解决问题。而JSPatch的出现，有效的解决了这一尴尬的局面。
-###热修复一种即时修复bug的技术，也叫hotfix。
-###什么是JSPatch？JSPatch是一个一个动态更新的开源的框架，可以实时的修复bu">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-1f31b1129e5a164b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-19df86d4b89682cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:description" content="##FCPopMenu
+An easy,friendly and customizable way to make a popover menu.
+容易、友好且可定制的下拉菜单
+
+###Installation 安装
+
+Cocoapods
+
+pod “FCPopMenu”, “~&amp;gt;1.0”
+Use pod repo update if not exist.
+如果pod找不到FCPopMenu">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-b419a2c9014d511e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-09-05T15:56:19.000Z">
+<meta property="og:updated_time" content="2017-06-23T16:58:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JSPatch热补丁实时修复bug">
-<meta name="twitter:description" content="###背景在iOS开发中，存在bug修复周期长的问题。若程序出了bug，往往需要走一下步骤：修改代码–打包–提交审核(–审核被拒–修改代码–再次提交审核)–用户更新。需要很长一个周期才能解决问题。而JSPatch的出现，有效的解决了这一尴尬的局面。
-###热修复一种即时修复bug的技术，也叫hotfix。
-###什么是JSPatch？JSPatch是一个一个动态更新的开源的框架，可以实时的修复bu">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/937405-1f31b1129e5a164b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="FGPopMenu">
+<meta name="twitter:description" content="##FCPopMenu
+An easy,friendly and customizable way to make a popover menu.
+容易、友好且可定制的下拉菜单
+
+###Installation 安装
+
+Cocoapods
+
+pod “FCPopMenu”, “~&amp;gt;1.0”
+Use pod repo update if not exist.
+如果pod找不到FCPopMenu">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/937405-b419a2c9014d511e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -121,7 +144,7 @@
   };
 </script>
 
-  <title> JSPatch热补丁实时修复bug | CGPointZero </title>
+  <title> FGPopMenu | CGPointZero </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -263,7 +286,7 @@
             
             
               
-                JSPatch热补丁实时修复bug
+                FGPopMenu
               
             
           </h1>
@@ -275,8 +298,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-19T01:30:18+08:00" content="2016-08-19">
-              2016-08-19
+            <time itemprop="dateCreated" datetime="2017-03-14T00:00:00+08:00" content="2017-03-14">
+              2017-03-14
             </time>
           </span>
 
@@ -286,8 +309,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/19/JSPatchABC/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/19/JSPatchABC/" itemprop="commentsCount"></span>
+                <a href="/2017/03/14/FGPopMenu/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/14/FGPopMenu/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -310,44 +333,53 @@
       
 
       
-        <p>###背景<br>在iOS开发中，存在bug修复周期长的问题。若程序出了bug，往往需要走一下步骤：<br>修改代码–打包–提交审核(–审核被拒–修改代码–再次提交审核)–用户更新。<br>需要很长一个周期才能解决问题。而JSPatch的出现，有效的解决了这一尴尬的局面。</p>
-<p>###热修复<br>一种即时修复bug的技术，也叫hotfix。</p>
-<p>###什么是JSPatch？<br><a href="https://github.com/bang590/JSPatch" target="_blank" rel="external">JSPatch</a>是一个一个动态更新的开源的框架，可以实时的修复bug(热修复)、添加新功能。从服务器下发补丁js补丁代码，客户端接收到补丁后，进行安全校验，然后用JS调用或替换原来crash的OC方法，从而达到实时修复bug的目的，过程如下图：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/937405-1f31b1129e5a164b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>###示例<br>假如，在<code>LeftViewControler</code>的<code>tableView:didSelectRowAtIndexPath:</code>方法中存在一个数组越界的crash：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath&#123;</span><br><span class="line"></span><br><span class="line">//---------------crash----------------</span><br><span class="line">NSArray *array=@[@&quot;1&quot;,@&quot;2&quot;,@&quot;3&quot;];</span><br><span class="line">for(int i=0;i&lt;4;i++)&#123;</span><br><span class="line">NSLog(@&quot;%@&quot;,array[i]); //程序中出现的crash(数组越界)</span><br><span class="line">&#125;</span><br><span class="line">//---------------crash---------------</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>我们可以在服务端用js下发一段这样的代码，达到实时修复bug的目的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">defineClass(&apos;LeftViewController&apos;, &#123;</span><br><span class="line">tableView_didSelectRowAtIndexPath: function(tableView, indexPath) &#123;</span><br><span class="line"></span><br><span class="line">var array = [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;];</span><br><span class="line">for (var i = 0; i &lt; array.count(); i++) &#123;</span><br><span class="line">NSLog(&quot;%&quot;, array[i]); </span><br><span class="line">&#125;</span><br><span class="line">&#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>我们可以在项目中引入JSPatch，然后在在自己搭建下发补丁的服务器，也可以直接用<a href="http://jspatch.com" target="_blank" rel="external">JSPatch平台</a>集成的带代码下发功能的SDK，我们只需要写好补丁，直接就可以在这个平台下发了。</p>
-<p>###步骤如下：</p>
+        <p>##FCPopMenu</p>
+<p>An easy,friendly and customizable way to make a popover menu.</p>
+<p>容易、友好且可定制的下拉菜单</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-b419a2c9014d511e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>###Installation 安装</p>
+<blockquote>
+<p>Cocoapods</p>
+</blockquote>
+<p>pod “FCPopMenu”, “~&gt;1.0”</p>
+<p>Use <code>pod repo update</code> if not exist.</p>
+<p>如果pod找不到FCPopMenu，用<code>pod repo update</code>更新repos</p>
+<blockquote>
+<p>Manual 手动</p>
+</blockquote>
+<p>Download <code>FCPopMenu</code>,drag folder “FCPopMenu” into your project, make sure to ues “create group if need”.</p>
+<p>下载FCPopMenu，并将”FCPopMenu”引用到项目中，确保勾选”create group if need”。</p>
+<p>###Useage 使用</p>
+<blockquote>
+<p>FCPopMenuItem</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[FCPopMenuItem itemWithImage:[UIImage imageNamed:@&quot;sence_new&quot;]</span><br><span class="line">title:@&quot;新建剧情&quot;</span><br><span class="line">titleColor:[UIColor whiteColor]</span><br><span class="line">target:self</span><br><span class="line">action:@selector(listClickAction:)];</span><br></pre></td></tr></table></figure>
+<p>or mutable items<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">NSArray *items=@[[FCPopMenuItem itemWithImage:[UIImage imageNamed:@&quot;sence_new&quot;]</span><br><span class="line">title:@&quot;新建剧情&quot;</span><br><span class="line">titleColor:[UIColor whiteColor]</span><br><span class="line">target:self</span><br><span class="line">action:@selector(listClickAction:)],</span><br><span class="line">[FCPopMenuItem itemWithImage:[UIImage imageNamed:@&quot;recruit_new&quot;]</span><br><span class="line">title:@&quot;发布招募&quot;</span><br><span class="line">titleColor:[UIColor whiteColor]</span><br><span class="line">target:self</span><br><span class="line">action:@selector(listClickAction:)],</span><br><span class="line">[FCPopMenuItem itemWithImage:[UIImage imageNamed:@&quot;sence_search&quot;]</span><br><span class="line">title:@&quot;搜一搜&quot;</span><br><span class="line">titleColor:[UIColor whiteColor]</span><br><span class="line">target:self</span><br><span class="line">action:@selector(listClickAction:)]];</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>FCPopMenu</p>
+</blockquote>
+<p>Create a popover menu like this<br>像这样创建一个下拉菜单</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">_list=[FCPopMenu menuWithFrame:CGRectMake(kFCPopMenuWidth-143, 64, 138, 140) trangleHeight:10 tranglePosition:CGPointMake(112, 0) items:items];</span><br><span class="line">_list.mainColor=[UIColor colorWithRed:73/255.f green:73/255.f blue:73/255.f alpha:1.f];</span><br><span class="line">_list.rowHeight=43.5;</span><br><span class="line">_list.sperateColor=[UIColor colorWithRed:217/255.f green:217/255.f blue:217/255.f alpha:1.f];</span><br><span class="line">_list.seperateInsets=UIEdgeInsetsMake(0, 14, 0, 14);</span><br></pre></td></tr></table></figure>
+<p>You may need a overlay view<br>你可能需要一个覆盖视图，在下拉菜单的下方<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-(UIControl *)back&#123;</span><br><span class="line"></span><br><span class="line">if(!_back)&#123;</span><br><span class="line"></span><br><span class="line">_back=[[UIControl alloc] initWithFrame:self.view.bounds];</span><br><span class="line">_back.backgroundColor=[UIColor clearColor];</span><br><span class="line">[_back addTarget:self action:@selector(hideList:) forControlEvents:UIControlEventTouchUpInside];</span><br><span class="line">&#125;</span><br><span class="line">return _back;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Troggle show/close menu<br>开启/关闭菜单</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">-(void)addBtnClickAction:(UIBarButtonItem *)sender&#123;</span><br><span class="line"></span><br><span class="line">sender.enabled=NO;</span><br><span class="line">if(self.list.superview)&#123;</span><br><span class="line"></span><br><span class="line">[self hideList:self.back];</span><br><span class="line">sender.enabled=YES;</span><br><span class="line">return;</span><br><span class="line">&#125;</span><br><span class="line">[self.view addSubview:self.back];</span><br><span class="line">[self.view addSubview:self.list];</span><br><span class="line">self.list.alpha=0.0;</span><br><span class="line">__weak typeof(self) wkself=self;</span><br><span class="line">[self.list mas_makeConstraints:^(MASConstraintMaker *make) &#123;</span><br><span class="line"></span><br><span class="line">make.right.equalTo(wkself.view).offset(-5);</span><br><span class="line">make.top.equalTo(wkself.view).offset(64);</span><br><span class="line">make.size.mas_equalTo(CGSizeMake(138, 140));</span><br><span class="line">&#125;];</span><br><span class="line">[UIView animateWithDuration:0.3 animations:^&#123;</span><br><span class="line"></span><br><span class="line">wkself.list.alpha=1.0;</span><br><span class="line">&#125;];</span><br><span class="line">sender.enabled=YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Monitor click action<br>监听点击事件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">-(void)listClickAction:(FCPopMenuItem *)sender&#123;</span><br><span class="line"></span><br><span class="line">[self hideList:self.back];</span><br><span class="line">NSString *title=[sender.title copy];</span><br><span class="line">if([title isEqualToString:@&quot;新建剧情&quot;])&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;else if([title isEqualToString:@&quot;发布招募&quot;])&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;else&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">NSLog(@&quot;%@&quot;,sender.title);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Hide<br>隐藏<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-(void)hideList:(UIControl *)sender&#123;</span><br><span class="line"></span><br><span class="line">[sender removeFromSuperview];</span><br><span class="line">[self.list removeFromSuperview];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Source code on github click－&gt; <a href="https://github.com/Insfgg99x/FCPopMenu" target="_blank" rel="external">here</a><br>查看源码点击这里－&gt;<a href="https://github.com/Insfgg99x/FCPopMenu" target="_blank" rel="external">传送门</a></p>
+<blockquote>
+<p>About Me 关于我</p>
+</blockquote>
 <ul>
-<li>第一步：在<a href="http://jspatch.com" target="_blank" rel="external">JSPatch平台</a>注册一个帐号；</li>
-<li>第二步：创建一个app；</li>
-<li>第三步：下载JSPatch SDK，这个跟github上的不一样，github上的是开源的，不带代码下发服务器的。</li>
-<li>第四步：生成RSA公钥和私钥。<br>打开终端，cd到Desktop/，输入<code>openssl</code>后按回车，输入以下三行指令，<br><code>genrsa -out rsa_private_key.pem 1024</code><br><code>pkcs8 -topk8 -inform PEM -in rsa_private_key.pem -outform PEM –nocrypt</code><br><code>rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem</code><br>在桌面时就会得到2个<code>.pem</code>文件，分别时公钥和私钥。私钥用于服务端甲米下发的补丁，公钥用于客服端解密补丁。</li>
-<li><p>第五步：按照文档集成SDK到文档中。<br>在<code>application:didFinishLaunchingWithOptions:</code>方法中对<code>JSPatch</code>初始化<br>`<br>//初始化JSPatch<br>-(void)setupJSPatch{</p>
-<p>  [JSPatch startWithAppKey:kJSPatchKey];<br>  [JSPatch setupRSAPublicKey:kRSAPublicKey];<br>  [JSPatch setupLogger:^(NSString *msg) {</p>
-<pre><code>NSLog(@&quot;%@&quot;,msg);
-</code></pre><p>  }];<br>  //[JSPatch testScriptInBundle];//沙盒测试<br>  [JSPatch sync];<br>}<code>其中，</code>appkey<code>是平台上创建app得到的appkey，而</code>pullic key<code>则是上步生成的</code>RSA公钥<code>，注意要手动加换行(\n)。如:</code>@”—–BEGIN PUBLIC KEY—–\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1heHjbL+R6nulhIRptjfGmd3M\nlU…\n—–END PUBLIC KEY—–”。<br>`</p>
-</li>
-<li><p>下发补丁时，服务端会计算补丁文件(js)文件的<code>MD5</code>值，然后讲这个MD5值用<code>RSA私钥签名</code>，签名后的字符串跟补丁一起下发到客户端。</p>
-</li>
-<li><p>客户端拿到签名后的字符串后，用公钥进行<code>解密</code>，得到一个MD5值，计算得到脚本的MD5值，比较这两个MD5值，若一支，说明补丁<code>没被篡改</code>。若无篡改，则在运行时通过方法交换，替换掉我们的crash代码。</p>
-</li>
-<li><p>第六步：我们用在桌面上新建一个<code>main.js</code>文件，打开命令后，<code>cd</code>到桌面，输入<code>touch main.js</code>后回车，在桌面就会生成一个<code>main.js</code>文件，用文本编辑器打开。<br>写入我们自己的方法替换掉crash部分的代码的所在的方法。</p>
-</li>
+<li>Blog:     <a href="http://cgpointzero.top">CGPointZeero</a></li>
+<li>GitHub:   <a href="https://github.com/Insfgg99x" target="_blank" rel="external">Insfgg99x</a></li>
+<li>Mooc:     <a href="http://www.imooc.com/u/3909164/articles" target="_blank" rel="external">CGPointZero</a></li>
+<li>Jianshu:  <a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" rel="external">CGPointZero</a></li>
+<li>Email:    <a href="mailto:newbox0512@yahoo.com" target="_blank" rel="external">newbox0512@yahoo.com</a></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">defineClass(&apos;LeftViewController&apos;, &#123;</span><br><span class="line"></span><br><span class="line">    tableView_didSelectRowAtIndexPath: function(tableView, indexPath) &#123;</span><br><span class="line"></span><br><span class="line">        var array = [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;];</span><br><span class="line">        for (var i = 0; i &lt; array.count(); i++) &#123;</span><br><span class="line">            NSLog(&quot;%&quot;, array[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>你可以用<a href="https://github.com/bang590/JSPatchConvertor/blob/gh-pages/JSPatchConvertor.zip" target="_blank" rel="external">JSPatchConverter</a>直接将写好的<code>OC</code>转成<code>Patch</code>，大部分可以直接转，但<code>私有变量/静态变量/宏</code>这些还不支持，所以转换后需要<b>手动修改</b>。可以借助这个工具，省去原本要先写好<code>OC</code>代码，在翻译成<code>Patch</code>的时间成本。</p>
-<ul>
-<li><p>第七步：测试补丁的有效性<br>在下发补丁之前，我们可以验证补丁是否凑效，具体做法是：<br>将我们刚刚编辑的main.js导入项目根目录，选择copy。在JSPatch初始化的方法中，打开沙盒测试方法<code>[JSPatch testScriptInBundle];</code>，并注释掉其他JSPathch方法。运行程序，该测试方法会自动在沙盒下寻找<code>main.js</code>文件并执行，以验证bug是否被修复。</p>
-</li>
-<li><p>第八步：下发补丁<br>在上一步补丁有效性验证成功之后，去<a href="http://jspatch.com" target="_blank" rel="external">JSPatch平台</a>下发补丁。<br>补丁选择刚刚的<code>main.js</code>，私钥选择刚刚生成的私钥<code>private_key.pem</code>文件，提交。<br>注意：App版本号要跟<code>Bundle versions string, short</code>版本号一致！</p>
-</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/937405-19df86d4b89682cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<ul>
-<li>第九步：运行app，再次在<code>LeftViewController</code>的选择cell，之前选择cell导致crash得到了修复!<br>至此，我们已经在不用重新提交版本的情况下，完成了bug的实时修复。</li>
-</ul>
-<p>至此，我们已经在不用重新提交版本的情况下，完成了bug的实时修复。<br><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<hr>
+<p>@CGPoitZero</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 
       
     </div>
@@ -372,17 +404,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/17/label-html/" rel="next" title="两种方法实现UILabel图文并茂的显示html文本">
-                <i class="fa fa-chevron-left"></i> 两种方法实现UILabel图文并茂的显示html文本
+              <a href="/2016/09/20/fggtextfield/" rel="next" title="酷炫的文本输入框FGGTextField">
+                <i class="fa fa-chevron-left"></i> 酷炫的文本输入框FGGTextField
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/01/colorfull_git/" rel="prev" title="彩色的git lg">
-                彩色的git lg <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -397,10 +425,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/08/19/JSPatchABC/"
-     data-title="JSPatch热补丁实时修复bug"
+        <div class="ds-share flat" data-thread-key="2017/03/14/FGPopMenu/"
+     data-title="FGPopMenu"
      data-content=""
-     data-url="http://cgpointzero.top/2016/08/19/JSPatchABC/">
+     data-url="http://cgpointzero.top/2017/03/14/FGPopMenu/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -427,8 +455,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/08/19/JSPatchABC/"
-           data-title="JSPatch热补丁实时修复bug" data-url="http://cgpointzero.top/2016/08/19/JSPatchABC/">
+      <div class="ds-thread" data-thread-key="2017/03/14/FGPopMenu/"
+           data-title="FGPopMenu" data-url="http://cgpointzero.top/2017/03/14/FGPopMenu/">
       </div>
     
   </div>

@@ -4,6 +4,59 @@
   
     
     <entry>
+      <title><![CDATA[FGPopMenu]]></title>
+      <url>http://cgpointzero.top/2017/03/14/FGPopMenu/</url>
+      <content type="html"><![CDATA[<p>##FCPopMenu</p>
+<p>An easy,friendly and customizable way to make a popover menu.</p>
+<p>容易、友好且可定制的下拉菜单</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-b419a2c9014d511e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>###Installation 安装</p>
+<blockquote>
+<p>Cocoapods</p>
+</blockquote>
+<p>pod “FCPopMenu”, “~&gt;1.0”</p>
+<p>Use <code>pod repo update</code> if not exist.</p>
+<p>如果pod找不到FCPopMenu，用<code>pod repo update</code>更新repos</p>
+<blockquote>
+<p>Manual 手动</p>
+</blockquote>
+<p>Download <code>FCPopMenu</code>,drag folder “FCPopMenu” into your project, make sure to ues “create group if need”.</p>
+<p>下载FCPopMenu，并将”FCPopMenu”引用到项目中，确保勾选”create group if need”。</p>
+<p>###Useage 使用</p>
+<blockquote>
+<p>FCPopMenuItem</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[FCPopMenuItem itemWithImage:[UIImage imageNamed:@&quot;sence_new&quot;]</span><br><span class="line">title:@&quot;新建剧情&quot;</span><br><span class="line">titleColor:[UIColor whiteColor]</span><br><span class="line">target:self</span><br><span class="line">action:@selector(listClickAction:)];</span><br></pre></td></tr></table></figure>
+<p>or mutable items<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">NSArray *items=@[[FCPopMenuItem itemWithImage:[UIImage imageNamed:@&quot;sence_new&quot;]</span><br><span class="line">title:@&quot;新建剧情&quot;</span><br><span class="line">titleColor:[UIColor whiteColor]</span><br><span class="line">target:self</span><br><span class="line">action:@selector(listClickAction:)],</span><br><span class="line">[FCPopMenuItem itemWithImage:[UIImage imageNamed:@&quot;recruit_new&quot;]</span><br><span class="line">title:@&quot;发布招募&quot;</span><br><span class="line">titleColor:[UIColor whiteColor]</span><br><span class="line">target:self</span><br><span class="line">action:@selector(listClickAction:)],</span><br><span class="line">[FCPopMenuItem itemWithImage:[UIImage imageNamed:@&quot;sence_search&quot;]</span><br><span class="line">title:@&quot;搜一搜&quot;</span><br><span class="line">titleColor:[UIColor whiteColor]</span><br><span class="line">target:self</span><br><span class="line">action:@selector(listClickAction:)]];</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>FCPopMenu</p>
+</blockquote>
+<p>Create a popover menu like this<br>像这样创建一个下拉菜单</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">_list=[FCPopMenu menuWithFrame:CGRectMake(kFCPopMenuWidth-143, 64, 138, 140) trangleHeight:10 tranglePosition:CGPointMake(112, 0) items:items];</span><br><span class="line">_list.mainColor=[UIColor colorWithRed:73/255.f green:73/255.f blue:73/255.f alpha:1.f];</span><br><span class="line">_list.rowHeight=43.5;</span><br><span class="line">_list.sperateColor=[UIColor colorWithRed:217/255.f green:217/255.f blue:217/255.f alpha:1.f];</span><br><span class="line">_list.seperateInsets=UIEdgeInsetsMake(0, 14, 0, 14);</span><br></pre></td></tr></table></figure>
+<p>You may need a overlay view<br>你可能需要一个覆盖视图，在下拉菜单的下方<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-(UIControl *)back&#123;</span><br><span class="line"></span><br><span class="line">if(!_back)&#123;</span><br><span class="line"></span><br><span class="line">_back=[[UIControl alloc] initWithFrame:self.view.bounds];</span><br><span class="line">_back.backgroundColor=[UIColor clearColor];</span><br><span class="line">[_back addTarget:self action:@selector(hideList:) forControlEvents:UIControlEventTouchUpInside];</span><br><span class="line">&#125;</span><br><span class="line">return _back;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Troggle show/close menu<br>开启/关闭菜单</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">-(void)addBtnClickAction:(UIBarButtonItem *)sender&#123;</span><br><span class="line"></span><br><span class="line">sender.enabled=NO;</span><br><span class="line">if(self.list.superview)&#123;</span><br><span class="line"></span><br><span class="line">[self hideList:self.back];</span><br><span class="line">sender.enabled=YES;</span><br><span class="line">return;</span><br><span class="line">&#125;</span><br><span class="line">[self.view addSubview:self.back];</span><br><span class="line">[self.view addSubview:self.list];</span><br><span class="line">self.list.alpha=0.0;</span><br><span class="line">__weak typeof(self) wkself=self;</span><br><span class="line">[self.list mas_makeConstraints:^(MASConstraintMaker *make) &#123;</span><br><span class="line"></span><br><span class="line">make.right.equalTo(wkself.view).offset(-5);</span><br><span class="line">make.top.equalTo(wkself.view).offset(64);</span><br><span class="line">make.size.mas_equalTo(CGSizeMake(138, 140));</span><br><span class="line">&#125;];</span><br><span class="line">[UIView animateWithDuration:0.3 animations:^&#123;</span><br><span class="line"></span><br><span class="line">wkself.list.alpha=1.0;</span><br><span class="line">&#125;];</span><br><span class="line">sender.enabled=YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Monitor click action<br>监听点击事件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">-(void)listClickAction:(FCPopMenuItem *)sender&#123;</span><br><span class="line"></span><br><span class="line">[self hideList:self.back];</span><br><span class="line">NSString *title=[sender.title copy];</span><br><span class="line">if([title isEqualToString:@&quot;新建剧情&quot;])&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;else if([title isEqualToString:@&quot;发布招募&quot;])&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;else&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">NSLog(@&quot;%@&quot;,sender.title);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Hide<br>隐藏<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-(void)hideList:(UIControl *)sender&#123;</span><br><span class="line"></span><br><span class="line">[sender removeFromSuperview];</span><br><span class="line">[self.list removeFromSuperview];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Source code on github click－&gt; <a href="https://github.com/Insfgg99x/FCPopMenu" target="_blank" rel="external">here</a><br>查看源码点击这里－&gt;<a href="https://github.com/Insfgg99x/FCPopMenu" target="_blank" rel="external">传送门</a></p>
+<blockquote>
+<p>About Me 关于我</p>
+</blockquote>
+<ul>
+<li>Blog:     <a href="http://cgpointzero.top">CGPointZeero</a></li>
+<li>GitHub:   <a href="https://github.com/Insfgg99x" target="_blank" rel="external">Insfgg99x</a></li>
+<li>Mooc:     <a href="http://www.imooc.com/u/3909164/articles" target="_blank" rel="external">CGPointZero</a></li>
+<li>Jianshu:  <a href="http://www.jianshu.com/users/c3f2e8c87dc4/latest_articles" target="_blank" rel="external">CGPointZero</a></li>
+<li>Email:    <a href="mailto:newbox0512@yahoo.com" target="_blank" rel="external">newbox0512@yahoo.com</a></li>
+</ul>
+<hr>
+<p>@CGPoitZero</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/937405-e91a649f7a7df2a0.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[酷炫的文本输入框FGGTextField]]></title>
       <url>http://cgpointzero.top/2016/09/20/fggtextfield/</url>
       <content type="html"><![CDATA[<h2 id="FGGTextField"><a href="#FGGTextField" class="headerlink" title="#FGGTextField"></a>#FGGTextField</h2><p>##Introduction<br>一个超级酷炫的文本输入框，继承自UITextField，依赖于AJWValidator.用于实现文本输入的实时监测。<br><img src="/img/fggtextfield.gif" alt=""></p>
